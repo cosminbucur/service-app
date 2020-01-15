@@ -1,0 +1,12 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+.car service app
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
