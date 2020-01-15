@@ -1,6 +1,12 @@
 package com.bucur;
 
-import com.bucur.model.*;
+import com.bucur.model.CustomerVisit;
+import com.bucur.model.StoragePoint;
+import com.bucur.model.StoreDismounted;
+import com.bucur.model.Tyre;
+import com.bucur.model.TyreType;
+import com.bucur.model.UnstoreNewTyres;
+import com.bucur.model.Vehicle;
 import com.bucur.service.HotelService;
 import com.bucur.service.MountingService;
 import org.junit.jupiter.api.Test;
@@ -8,6 +14,9 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AcceptanceTests {
 
@@ -58,23 +67,26 @@ public class AcceptanceTests {
 
         MountingService mountingService = new MountingService();
 
-        Vehicle oldVehicleTyres = new Vehicle.Builder()
-                .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER))
-                .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER))
-                .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER))
-                .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER))
-                .build();
+        Vehicle vehicleWithOldTyres = new Vehicle.Builder()
+            .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER))
+            .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER))
+            .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER))
+            .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER))
+            .build();
 
-        Vehicle newVehicleTyres = new Vehicle.Builder()
-                .withFrontLeft(new Tyre(tyreBrand, TyreType.WINTER))
-                .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER))
-                .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER))
-                .withRearRight(new Tyre(tyreBrand, TyreType.WINTER))
-                .build();
+        Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER);
+        Vehicle vehicleWithNewTyres = new Vehicle.Builder()
+            .withFrontLeft(newFrontLeft)
+            .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER))
+            .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER))
+            .withRearRight(new Tyre(tyreBrand, TyreType.WINTER))
+            .build();
 
         String licensePlate = "B22ABC";
-        mountingService.replaceTyres(customerVisit.id, mechanicId, licensePlate, UnstoreNewTyres.YES, oldVehicleTyres, newVehicleTyres);
+        mountingService.replaceTyres(customerVisit.id, mechanicId, licensePlate, UnstoreNewTyres.YES,
+            vehicleWithOldTyres, vehicleWithNewTyres);
 
+        assertThat(vehicleWithNewTyres.frontLeft).isEqualTo(newFrontLeft);
 
         // Use case 2: season change
 
@@ -86,11 +98,20 @@ public class AcceptanceTests {
         // notificare 6 luni: schimbare sezon
 
         // use case 3: replace worn tyres in store
-        List<StoragePointWithTyres> storagePointsWithTyres = hotelService.getStoredTyres(licensePlate);
+        StoragePoint storagePointsWithTyres = hotelService.getStoredTyres(licensePlate);
 
-        storagePoint = storagePointsWithTyres.getStoragePoint();
         List<Tyre> selectedTyres = storagePointsWithTyres.getTyres();
+
         hotelService.unstoreTyres(storagePoint, customerVisit, selectedTyres);
+
+        // use case 4: move tyres from one storage point to another
+        StoragePoint oldStorage = new StoragePoint();
+        StoragePoint newStorage = new StoragePoint();
+        hotelService.swapStorage(oldStorage, selectedTyres, newStorage);
+
+        // use case 5: get the worn tyres list
+        StoragePoint storagePointWithWornTyres = new StoragePoint();
+        Map<String, List<Tyre>> wornTyres = hotelService.getWornTyres();
     }
 
     private List<Tyre> createTyres() {

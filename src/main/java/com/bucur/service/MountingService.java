@@ -5,7 +5,8 @@ import com.bucur.model.Vehicle;
 
 public class MountingService {
 
-    public void replaceTyres(long id, long mechanicId, String licensePlate, UnstoreNewTyres yes, Vehicle oldVehicleTyres, Vehicle newVehicleTyres) {
+    public void replaceTyres(long id, long mechanicId, String licensePlate, UnstoreNewTyres yes,
+                             Vehicle oldVehicleTyres, Vehicle newVehicleTyres) {
 
     }
 }
