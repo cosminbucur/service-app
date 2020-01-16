@@ -1,12 +1,8 @@
 package com.bucur;
 
-import com.bucur.model.CustomerVisit;
-import com.bucur.model.StoragePoint;
-import com.bucur.model.StoreDismounted;
-import com.bucur.model.Tyre;
-import com.bucur.model.TyreType;
-import com.bucur.model.UnstoreNewTyres;
-import com.bucur.model.Vehicle;
+import com.bucur.model.*;
+import com.bucur.repository.HotelRepository;
+import com.bucur.repository.HotelRepositoryInMemory;
 import com.bucur.service.HotelService;
 import com.bucur.service.MountingService;
 import org.junit.jupiter.api.Test;
@@ -81,17 +77,18 @@ public class AcceptanceTests {
             .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, wear))
             .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, wear))
             .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, wear))
-            .build();
+                .build();
 
         String licensePlate = "B22ABC";
         mountingService.replaceTyres(customerVisit.id, mechanicId, licensePlate, UnstoreNewTyres.YES,
-            vehicleWithOldTyres, vehicleWithNewTyres);
+                vehicleWithOldTyres, vehicleWithNewTyres);
 
         assertThat(vehicleWithNewTyres.frontLeft).isEqualTo(newFrontLeft);
 
         // Use case 2: season change
 
-        HotelService hotelService = new HotelService();
+        HotelRepository hotelRepository = new HotelRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository);
         StoragePoint storagePoint = new StoragePoint();
         List<Tyre> tyres = createTyres();
         hotelService.storeTyres(storagePoint, customerVisit, licensePlate, StoreDismounted.YES, tyres);
