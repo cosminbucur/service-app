@@ -5,6 +5,8 @@ public class Tyre {
     public String tyreBrand;
     public TyreType type;
     public int wear;
+    public Long storageId;
+    public String licensePlate;
 
     public Tyre() {
 

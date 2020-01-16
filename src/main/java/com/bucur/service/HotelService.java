@@ -4,17 +4,21 @@ import com.bucur.model.CustomerVisit;
 import com.bucur.model.StoragePoint;
 import com.bucur.model.StoreDismounted;
 import com.bucur.model.Tyre;
+import com.bucur.repository.HotelRepository;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class HotelService {
 
-    private static Map<StoragePoint, List<Tyre>> database = new HashMap<>();
+    private final HotelRepository hotelRepository;
+
+    public HotelService(HotelRepository hotelRepository) {
+        this.hotelRepository = hotelRepository;
+    }
 
     public StoragePoint getStoredTyres(String licensePlate) {
-        return null;
+        return hotelRepository.getStoragePoint(licensePlate);
     }
 
     public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, String licensePlate, StoreDismounted yes, List<Tyre> tyres) {

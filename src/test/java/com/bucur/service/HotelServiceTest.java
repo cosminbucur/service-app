@@ -3,6 +3,8 @@ package com.bucur.service;
 import com.bucur.model.StoragePoint;
 import com.bucur.model.Tyre;
 import com.bucur.model.TyreType;
+import com.bucur.repository.HotelRepository;
+import com.bucur.repository.HotelRepositoryInMemory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -34,7 +36,8 @@ class HotelServiceTest {
         StoragePoint storagePoint2 = new StoragePoint();
         storagePoint2.setTyres(Arrays.asList(newTyre1, wornTyre3));
 
-        HotelService hotelService = new HotelService();
+        HotelRepository hotelRepository = new HotelRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository);
 
         // when
         // on when, we call the method under test from the responsible object

@@ -4,6 +4,8 @@ import java.util.List;
 
 public class StoragePoint {
 
+    public String licensePlate;
+
     private List<Tyre> tyres;
 
     public List<Tyre> getTyres() {
