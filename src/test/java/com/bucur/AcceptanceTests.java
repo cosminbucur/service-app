@@ -67,19 +67,20 @@ public class AcceptanceTests {
 
         MountingService mountingService = new MountingService();
 
+        int wear = 3;
         Vehicle vehicleWithOldTyres = new Vehicle.Builder()
-            .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER))
-            .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER))
-            .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER))
-            .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER))
+            .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER, wear))
+            .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER, wear))
+            .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER, wear))
+            .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER, wear))
             .build();
 
-        Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER);
+        Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER, wear);
         Vehicle vehicleWithNewTyres = new Vehicle.Builder()
             .withFrontLeft(newFrontLeft)
-            .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER))
-            .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER))
-            .withRearRight(new Tyre(tyreBrand, TyreType.WINTER))
+            .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, wear))
+            .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, wear))
+            .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, wear))
             .build();
 
         String licensePlate = "B22ABC";
