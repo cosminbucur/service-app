@@ -17,8 +17,8 @@ public class HotelService {
         this.hotelRepository = hotelRepository;
     }
 
-    public StoragePoint getStoredTyres(String licensePlate) {
-        return hotelRepository.getStoragePoint(licensePlate);
+    public StoragePoint findStoragePoint(String licensePlate) {
+        return hotelRepository.findStoragePoint(licensePlate);
     }
 
     public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, String licensePlate, StoreDismounted yes, List<Tyre> tyres) {
@@ -34,7 +34,7 @@ public class HotelService {
     }
 
     public Map<String, List<Tyre>> getWornTyres() {
-        return null;
+        return hotelRepository.findWornTyres();
     }
 
     /*
@@ -44,24 +44,7 @@ public class HotelService {
      increment a counter
      */
     public int countWornTyres() {
-//        Tyre tyre1 = new Tyre(1);
-//        Tyre tyre2 = new Tyre(2);
-//        Tyre tyre3 = new Tyre(6);
-//
-//        int wornTyresCount = 0;
-//
-//        if (tyre1.wear < 3) {
-//            wornTyresCount++;
-//        }
-//        if (tyre2.wear < 3) {
-//            wornTyresCount++;
-//        }
-//        if (tyre3.wear < 3) {
-//            wornTyresCount++;
-//        }
-//
-//        return wornTyresCount;
-
+        // TODO: implement this if the total number of worn tyres provides some business value
         return -1;
     }
 }

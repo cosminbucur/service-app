@@ -1,12 +1,13 @@
 package com.bucur.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoragePoint {
 
     public String licensePlate;
 
-    private List<Tyre> tyres;
+    private List<Tyre> tyres = new ArrayList<>();
 
     public List<Tyre> getTyres() {
         return tyres;
