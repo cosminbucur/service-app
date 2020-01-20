@@ -10,7 +10,16 @@ public class HotelRepositoryInMemory implements HotelRepository {
 
     private List<StoragePoint> storagePoints = new ArrayList<>();
 
-    Tyre tyre = new Tyre();
+
+    private List<Tyre> tyres = new ArrayList<>();
+
+    public void setStoragePoints(List<StoragePoint> storagePoints) {
+        this.storagePoints = storagePoints;
+    }
+
+    public void setTyres(List<Tyre> tyres) {
+        this.tyres = tyres;
+    }
 
     //    public HotelRepositoryInMemory() {
 ////        setup();
@@ -33,26 +42,10 @@ public class HotelRepositoryInMemory implements HotelRepository {
                 .orElseThrow(() -> new RuntimeException("no tyres found for license plate " + licensePlate));
     }
 
-    private List<Tyre> tyres = new ArrayList<>();
-
-    public void setStoragePoints(List<StoragePoint> storagePoints) {
-        this.storagePoints = storagePoints;
-    }
-
-    public void setTyres(List<Tyre> tyres) {
-        this.tyres = tyres;
-    }
-
     public long countWornTyres(HotelRepositoryInMemory storagePoint) {
         long count = tyres.stream().filter(tyre -> tyre.wear <= 3).count();
-
-        return count;
-
-//        int minimumWearIndicator=3;
-//        return tyres.stream()
-//                .filter(tyre -> tyre.wear < minimumWearIndicator)
-//                .findFirst()
-//                .orElseThrow(() -> new RuntimeException("no worn tyres found"));
+        if (count > 0) {
+            return count;
+        } else throw new RuntimeException("no used tyre for storage point " + storagePoint);
     }
-
 }
