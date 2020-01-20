@@ -9,17 +9,16 @@ public class Tyre {
     public String licensePlate;
 
     public Tyre() {
-
     }
 
-    public Tyre(String tyreBrand, TyreType type) {
-        this.tyreBrand = tyreBrand;
-        this.type = type;
-    }
-
-    public Tyre(String tyreBrand, TyreType type, int wear) {
-        this.tyreBrand = tyreBrand;
-        this.type = type;
-        this.wear = wear;
-    }
+//        public Tyre(String tyreBrand, TyreType type) {
+//        this.tyreBrand = tyreBrand;
+//        this.type = type;
+//    }
+//
+public Tyre(String tyreBrand, TyreType type, int wear) {
+    this.tyreBrand = tyreBrand;
+    this.type = type;
+    this.wear = wear;
+}
 }

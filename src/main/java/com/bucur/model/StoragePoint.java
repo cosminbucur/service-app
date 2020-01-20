@@ -15,4 +15,5 @@ public class StoragePoint {
     public void setTyres(List<Tyre> tyres) {
         this.tyres = tyres;
     }
+
 }

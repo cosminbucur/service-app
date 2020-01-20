@@ -43,25 +43,6 @@ public class HotelService {
      iterate list and for each tyre, if the element meets the desired criteria
      increment a counter
      */
-    public int countWornTyres() {
-//        Tyre tyre1 = new Tyre(1);
-//        Tyre tyre2 = new Tyre(2);
-//        Tyre tyre3 = new Tyre(6);
-//
-//        int wornTyresCount = 0;
-//
-//        if (tyre1.wear < 3) {
-//            wornTyresCount++;
-//        }
-//        if (tyre2.wear < 3) {
-//            wornTyresCount++;
-//        }
-//        if (tyre3.wear < 3) {
-//            wornTyresCount++;
-//        }
-//
-//        return wornTyresCount;
 
-        return -1;
-    }
 }
+
