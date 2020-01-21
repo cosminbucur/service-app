@@ -21,4 +21,5 @@ public Tyre(String tyreBrand, TyreType type, int wear) {
     this.type = type;
     this.wear = wear;
 }
+
 }

@@ -25,6 +25,6 @@ class HotelRepositoryInMemoryTest {
         StoragePoint actual = hotelRepository.getStoragePoint("A");
 
         // then
-        assertThat(actual.licensePlate).isEqualTo("A");
+        assertThat(storagePoint1).isEqualTo(actual);
     }
 }
