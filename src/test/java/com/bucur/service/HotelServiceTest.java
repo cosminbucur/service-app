@@ -31,14 +31,14 @@ class HotelServiceTest {
         newTyre1.wear = 6;
         wornTyre3.wear = 1;
 
-        HotelRepositoryInMemory tyresInStoragePoint = new HotelRepositoryInMemory();
-        tyresInStoragePoint.setTyres(Arrays.asList(wornTyre1, wornTyre2, newTyre1, wornTyre3));
+        HotelRepositoryInMemory hotelRepositoryInMemory = new HotelRepositoryInMemory();
+        hotelRepositoryInMemory.setTyres(Arrays.asList(wornTyre1, wornTyre2, newTyre1, wornTyre3));
         // when
         // on when, we call the method under test from the responsible object
-        long actualResult = tyresInStoragePoint.countWornTyres(tyresInStoragePoint);
+        int actualResult = hotelRepositoryInMemory.countWornTyres(" ");
 
         // because we have 2 worn tyres in first storage point and 1 in the second point
-        long expectedResult = 3;
+        int expectedResult = 3;
 
         // then
         // on then, we check that the actual result is equal to the expected result
