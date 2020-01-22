@@ -14,11 +14,6 @@ public class HotelRepositoryInMemory implements HotelRepository {
 
     private List<StoragePoint> storagePoints = new ArrayList<>();
 
-    public HotelRepositoryInMemory() {
-        // uncomment this if you want to setup an in memory database with some initial data
-//        setup();
-    }
-
     @Override
     public StoragePoint findStoragePoint(String licensePlate) {
         return storagePoints.stream()
@@ -50,13 +45,5 @@ public class HotelRepositoryInMemory implements HotelRepository {
     @Override
     public void setStoragePoints(List<StoragePoint> storagePoints) {
         this.storagePoints = storagePoints;
-    }
-
-    private void setup() {
-        StoragePoint storagePoint1 = new StoragePoint();
-        StoragePoint storagePoint2 = new StoragePoint();
-
-        storagePoint1.licensePlate = "B22ABC";
-        storagePoint2.licensePlate = "B33DEF";
     }
 }

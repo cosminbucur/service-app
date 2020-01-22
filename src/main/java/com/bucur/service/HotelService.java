@@ -21,7 +21,7 @@ public class HotelService {
         return hotelRepository.findStoragePoint(licensePlate);
     }
 
-    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, String licensePlate, StoreDismounted yes, List<Tyre> tyres) {
+    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, StoreDismounted yes, List<Tyre> tyres) {
         // tyre service -> check worn level
     }
 
