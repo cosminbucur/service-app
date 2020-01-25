@@ -1,11 +1,12 @@
 package com.bucur.repository;
 
-import com.bucur.model.StoragePoint;
-import com.bucur.model.Tyre;
+import com.bucur.dto.StoragePoint;
+import com.bucur.dto.Tyre;
 
 import java.util.List;
 import java.util.Map;
 
+// deposit tyres in hotel by: shelf > row > floor
 public interface HotelRepository {
 
     // as a convention we use find() when a method might not have a result

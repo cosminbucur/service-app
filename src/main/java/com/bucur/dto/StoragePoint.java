@@ -1,4 +1,4 @@
-package com.bucur.model;
+package com.bucur.dto;
 
 import java.util.ArrayList;
 import java.util.List;

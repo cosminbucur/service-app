@@ -1,4 +1,7 @@
-package com.bucur.model;
+package com.bucur.dto;
+
+import com.bucur.model.TyreType;
+import com.bucur.model.Wear;
 
 import java.util.Objects;
 

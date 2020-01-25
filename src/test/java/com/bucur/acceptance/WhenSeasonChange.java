@@ -1,9 +1,9 @@
 package com.bucur.acceptance;
 
-import com.bucur.model.CustomerVisit;
-import com.bucur.model.StoragePoint;
-import com.bucur.model.StoreDismounted;
-import com.bucur.model.Tyre;
+import com.bucur.dto.CustomerVisit;
+import com.bucur.dto.StoragePoint;
+import com.bucur.dto.Tyre;
+import com.bucur.model.TyreType;
 import com.bucur.repository.HotelRepository;
 import com.bucur.repository.HotelRepositoryInMemory;
 import com.bucur.service.HotelService;
@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenSeasonChange {
 
+    // TODO use case 2: store tyres during season change
     @Test
     public void shouldStoreTyres() {
         List<String> licensePlates = Arrays.asList("B22ABC", "B33DEF");
@@ -29,12 +31,61 @@ public class WhenSeasonChange {
         StoragePoint storagePoint = new StoragePoint();
         List<Tyre> tyres = createTyres();
 
-        hotelService.storeTyres(storagePoint, customerVisit, licensePlates.get(0), StoreDismounted.YES, tyres);
+        hotelService.storeTyres(storagePoint, customerVisit, tyres);
 
         assertThat(hotelRepository.findStoragePoint("B22ABC").getTyres().size()).isEqualTo(4);
     }
 
+    // TODO use case 3: unstore tyres during season change
+    @Test
+    public void shouldUnstoreTyres() {
+        HotelRepository hotelRepository = new HotelRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository);
+
+        CustomerVisit customerVisit = new CustomerVisit(1, LocalDate.now(), Arrays.asList("B22ABC"));
+        StoragePoint storagePointsWithTyres = new StoragePoint();
+        storagePointsWithTyres.setTyres(createTyres());
+
+        List<Tyre> selectedTyres = storagePointsWithTyres.getTyres();
+
+        hotelService.unstoreTyres(storagePointsWithTyres, customerVisit, selectedTyres);
+
+        assertThat(storagePointsWithTyres.getTyres()).isEmpty();
+    }
+
+    // TODO use case 6: notify customers after 6 months
+    @Test
+    public void shouldNotifyCustomersEverySixMonths() {
+        HotelRepository hotelRepository = new HotelRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository);
+
+        StoragePoint storagePoint1 = new StoragePoint();
+        storagePoint1.setTyres(createTyres());
+        StoragePoint storagePoint2 = new StoragePoint();
+        storagePoint2.setTyres(createTyres());
+
+        LocalDate sixMonthsAgo = LocalDate.of(2019, 6, 20);
+        LocalDate recentDate = LocalDate.of(2020, 1, 10);
+
+        CustomerVisit customerVisit1 = new CustomerVisit(1, sixMonthsAgo, Collections.singletonList("B22ABC"));
+        CustomerVisit customerVisit2 = new CustomerVisit(1, recentDate, Collections.singletonList("B22DEF"));
+
+        List<CustomerVisit> customerVisits = Arrays.asList(customerVisit1, customerVisit2);
+
+        hotelService.notifyCustomersOnSeasonChange(customerVisits);
+
+        assertThat(customerVisit1.seasonPassed).isTrue();
+        assertThat(customerVisit2.seasonPassed).isFalse();
+    }
+
     private List<Tyre> createTyres() {
-        return Arrays.asList(new Tyre(), new Tyre(), new Tyre(), new Tyre());
+        String tyreBrand = "michelin";
+        int threadLevel = 3;
+        return Arrays.asList(
+            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel),
+            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel),
+            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel),
+            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel)
+        );
     }
 }

@@ -1,7 +1,7 @@
 package com.bucur.repository;
 
-import com.bucur.model.StoragePoint;
-import com.bucur.model.Tyre;
+import com.bucur.dto.StoragePoint;
+import com.bucur.dto.Tyre;
 import com.bucur.model.Wear;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.bucur.acceptance;
 
-import com.bucur.model.StoragePoint;
-import com.bucur.model.Tyre;
+import com.bucur.dto.StoragePoint;
+import com.bucur.dto.Tyre;
 import com.bucur.model.TyreType;
 import com.bucur.repository.HotelRepository;
 import com.bucur.repository.HotelRepositoryInMemory;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenWornTyresInStorage {
 
-    // use case 5: get the worn tyres list
+    // TODO use case 5: get the worn tyres list
     @Test
     public void shouldSeeWornTyres() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();

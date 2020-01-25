@@ -1,11 +1,9 @@
 package com.bucur.acceptance;
 
-import com.bucur.model.CustomerVisit;
-import com.bucur.model.StoragePoint;
-import com.bucur.model.Tyre;
+import com.bucur.dto.CustomerVisit;
+import com.bucur.dto.Tyre;
+import com.bucur.dto.Vehicle;
 import com.bucur.model.TyreType;
-import com.bucur.model.UnstoreNewTyres;
-import com.bucur.model.Vehicle;
 import com.bucur.service.MountingService;
 import org.junit.jupiter.api.Test;
 
@@ -17,42 +15,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenNewCustomer {
 
-    // test application service
-
-
-    // Use case 1: first time mount tyres
-
-    // un client
-
-    // 1 masina
-    // 4 (FIX) cauciucuri vara montate
-    // 5 cauciucuri iarna in masina
-    // 1 cauciuc rezerva (vara, iarna, all season)
-
-    // 1 mecanic
-
-    // mecanic demonteaza 4 roti vara
-    // mecanic monteaza 4 roti iarna
-
-    // client lasa 6 cauciucuri la mecanic
-
-    // mecanic stocheaza 6 cauciucuri in depozit
-
-    // in hotel: shelf >  row  > floor
-
+    // TODO use case 1: first time mount tyres
     @Test
     public void shouldReplaceTyres() {
-        // entity: customer
-        // value type: tyre
-        // domain service:
-        // application service:
-
-        // customer, mechanic
-        // vehicle
-        // tyre
-        // hotel
-        // storage point
-
         List<String> licensePlates = Arrays.asList("B22ABC", "B33BCD");
         LocalDate visitDate = LocalDate.now();
         long customerId = 2L;
@@ -81,23 +46,8 @@ public class WhenNewCustomer {
             .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, threadLevel))
             .build();
 
-
-        mountingService.replaceTyres(customerVisit.id, mechanicId, licensePlate, UnstoreNewTyres.YES,
-                vehicleWithOldTyres, vehicleWithNewTyres);
+        mountingService.replaceTyres(customerVisit, mechanicId, licensePlate, vehicleWithOldTyres, vehicleWithNewTyres);
 
         assertThat(vehicleWithNewTyres.frontLeft).isEqualTo(newFrontLeft);
-
-        // Use case 2: season change
-
-
-
-        // notificare 6 luni: schimbare sezon
-
-        // use case 3: replace worn tyres in store
-        StoragePoint storagePointsWithTyres = hotelService.findStoragePoint(licensePlate);
-
-        List<Tyre> selectedTyres = storagePointsWithTyres.getTyres();
-
-        hotelService.unstoreTyres(storagePoint, customerVisit, selectedTyres);
     }
 }

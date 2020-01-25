@@ -1,12 +1,11 @@
 package com.bucur.service;
 
-import com.bucur.model.UnstoreNewTyres;
-import com.bucur.model.Vehicle;
+import com.bucur.dto.CustomerVisit;
+import com.bucur.dto.Vehicle;
 
 public class MountingService {
 
-    public void replaceTyres(long id, long mechanicId, String licensePlate, UnstoreNewTyres yes,
-                             Vehicle oldVehicleTyres, Vehicle newVehicleTyres) {
+    public void replaceTyres(CustomerVisit customerVisit, long mechanicId, String licensePlate, Vehicle oldVehicleTyres, Vehicle newVehicleTyres) {
 
     }
 }

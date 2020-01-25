@@ -1,9 +1,8 @@
 package com.bucur.service;
 
-import com.bucur.model.CustomerVisit;
-import com.bucur.model.StoragePoint;
-import com.bucur.model.StoreDismounted;
-import com.bucur.model.Tyre;
+import com.bucur.dto.CustomerVisit;
+import com.bucur.dto.StoragePoint;
+import com.bucur.dto.Tyre;
 import com.bucur.repository.HotelRepository;
 
 import java.util.List;
@@ -21,15 +20,15 @@ public class HotelService {
         return hotelRepository.findStoragePoint(licensePlate);
     }
 
-    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, StoreDismounted yes, List<Tyre> tyres) {
-        // tyre service -> check worn level
-    }
-
-    public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> selectedTyres) {
+    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
 
     }
 
-    public void swapStorage(StoragePoint oldStorage, List<Tyre> selectedTyres, StoragePoint newStorage) {
+    public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
+
+    }
+
+    public void swapStorage(StoragePoint oldStorage, StoragePoint newStorage) {
 
     }
 
@@ -37,14 +36,7 @@ public class HotelService {
         return hotelRepository.findWornTyres();
     }
 
-    /*
-     in order to count the number of items in a list:
-     get all the tyres from the database (or a list for example)
-     iterate list and for each tyre, if the element meets the desired criteria
-     increment a counter
-     */
-    public int countWornTyres() {
-        // TODO: implement this if the total number of worn tyres provides some business value
-        return -1;
+    public void notifyCustomersOnSeasonChange(List<CustomerVisit> customerVisits) {
+
     }
 }
