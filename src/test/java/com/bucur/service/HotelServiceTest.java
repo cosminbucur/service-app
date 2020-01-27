@@ -57,10 +57,10 @@ class HotelServiceTest {
 
     @Test
     public void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
-        Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3);
-        Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2);
-        Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8);
-        Tyre wornTyre3 = new Tyre("michelin", TyreType.SUMMER, 2);
+        Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");
+        Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
+        Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8, 205, 55, "R16");
+        Tyre wornTyre3 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
 
         StoragePoint storagePoint1 = new StoragePoint();
         storagePoint1.licensePlate = "B22ABC";

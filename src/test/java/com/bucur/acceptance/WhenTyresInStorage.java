@@ -34,12 +34,12 @@ public class WhenTyresInStorage {
 
     private List<Tyre> createTyres() {
         String tyreBrand = "michelin";
-        int threadLevel = 3;
+        int treadDepth = 3;
         return Arrays.asList(
-            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel),
-            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel),
-            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel),
-            new Tyre(tyreBrand, TyreType.SUMMER, threadLevel)
+                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16"),
+                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16"),
+                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16"),
+                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16")
         );
     }
 }

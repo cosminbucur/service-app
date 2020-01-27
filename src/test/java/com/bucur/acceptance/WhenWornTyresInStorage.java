@@ -9,6 +9,7 @@ import com.bucur.service.HotelService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,23 +17,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenWornTyresInStorage {
 
-    // TODO use case 5: get the worn tyres list
+    // TODO use case 5: get the worn tyres list -- test is the same with
+    // given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() in HotelServiceTest
     @Test
     public void shouldSeeWornTyres() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
         HotelService hotelService = new HotelService(hotelRepository);
 
-        Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3);
-        Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2);
-        Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8);
-        Tyre wornTyre3 = new Tyre("michelin", TyreType.SUMMER, 2);
+        Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");
+        Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
+        Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8, 205, 55, "R16");
+        Tyre wornTyre3 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
 
         StoragePoint storagePointWithWornTyres = new StoragePoint();
         storagePointWithWornTyres.licensePlate = "B22ABC";
         storagePointWithWornTyres.setTyres(Arrays.asList(wornTyre1, wornTyre2, newTyre1, wornTyre3));
 
+        hotelRepository.setStoragePoints(Collections.singletonList(storagePointWithWornTyres));
+
         Map<String, List<Tyre>> wornTyres = hotelService.getWornTyres();
 
-        assertThat(wornTyres.size()).isEqualTo(3);
+        int expectedResult = Map.of("B22ABC", Arrays.asList(wornTyre1, wornTyre2, wornTyre3)).size();
+
+        assertThat(wornTyres.size()).isEqualTo(expectedResult);
     }
 }

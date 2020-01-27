@@ -29,21 +29,21 @@ public class WhenNewCustomer {
 
         MountingService mountingService = new MountingService();
 
-        int threadLevel = 3;
+        int treadDepth = 3;
         Vehicle vehicleWithOldTyres = new Vehicle.Builder()
-            .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER, threadLevel))
-            .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER, threadLevel))
-            .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER, threadLevel))
-            .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER, threadLevel))
-            .build();
+                .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+                .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+                .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+                .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+                .build();
 
-        Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER, threadLevel);
+        Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15");
 
         Vehicle vehicleWithNewTyres = new Vehicle.Builder()
-            .withFrontLeft(newFrontLeft)
-            .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, threadLevel))
-            .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, threadLevel))
-            .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, threadLevel))
+                .withFrontLeft(newFrontLeft)
+                .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
+                .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
+                .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
             .build();
 
         mountingService.replaceTyres(customerVisit, mechanicId, licensePlate, vehicleWithOldTyres, vehicleWithNewTyres);

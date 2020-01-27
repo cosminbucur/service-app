@@ -1,5 +1,6 @@
 package com.bucur.dto;
 
+import com.bucur.model.RimType;
 import com.bucur.model.TyreType;
 import com.bucur.model.Wear;
 
@@ -8,8 +9,13 @@ import java.util.Objects;
 public class Tyre {
 
     public String tyreBrand;
+    public int tyreWidth;
+    public int tyreHeight;
+    public String rimDiameter;
     public TyreType type;
-    public int threadDepth;
+    public RimType rimType;
+    public int numberOfRimCaps;
+    public int treadDepth;
     public Wear wear;
     public Long storageId;
     public String licensePlate;
@@ -23,10 +29,15 @@ public class Tyre {
         this.type = type;
     }
 
-    public Tyre(String tyreBrand, TyreType type, int threadDepth) {
+    public Tyre(String tyreBrand, TyreType type, int treadDepth, int tyreWidth, int tyreHeight, String rimDiameter) {
         this.tyreBrand = tyreBrand;
         this.type = type;
-        setTyreWearLevel(threadDepth);
+        setTyreWearLevel(treadDepth);
+        setTyreSize(tyreWidth, tyreHeight, rimDiameter);
+    }
+
+    private String setTyreSize(int tyreWidth, int tyreHeight, String rimDiameter) {
+        return tyreWidth + "/" + tyreHeight + rimDiameter;
     }
 
     private void setTyreWearLevel(int threadDepth) {
@@ -57,29 +68,29 @@ public class Tyre {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tyre tyre = (Tyre) o;
-        return threadDepth == tyre.threadDepth &&
-            Objects.equals(tyreBrand, tyre.tyreBrand) &&
-            type == tyre.type &&
-            wear == tyre.wear &&
-            Objects.equals(storageId, tyre.storageId) &&
-            Objects.equals(licensePlate, tyre.licensePlate);
+        return treadDepth == tyre.treadDepth &&
+                Objects.equals(tyreBrand, tyre.tyreBrand) &&
+                type == tyre.type &&
+                wear == tyre.wear &&
+                Objects.equals(storageId, tyre.storageId) &&
+                Objects.equals(licensePlate, tyre.licensePlate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tyreBrand, type, threadDepth, wear, storageId, licensePlate);
+        return Objects.hash(tyreBrand, type, treadDepth, wear, storageId, licensePlate);
     }
 
     @Override
     public String
     toString() {
         return "Tyre{" +
-            "tyreBrand='" + tyreBrand + '\'' +
-            ", type=" + type +
-            ", threadDepth=" + threadDepth +
-            ", wear=" + wear +
-            ", storageId=" + storageId +
-            ", licensePlate='" + licensePlate + '\'' +
-            '}';
+                "tyreBrand='" + tyreBrand + '\'' +
+                ", type=" + type +
+                ", threadDepth=" + treadDepth +
+                ", wear=" + wear +
+                ", storageId=" + storageId +
+                ", licensePlate='" + licensePlate + '\'' +
+                '}';
     }
 }

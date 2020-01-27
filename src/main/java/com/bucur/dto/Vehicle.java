@@ -8,7 +8,7 @@ public class Vehicle {
     public Tyre frontRight;
     public Tyre rearRight;
 
-    private Vehicle() {
+    public Vehicle() {
     }
 
     public static class Builder {
