@@ -16,4 +16,8 @@ public class StoragePoint {
     public void setTyres(List<Tyre> tyres) {
         this.tyres = tyres;
     }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
 }

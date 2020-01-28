@@ -5,6 +5,7 @@ import com.bucur.dto.StoragePoint;
 import com.bucur.dto.Tyre;
 import com.bucur.repository.HotelRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,9 @@ public class HotelService {
     }
 
     public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
-
+        storagePoint.setLicensePlate(customerVisit.getLicensePlates());
+        storagePoint.setTyres(tyres);
+        hotelRepository.setStoragePoints(Collections.singletonList(storagePoint));
     }
 
     public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {

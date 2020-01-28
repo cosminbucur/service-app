@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +20,7 @@ public class WhenSeasonChange {
     // TODO use case 2: store tyres during season change
     @Test
     public void shouldStoreTyres() {
-        List<String> licensePlates = Arrays.asList("B22ABC", "B33DEF");
+        String licensePlates = "B22ABC";
         LocalDate visitDate = LocalDate.now();
         long customerId = 2L;
         CustomerVisit customerVisit = new CustomerVisit(customerId, visitDate, licensePlates);
@@ -42,7 +41,7 @@ public class WhenSeasonChange {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
         HotelService hotelService = new HotelService(hotelRepository);
 
-        CustomerVisit customerVisit = new CustomerVisit(1, LocalDate.now(), Arrays.asList("B22ABC"));
+        CustomerVisit customerVisit = new CustomerVisit(1, LocalDate.now(), "B22ABC");
         StoragePoint storagePointsWithTyres = new StoragePoint();
         storagePointsWithTyres.setTyres(createTyres());
 
@@ -67,8 +66,8 @@ public class WhenSeasonChange {
         LocalDate sixMonthsAgo = LocalDate.of(2019, 6, 20);
         LocalDate recentDate = LocalDate.of(2020, 1, 10);
 
-        CustomerVisit customerVisit1 = new CustomerVisit(1, sixMonthsAgo, Collections.singletonList("B22ABC"));
-        CustomerVisit customerVisit2 = new CustomerVisit(1, recentDate, Collections.singletonList("B22DEF"));
+        CustomerVisit customerVisit1 = new CustomerVisit(1, sixMonthsAgo, "B22ABC");
+        CustomerVisit customerVisit2 = new CustomerVisit(1, recentDate, "B22DEF");
 
         List<CustomerVisit> customerVisits = Arrays.asList(customerVisit1, customerVisit2);
 

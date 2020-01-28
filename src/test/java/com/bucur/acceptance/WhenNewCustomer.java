@@ -8,8 +8,6 @@ import com.bucur.service.MountingService;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +16,7 @@ public class WhenNewCustomer {
     // TODO use case 1: first time mount tyres
     @Test
     public void shouldReplaceTyres() {
-        List<String> licensePlates = Arrays.asList("B22ABC", "B33BCD");
+        String licensePlates = "B22ABC";
         LocalDate visitDate = LocalDate.now();
         long customerId = 2L;
         long mechanicId = 3L;
