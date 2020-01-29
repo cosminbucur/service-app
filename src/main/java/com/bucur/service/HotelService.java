@@ -36,7 +36,8 @@ public class HotelService {
     }
 
     public void swapStorage(StoragePoint oldStorage, StoragePoint newStorage) {
-
+        newStorage.setTyres(oldStorage.getTyres());
+        oldStorage.deleteTyres(oldStorage.getTyres());
     }
 
     public Map<String, List<Tyre>> getWornTyres() {
