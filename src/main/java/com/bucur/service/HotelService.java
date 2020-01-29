@@ -29,6 +29,10 @@ public class HotelService {
 
     public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
 
+        if (!storagePoint.getTyres().isEmpty()) {
+            storagePoint.deleteTyres(tyres);
+            hotelRepository.setStoragePoints(Collections.singletonList(storagePoint));
+        } else throw new RuntimeException("no tyres stored for license plate" + storagePoint.licensePlate);
     }
 
     public void swapStorage(StoragePoint oldStorage, StoragePoint newStorage) {

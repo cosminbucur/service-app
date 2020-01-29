@@ -1,6 +1,7 @@
 package com.bucur.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StoragePoint {
@@ -19,5 +20,9 @@ public class StoragePoint {
 
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
+    }
+
+    public void deleteTyres(List<Tyre> tyres) {
+        this.tyres = Collections.emptyList();
     }
 }
