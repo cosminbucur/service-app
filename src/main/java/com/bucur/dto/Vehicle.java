@@ -1,15 +1,14 @@
-package com.bucur.model;
+package com.bucur.dto;
 
 public class Vehicle {
 
-    public Long id;
     public String licensePlate;
     public Tyre frontLeft;
     public Tyre rearLeft;
     public Tyre frontRight;
     public Tyre rearRight;
 
-    private Vehicle() {
+    public Vehicle() {
     }
 
     public static class Builder {
