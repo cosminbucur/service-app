@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenNewCustomer {
 
-    // TODO use case 1: first time mount tyres
+    // TODO user story 3: first time mount tyres
     @Test
     public void shouldReplaceTyres() {
         String licensePlates = "B22ABC";

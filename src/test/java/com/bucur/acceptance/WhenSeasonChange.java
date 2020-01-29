@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenSeasonChange {
 
-    // TODO use case 2: store tyres during season change
+    // TODO user story 6: store tyres during season change
     @Test
     public void shouldStoreTyres() {
         String licensePlates = "B22ABC";
@@ -35,7 +35,7 @@ public class WhenSeasonChange {
         assertThat(hotelRepository.findStoragePoint("B22ABC").getTyres().size()).isEqualTo(4);
     }
 
-    // TODO use case 3: unstore tyres during season change
+    // TODO user story 7: unstore tyres during season change
     @Test
     public void shouldUnstoreTyres() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
@@ -52,7 +52,7 @@ public class WhenSeasonChange {
         assertThat(storagePointsWithTyres.getTyres()).isEmpty();
     }
 
-    // TODO use case 6: notify customers after 6 months
+    // TODO user story 8: notify customers after 6 months
     @Test
     public void shouldNotifyCustomersEverySixMonths() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
