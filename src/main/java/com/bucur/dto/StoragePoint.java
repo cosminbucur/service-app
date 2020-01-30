@@ -24,6 +24,8 @@ public class StoragePoint {
 
     public void removeTyres(List<Tyre> tyres) {
         // TODO: remove the selected tyres
-        this.tyres = Collections.emptyList();
+        for (Tyre tyre : tyres) {
+            setTyres(Collections.EMPTY_LIST);
+        }
     }
 }

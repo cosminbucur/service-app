@@ -41,10 +41,16 @@ public class HotelRepositoryInMemory implements HotelRepository {
         storagePoints.add(storagePoint);
     }
 
+    @Override
+    public List<StoragePoint> getStoragePointByLicensePlate(String licensePlate) {
+        return storagePoints.stream().filter(storagePoint -> storagePoint.licensePlate.equals(licensePlate))
+                .collect(Collectors.toList());
+    }
+
     private List<Tyre> getWornTyresFromStoragePoint(List<Tyre> tyres) {
         return tyres.stream()
-            .filter(tyre -> tyre.wear.equals(Wear.WARNING) || tyre.wear.equals(Wear.DANGER))
-            .collect(Collectors.toList());
+                .filter(tyre -> tyre.wear.equals(Wear.WARNING) || tyre.wear.equals(Wear.DANGER))
+                .collect(Collectors.toList());
     }
 
     @Override

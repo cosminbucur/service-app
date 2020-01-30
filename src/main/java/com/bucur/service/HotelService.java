@@ -21,20 +21,23 @@ public class HotelService {
     }
 
     public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
-        storagePoint.setLicensePlate(customerVisit.getLicensePlates());
+        storagePoint.setLicensePlate(customerVisit.getLicensePlate());
         storagePoint.setTyres(tyres);
         hotelRepository.save(storagePoint);
     }
 
     public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
         // get storage point from db (by license plate)
+        hotelRepository.getStoragePointByLicensePlate(customerVisit.licensePlate);
         // remove tyres
+        storagePoint.removeTyres(tyres);
         // save
+        hotelRepository.save(storagePoint);
 
-        if (!storagePoint.getTyres().isEmpty()) {
-            storagePoint.removeTyres(tyres);
-            hotelRepository.save(storagePoint);
-        } else throw new RuntimeException("no tyres stored for license plate" + storagePoint.licensePlate);
+//        if (!storagePoint.getTyres().isEmpty()) {
+//            storagePoint.removeTyres(tyres);
+//            hotelRepository.save(storagePoint);
+//        } else throw new RuntimeException("no tyres stored for license plate" + storagePoint.licensePlate);
     }
 
     public void swapStorage(StoragePoint oldStorage, StoragePoint newStorage) {
