@@ -1,5 +1,7 @@
 package com.bucur.dto;
 
+import java.util.List;
+
 public class Vehicle {
 
     public String licensePlate;
@@ -9,6 +11,14 @@ public class Vehicle {
     public Tyre rearRight;
 
     public Vehicle() {
+    }
+
+    public void mountTyres(List<Tyre> newTyres) {
+
+        newTyres.add(frontLeft);
+        newTyres.add(frontRight);
+        newTyres.add(rearLeft);
+        newTyres.add(rearRight);
     }
 
     public static class Builder {

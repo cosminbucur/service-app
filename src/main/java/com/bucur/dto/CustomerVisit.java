@@ -20,4 +20,15 @@ public class CustomerVisit {
         return licensePlates;
     }
 
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setVisitDate(LocalDate visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public void setLicensePlates(String licensePlates) {
+        this.licensePlates = licensePlates;
+    }
 }
