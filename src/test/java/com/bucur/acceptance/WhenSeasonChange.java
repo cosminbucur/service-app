@@ -20,10 +20,10 @@ public class WhenSeasonChange {
     // TODO use case 2: store tyres during season change
     @Test
     public void shouldStoreTyres() {
-        String licensePlates = "B22ABC";
+        String licensePlate = "B22ABC";
         LocalDate visitDate = LocalDate.now();
         long customerId = 2L;
-        CustomerVisit customerVisit = new CustomerVisit(customerId, visitDate, licensePlates);
+        CustomerVisit customerVisit = new CustomerVisit(customerId, visitDate, licensePlate);
 
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
         HotelService hotelService = new HotelService(hotelRepository);

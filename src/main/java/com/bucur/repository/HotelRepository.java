@@ -35,4 +35,6 @@ public interface HotelRepository {
     Map<String, List<Tyre>> findWornTyres();
 
     void save(StoragePoint storagePoint);
+
+    List<StoragePoint> getStoragePointByLicensePlate(String licensePlates);
 }

@@ -6,18 +6,18 @@ public class CustomerVisit {
 
     public long customerId;
     public LocalDate visitDate;
-    public String licensePlates;
+    public String licensePlate;
     public boolean seasonPassed;
 
-    public CustomerVisit(long customerId, LocalDate visitDate, String licensePlates) {
+    public CustomerVisit(long customerId, LocalDate visitDate, String licensePlate) {
         this.customerId = customerId;
         this.visitDate = visitDate;
-        this.licensePlates = licensePlates;
+        this.licensePlate = licensePlate;
         this.seasonPassed = false;
     }
 
-    public String getLicensePlates() {
-        return licensePlates;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
     public void setCustomerId(long customerId) {
