@@ -1,12 +1,12 @@
-# Intellij
-.idea/
-*.iml
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+
+/build/
+*/out/
+*/logs/
+
+### IntelliJ IDEA ###
+.idea
 *.iws
-.car service app
-
-# Mac
-.DS_Store
-
-# Maven
-log/
-target/
+*.iml
+*.ipr
