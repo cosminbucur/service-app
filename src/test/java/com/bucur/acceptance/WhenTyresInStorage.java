@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenTyresInStorage {
 
-    // TODO use case 4: move tyres from one storage point to another
+    // TODO user story 4: move tyres from one storage point to another
     @Test
     public void shouldSwapStorage() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();

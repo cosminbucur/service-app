@@ -17,8 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WhenWornTyresInStorage {
 
-    // TODO use case 5: get the worn tyres list -- test is the same with
-    // given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() in HotelServiceTest
+    // TODO user story 5: get the worn tyres list
     @Test
     public void shouldSeeWornTyres() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
