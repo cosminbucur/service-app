@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Mechanic {
 
-    long id;
-    String name;
+    public long id;
+    public String name;
 
     public Mechanic() {
     }

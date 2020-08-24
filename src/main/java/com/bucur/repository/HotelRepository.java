@@ -33,4 +33,6 @@ public interface HotelRepository {
      * @return the map with the entries if any
      */
     Map<String, List<Tyre>> findWornTyres();
+
+    void save(StoragePoint storagePoint);
 }

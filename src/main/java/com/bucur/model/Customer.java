@@ -13,6 +13,12 @@ public class Customer {
     private String emailAddress;
 
     public Customer() {
+        withId(id);
+        withFirstName(firstName);
+        withLastName(lastName);
+        withCompany(company);
+        withPhoneNumber(phoneNumber);
+        withEmailAddress(emailAddress);
     }
 
     public static Customer customer() {

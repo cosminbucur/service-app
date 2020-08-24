@@ -36,6 +36,11 @@ public class HotelRepositoryInMemory implements HotelRepository {
         return result;
     }
 
+    @Override
+    public void save(StoragePoint storagePoint) {
+        storagePoints.add(storagePoint);
+    }
+
     private List<Tyre> getWornTyresFromStoragePoint(List<Tyre> tyres) {
         return tyres.stream()
             .filter(tyre -> tyre.wear.equals(Wear.WARNING) || tyre.wear.equals(Wear.DANGER))

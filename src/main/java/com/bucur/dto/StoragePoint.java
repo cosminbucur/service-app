@@ -22,7 +22,8 @@ public class StoragePoint {
         this.licensePlate = licensePlate;
     }
 
-    public void deleteTyres(List<Tyre> tyres) {
+    public void removeTyres(List<Tyre> tyres) {
+        // TODO: remove the selected tyres
         this.tyres = Collections.emptyList();
     }
 }
