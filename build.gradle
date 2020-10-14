@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        junitVersion= '5.4.2'
+        junitVersion= '5.7.0'
     }
     repositories {
         jcenter()
@@ -13,7 +13,7 @@ plugins {
 }
 
 java {
-    group 'com.bucur'
+    group 'com.fm'
     version '1.0-SNAPSHOT'
     sourceCompatibility JavaVersion.VERSION_11
     targetCompatibility JavaVersion.VERSION_11
@@ -24,13 +24,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"      // use junit 5 new methods
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"   // runs parametrized test
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.5.0'       // handle default launcher
-
-    testImplementation 'org.assertj:assertj-core:3.12.2'                        // fluent assertions
-    testImplementation 'org.mockito:mockito-core:2.28.2'                        // mocking framework
-
-    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junitVersion"      // run legacy junit 4 tests
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testImplementation 'org.assertj:assertj-core:3.17.2'
+    testImplementation 'org.mockito:mockito-core:3.5.13'
 }
