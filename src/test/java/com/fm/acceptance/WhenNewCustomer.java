@@ -11,9 +11,10 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: update tests to junit 5 syntax
 public class WhenNewCustomer {
 
-    // TODO user story 3: first time mount tyres
+    // user story 3: first time mount tyres
     @Test
     public void shouldReplaceTyres() {
         String licensePlates = "B22ABC";
@@ -29,19 +30,19 @@ public class WhenNewCustomer {
 
         int treadDepth = 3;
         Vehicle vehicleWithOldTyres = new Vehicle.Builder()
-                .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-                .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-                .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-                .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-                .build();
+            .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+            .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+            .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+            .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+            .build();
 
         Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15");
 
         Vehicle vehicleWithNewTyres = new Vehicle.Builder()
-                .withFrontLeft(newFrontLeft)
-                .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
-                .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
-                .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
+            .withFrontLeft(newFrontLeft)
+            .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
+            .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
+            .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
             .build();
 
         mountingService.replaceTyres(customerVisit, mechanicId, licensePlate, vehicleWithOldTyres, vehicleWithNewTyres);

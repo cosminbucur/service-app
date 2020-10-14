@@ -21,6 +21,8 @@ public class HotelService {
     }
 
     public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
+        // TODO: save customer
+
         storagePoint.setLicensePlate(customerVisit.getLicensePlate());
         storagePoint.setTyres(tyres);
         hotelRepository.save(storagePoint);
