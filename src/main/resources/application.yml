@@ -1,6 +1,10 @@
-# TODO add properties for h2
-# enable h2 console
-
-# TODO add properties for spring jpa
-# show sql
-# create-drop database
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:file:~/test
+    username: user
+    password: password
+    driverClassName: org.h2.Driver
