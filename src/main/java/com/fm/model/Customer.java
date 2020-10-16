@@ -12,7 +12,7 @@ public class Customer {
 
     // FIXME should be private String
     // a phone number is always a String. long is for high numbers that don't start with 0 or +40
-    public Long phoneNumber;
+    private String phoneNumber;
     private String emailAddress;
 
     public Customer() {
@@ -48,7 +48,7 @@ public class Customer {
         return this;
     }
 
-    public Customer withPhoneNumber(Long phoneNumber) {
+    public Customer withPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
@@ -90,11 +90,11 @@ public class Customer {
         this.company = company;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

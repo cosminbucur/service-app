@@ -3,8 +3,6 @@ package com.fm.acceptance;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
-// FIXME remove unused imports
-// in commit window check the 3 boxes regarding rearange code and imports
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepository;
@@ -19,12 +17,13 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WhenWornTyresInStorage {
+class WhenWornTyresInStorage {
 
     @Test
-    public void shouldSeeWornTyres() {
+    void shouldSeeWornTyres() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
-        HotelService hotelService = new HotelService(hotelRepository);
+        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository, customerRepository);
 
         Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");
         Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");

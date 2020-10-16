@@ -18,11 +18,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WhenSeasonChange {
+class WhenSeasonChange {
 
     // user story 6: store tyres during season change
     @Test
-    public void shouldStoreTyres() {
+    void shouldStoreTyres() {
         //create new customer
         Customer customer = createCustomer();
 
@@ -31,9 +31,9 @@ public class WhenSeasonChange {
         CustomerVisit customerVisit = new CustomerVisit(customer.getId(), visitDate, licensePlate);
 
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
-        HotelService hotelService = new HotelService(hotelRepository);
-
         CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository, customerRepository);
+
 
         StoragePoint storagePoint = new StoragePoint();
         List<Tyre> tyres = createTyres();
@@ -41,15 +41,15 @@ public class WhenSeasonChange {
         hotelService.storeTyres(customer, storagePoint, customerVisit, tyres);
 
         assertThat(hotelRepository.findStoragePoint("B22ABC").getTyres().size()).isEqualTo(4);
-        assertThat(customerRepository.findCustomerByPhoneNumber(55L).getFirstName()).isEqualTo("alex");
+        assertThat(customerRepository.findByPhoneNumber("0722333444").getFirstName()).isEqualTo("alex");
     }
 
     // user story 7: unstore tyres during season change
     @Test
-    public void shouldUnstoreTyres() {
+    void shouldUnstoreTyres() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
-
-        HotelService hotelService = new HotelService(hotelRepository);
+        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository, customerRepository);
 
         CustomerVisit customerVisit = new CustomerVisit(1, LocalDate.now(), "B22ABC");
         StoragePoint storagePointsWithTyres = new StoragePoint();
@@ -64,9 +64,10 @@ public class WhenSeasonChange {
 
     // TODO user story 8: notify customers after 6 months
     @Test
-    public void shouldNotifyCustomersEverySixMonths() {
+    void shouldNotifyCustomersEverySixMonths() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
-        HotelService hotelService = new HotelService(hotelRepository);
+        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+        HotelService hotelService = new HotelService(hotelRepository, customerRepository);
 
         StoragePoint storagePoint1 = new StoragePoint();
         storagePoint1.setTyres(createTyres());
@@ -104,7 +105,7 @@ public class WhenSeasonChange {
         customer.setLastName("Xela");
         customer.setCompany("aerospace");
         customer.setEmailAddress("xela@aerospace.ro");
-        customer.setPhoneNumber(55L);
+        customer.setPhoneNumber("0722333444");
         return customer;
     }
 }

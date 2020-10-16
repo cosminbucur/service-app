@@ -6,5 +6,5 @@ public interface CustomerRepository {
 
     void save(Customer customer);
 
-    Customer findCustomerByPhoneNumber(Long phoneNumber);
+    Customer findByPhoneNumber(String phoneNumber);
 }

@@ -11,12 +11,11 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-// TODO: update tests to junit 5 syntax
-public class WhenNewCustomer {
+class WhenNewCustomer {
 
     // user story 3: first time mount tyres
     @Test
-    public void shouldReplaceTyres() {
+    void shouldReplaceTyres() {
         String licensePlates = "B22ABC";
         LocalDate visitDate = LocalDate.now();
         long customerId = 2L;

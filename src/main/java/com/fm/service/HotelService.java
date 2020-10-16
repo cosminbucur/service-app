@@ -13,12 +13,11 @@ import java.util.Map;
 public class HotelService {
 
     private HotelRepository hotelRepository;
-    // FIXME inject repository in constructor properly
-    // color gray = unused = bad
     private CustomerRepository customerRepository;
 
-    public HotelService(HotelRepository hotelRepository) {
+    public HotelService(HotelRepository hotelRepository, CustomerRepository customerRepository) {
         this.hotelRepository = hotelRepository;
+        this.customerRepository = customerRepository;
     }
 
     public StoragePoint findStoragePoint(String licensePlate) {
@@ -27,6 +26,7 @@ public class HotelService {
 
     public void storeTyres(Customer customer, StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
         // TODO: save customer
+        CustomerRepository customerRepository = null;
 
         storagePoint.setLicensePlate(customerVisit.getLicensePlate());
         storagePoint.setTyres(tyres);

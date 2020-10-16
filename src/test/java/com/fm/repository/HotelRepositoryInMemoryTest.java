@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HotelRepositoryInMemoryTest {
 
     @Test
-    public void getStoragePoint() {
+    void getStoragePoint() {
         StoragePoint storagePoint1 = new StoragePoint();
         StoragePoint storagePoint2 = new StoragePoint();
         storagePoint1.licensePlate = "B22ABC";

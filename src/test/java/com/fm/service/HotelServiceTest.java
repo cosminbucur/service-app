@@ -3,9 +3,6 @@ package com.fm.service;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
-import com.fm.repository.CustomerRepository;
-import com.fm.repository.CustomerRepositoryInMemory;
-import com.fm.repository.HotelRepository;
 import com.fm.repository.HotelRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,17 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class HotelServiceTest {
 
-    // TODO: mock the repository instead of using a real object
-    private HotelRepository hotelRepository;
-    // FIXME remove field if unused
-    private CustomerRepository customerRepository;
     private HotelService hotelService;
 
 
     @BeforeEach
     void setUp() {
-        hotelRepository = new HotelRepositoryInMemory();
-        hotelService = new HotelService(hotelRepository);
+        HotelRepositoryInMemory hotelRepositoryInMemory = new HotelRepositoryInMemory();
+        hotelService = new HotelService(hotelRepositoryInMemory, customerRepository);
     }
 
     /*
@@ -41,7 +34,7 @@ class HotelServiceTest {
          check I get the correct number of worn tyres (2)
          */
     @Test
-    public void given3wornTyresAnd1New_whenCountWornTyres_thenReturn3() {
+    void given3wornTyresAnd1New_whenCountWornTyres_thenReturn3() {
         // given
         // on given, we instantiate the objects required to create the test scenario
 
@@ -62,7 +55,7 @@ class HotelServiceTest {
 
     // TODO: possible duplicate with WhenWornTyresInStorage
     @Test
-    public void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
+    void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
         Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");
         Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
         Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8, 205, 55, "R16");
@@ -76,13 +69,14 @@ class HotelServiceTest {
         storagePoint2.licensePlate = "B33DEF";
         storagePoint2.setTyres(Arrays.asList(newTyre1, wornTyre3));
 
-        hotelRepository.setStoragePoints(Arrays.asList(storagePoint1, storagePoint2));
+        HotelRepositoryInMemory hotelRepositoryInMemory = new HotelRepositoryInMemory();
+        hotelRepositoryInMemory.setStoragePoints(Arrays.asList(storagePoint1, storagePoint2));
 
         Map<String, List<Tyre>> actualResult = hotelService.getWornTyres();
 
         Map<String, List<Tyre>> expectedResult = Map.of(
-            "B33DEF", Collections.singletonList(wornTyre3),
-            "B22ABC", Arrays.asList(wornTyre1, wornTyre2)
+                "B33DEF", Collections.singletonList(wornTyre3),
+                "B22ABC", Arrays.asList(wornTyre1, wornTyre2)
         );
 
         assertThat(actualResult).isEqualTo(expectedResult);

@@ -24,9 +24,6 @@ public interface HotelRepository {
     // TODO remove this after switching to a real database
     void setStoragePoints(List<StoragePoint> storagePoints);
 
-    // FIXME don't add useless empty rows
-    // convention is 1 empty row between stuff
-
     /**
      * Returns a map of worn tyres where
      * key - the license plate
