@@ -41,7 +41,7 @@ public class WhenSeasonChange {
         hotelService.storeTyres(customer, storagePoint, customerVisit, tyres);
 
         assertThat(hotelRepository.findStoragePoint("B22ABC").getTyres().size()).isEqualTo(4);
-        assertThat(customerRepository.findCustomerByPhoneNumber(55L).getFirstName().equals("Alex"));
+        assertThat(customerRepository.findCustomerByPhoneNumber(55L).getFirstName()).isEqualTo("alex");
     }
 
     // user story 7: unstore tyres during season change

@@ -21,6 +21,7 @@ class HotelServiceTest {
 
     // TODO: mock the repository instead of using a real object
     private HotelRepository hotelRepository;
+    // FIXME remove field if unused
     private CustomerRepository customerRepository;
     private HotelService hotelService;
 
@@ -59,7 +60,7 @@ class HotelServiceTest {
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
-    // TODO: posible duplicate with WhenWornTyresInStorage 
+    // TODO: possible duplicate with WhenWornTyresInStorage
     @Test
     public void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
         Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");

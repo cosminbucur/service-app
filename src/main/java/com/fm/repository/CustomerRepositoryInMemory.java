@@ -14,11 +14,12 @@ public class CustomerRepositoryInMemory implements CustomerRepository{
         customers.add(customer);
     }
 
+    // FIXME rename to findById
     @Override
     public Customer findCustomerByPhoneNumber(Long phoneNumber) {
         return customers.stream()
-                .filter(customer -> customer.phoneNumber.equals(phoneNumber))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("no customer with phone number "  + phoneNumber));
+            .filter(customer -> customer.phoneNumber.equals(phoneNumber))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("no customer with phone number "  + phoneNumber));
     }
 }

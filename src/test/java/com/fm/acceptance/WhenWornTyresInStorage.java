@@ -3,6 +3,8 @@ package com.fm.acceptance;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
+// FIXME remove unused imports
+// in commit window check the 3 boxes regarding rearange code and imports
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepository;

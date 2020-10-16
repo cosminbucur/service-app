@@ -11,6 +11,8 @@ public class StoragePoint {
     public String licensePlate;
 
     private List<Tyre> tyres = new ArrayList<>();
+
+    // FIXME why do you need a customer on the storage point?
     private Customer customer;
 
     public List<Tyre> getTyres() {

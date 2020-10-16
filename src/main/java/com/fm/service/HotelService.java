@@ -13,6 +13,8 @@ import java.util.Map;
 public class HotelService {
 
     private HotelRepository hotelRepository;
+    // FIXME inject repository in constructor properly
+    // color gray = unused = bad
     private CustomerRepository customerRepository;
 
     public HotelService(HotelRepository hotelRepository) {

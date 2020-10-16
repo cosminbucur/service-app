@@ -16,6 +16,8 @@ public class CustomerVisit {
         this.seasonPassed = false;
     }
 
+    // FIXME don't add useless empty rows
+    // convention is 1 empty row between stuff
 
     public long getCustomerId() {
         return customerId;

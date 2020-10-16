@@ -9,6 +9,9 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String company;
+
+    // FIXME should be private String
+    // a phone number is always a String. long is for high numbers that don't start with 0 or +40
     public Long phoneNumber;
     private String emailAddress;
 
