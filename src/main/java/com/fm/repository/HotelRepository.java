@@ -24,6 +24,7 @@ public interface HotelRepository {
     // TODO remove this after switching to a real database
     void setStoragePoints(List<StoragePoint> storagePoints);
 
+
     /**
      * Returns a map of worn tyres where
      * key - the license plate

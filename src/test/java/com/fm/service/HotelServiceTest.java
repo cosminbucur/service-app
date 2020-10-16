@@ -3,6 +3,8 @@ package com.fm.service;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
+import com.fm.repository.CustomerRepository;
+import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepository;
 import com.fm.repository.HotelRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +21,9 @@ class HotelServiceTest {
 
     // TODO: mock the repository instead of using a real object
     private HotelRepository hotelRepository;
+    private CustomerRepository customerRepository;
     private HotelService hotelService;
+
 
     @BeforeEach
     void setUp() {

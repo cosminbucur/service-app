@@ -16,6 +16,7 @@ public class CustomerVisit {
         this.seasonPassed = false;
     }
 
+
     public long getCustomerId() {
         return customerId;
     }

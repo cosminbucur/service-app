@@ -9,7 +9,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String company;
-    private int phoneNumber;
+    public Long phoneNumber;
     private String emailAddress;
 
     public Customer() {
@@ -45,7 +45,7 @@ public class Customer {
         return this;
     }
 
-    public Customer withPhoneNumber(int phoneNumber) {
+    public Customer withPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
@@ -87,11 +87,11 @@ public class Customer {
         this.company = company;
     }
 
-    public int getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

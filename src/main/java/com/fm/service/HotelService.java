@@ -3,6 +3,8 @@ package com.fm.service;
 import com.fm.dto.CustomerVisit;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
+import com.fm.model.Customer;
+import com.fm.repository.CustomerRepository;
 import com.fm.repository.HotelRepository;
 
 import java.util.List;
@@ -10,7 +12,8 @@ import java.util.Map;
 
 public class HotelService {
 
-    private final HotelRepository hotelRepository;
+    private HotelRepository hotelRepository;
+    private CustomerRepository customerRepository;
 
     public HotelService(HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
@@ -20,12 +23,15 @@ public class HotelService {
         return hotelRepository.findStoragePoint(licensePlate);
     }
 
-    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
+    public void storeTyres(Customer customer, StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
         // TODO: save customer
 
         storagePoint.setLicensePlate(customerVisit.getLicensePlate());
         storagePoint.setTyres(tyres);
+
+        customerRepository.save(customer);
         hotelRepository.save(storagePoint);
+
     }
 
     public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
