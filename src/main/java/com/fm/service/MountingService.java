@@ -18,9 +18,9 @@ public class MountingService {
         Mechanic.mechanic().setId(mechanicId);
 
         customerVisit.setVisitDate(LocalDate.now());
-        customerVisit.setLicensePlate(licensePlate);
+        customerVisit.getCustomerDetails().setLicensePlate(licensePlate);
 
-        vehicleWithOldTyres.licensePlate = customerVisit.getLicensePlate();
+        vehicleWithOldTyres.licensePlate = customerVisit.getCustomerDetails().getLicensePlate();
         vehicleWithNewTyres.licensePlate = vehicleWithOldTyres.licensePlate;
         vehicleWithNewTyres.mountTyres(newTyres);
     }

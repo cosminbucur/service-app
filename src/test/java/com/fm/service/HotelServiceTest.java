@@ -1,12 +1,13 @@
 package com.fm.service;
 
+import com.fm.dto.CustomerMapper;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerRepositoryInMemory;
+import com.fm.repository.HotelRepository;
 import com.fm.repository.HotelRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -18,14 +19,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class HotelServiceTest {
 
-    private HotelService hotelService;
-
-    @BeforeEach
-    void setUp() {
-        HotelRepositoryInMemory hotelRepositoryInMemory = new HotelRepositoryInMemory();
-        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
-        hotelService = new HotelService(hotelRepositoryInMemory, customerRepository);
-    }
+    private final HotelRepository hotelRepository = new HotelRepositoryInMemory();
+    private final CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+    private final CustomerMapper customerMapper = new CustomerMapper();
+    private final HotelService hotelService = new HotelService(hotelRepository, customerRepository, customerMapper);
 
     /*
          scenario:

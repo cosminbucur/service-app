@@ -7,4 +7,6 @@ public interface CustomerRepository {
     void save(Customer customer);
 
     Customer findByPhoneNumber(String phoneNumber);
+
+    boolean existsById(Long id);
 }

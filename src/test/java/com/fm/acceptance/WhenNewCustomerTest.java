@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WhenNewCustomer {
+class WhenNewCustomerTest {
 
     // user story 3: first time mount tyres
     @Test
@@ -23,7 +23,7 @@ class WhenNewCustomer {
         String tyreBrand = "michelin";
         String licensePlate = "B22ABC";
 
-        CustomerVisit customerVisit = new CustomerVisit(customerId, visitDate, licensePlates);
+        CustomerVisit customerVisit = new CustomerVisit(0, visitDate, licensePlates);
 
         MountingService mountingService = new MountingService();
 

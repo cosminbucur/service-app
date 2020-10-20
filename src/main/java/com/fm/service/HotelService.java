@@ -1,5 +1,7 @@
 package com.fm.service;
 
+import com.fm.dto.CustomerDetails;
+import com.fm.dto.CustomerMapper;
 import com.fm.dto.CustomerVisit;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
@@ -14,31 +16,35 @@ public class HotelService {
 
     private HotelRepository hotelRepository;
     private CustomerRepository customerRepository;
+    private CustomerMapper customerMapper;
 
-    public HotelService(HotelRepository hotelRepository, CustomerRepository customerRepository) {
+    public HotelService(HotelRepository hotelRepository, CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.hotelRepository = hotelRepository;
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
     public StoragePoint findStoragePoint(String licensePlate) {
         return hotelRepository.findStoragePoint(licensePlate);
     }
 
-    public void storeTyres(Customer customer, StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
-        // TODO: save customer
-        CustomerRepository customerRepository = null;
+    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
+        CustomerDetails customerDetails = customerVisit.getCustomerDetails();
+        Customer customer = customerMapper.toEntity(customerDetails);
 
-        storagePoint.setLicensePlate(customerVisit.getLicensePlate());
+        if (!customerRepository.existsById(customerDetails.getId())) {
+            customerRepository.save(customer);
+        }
+
+        storagePoint.setLicensePlate(customerDetails.getLicensePlate());
         storagePoint.setTyres(tyres);
 
-        customerRepository.save(customer);
         hotelRepository.save(storagePoint);
-
     }
 
     public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
         // get storage point from db (by license plate)
-        hotelRepository.getStoragePointByLicensePlate(customerVisit.getLicensePlate());
+        hotelRepository.getStoragePointByLicensePlate(customerVisit.getCustomerDetails().getLicensePlate());
         // remove tyres
         storagePoint.removeTyres(tyres);
         // save

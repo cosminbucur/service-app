@@ -1,5 +1,6 @@
 package com.fm.acceptance;
 
+import com.fm.dto.CustomerMapper;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
@@ -17,14 +18,15 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WhenWornTyresInStorage {
+class WhenWornTyresInStorageTest {
+
+    private final HotelRepository hotelRepository = new HotelRepositoryInMemory();
+    private final CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+    private final CustomerMapper customerMapper = new CustomerMapper();
+    private final HotelService hotelService = new HotelService(hotelRepository, customerRepository, customerMapper);
 
     @Test
     void shouldSeeWornTyres() {
-        HotelRepository hotelRepository = new HotelRepositoryInMemory();
-        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
-        HotelService hotelService = new HotelService(hotelRepository, customerRepository);
-
         Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");
         Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
         Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8, 205, 55, "R16");

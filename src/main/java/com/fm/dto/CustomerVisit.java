@@ -4,24 +4,24 @@ import java.time.LocalDate;
 
 public class CustomerVisit {
 
-    private long customerId;
+    private CustomerDetails customerDetails;
+
     private LocalDate visitDate;
-    private String licensePlate;
     private boolean seasonPassed;
 
-    public CustomerVisit(long customerId, LocalDate visitDate, String licensePlate) {
-        this.customerId = customerId;
-        this.visitDate = visitDate;
-        this.licensePlate = licensePlate;
-        this.seasonPassed = false;
+    public CustomerVisit() {
     }
 
-    public long getCustomerId() {
-        return customerId;
+    public CustomerVisit(int i, LocalDate now, String b22ABC) {
+
     }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
+    public CustomerDetails getCustomerDetails() {
+        return customerDetails;
+    }
+
+    public void setCustomerDetails(CustomerDetails customerDetails) {
+        this.customerDetails = customerDetails;
     }
 
     public LocalDate getVisitDate() {
@@ -30,14 +30,6 @@ public class CustomerVisit {
 
     public void setVisitDate(LocalDate visitDate) {
         this.visitDate = visitDate;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
     }
 
     public boolean isSeasonPassed() {

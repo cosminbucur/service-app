@@ -1,11 +1,6 @@
-package com.fm.model;
+package com.fm.dto;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-public class Customer {
+public class CustomerDetails {
 
     private Long id;
     private String firstName;
@@ -13,8 +8,7 @@ public class Customer {
     private String company;
     private String phoneNumber;
     private String email;
-
-    private List<String> licensePlates = new ArrayList<>();
+    private String licensePlate;
 
     public Long getId() {
         return id;
@@ -64,24 +58,11 @@ public class Customer {
         this.email = email;
     }
 
-    public List<String> getLicensePlates() {
-        return licensePlates;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void addLicensePlate(String licensePlate) {
-        this.licensePlates.add(licensePlate);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, company, phoneNumber, email);
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 }

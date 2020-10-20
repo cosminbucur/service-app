@@ -1,5 +1,6 @@
 package com.fm.acceptance;
 
+import com.fm.dto.CustomerMapper;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
@@ -15,14 +16,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WhenTyresInStorage {
+class WhenTyresInStorageTest {
+
+    private final HotelRepository hotelRepository = new HotelRepositoryInMemory();
+    private final CustomerRepository customerRepository = new CustomerRepositoryInMemory();
+    private final CustomerMapper customerMapper = new CustomerMapper();
+    private final HotelService hotelService = new HotelService(hotelRepository, customerRepository, customerMapper);
 
     @Test
     void shouldSwapStorage() {
-        HotelRepository hotelRepository = new HotelRepositoryInMemory();
-        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
-        HotelService hotelService = new HotelService(hotelRepository, customerRepository);
-
         StoragePoint oldStorage = new StoragePoint();
         StoragePoint newStorage = new StoragePoint();
 
