@@ -3,6 +3,8 @@ package com.fm.acceptance;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
+import com.fm.repository.CustomerRepository;
+import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepository;
 import com.fm.repository.HotelRepositoryInMemory;
 import com.fm.service.HotelService;
@@ -18,6 +20,7 @@ class WhenTyresInStorage {
     @Test
     void shouldSwapStorage() {
         HotelRepository hotelRepository = new HotelRepositoryInMemory();
+        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
         HotelService hotelService = new HotelService(hotelRepository, customerRepository);
 
         StoragePoint oldStorage = new StoragePoint();

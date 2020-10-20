@@ -3,6 +3,8 @@ package com.fm.service;
 import com.fm.dto.StoragePoint;
 import com.fm.dto.Tyre;
 import com.fm.model.TyreType;
+import com.fm.repository.CustomerRepository;
+import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,10 +20,10 @@ class HotelServiceTest {
 
     private HotelService hotelService;
 
-
     @BeforeEach
     void setUp() {
         HotelRepositoryInMemory hotelRepositoryInMemory = new HotelRepositoryInMemory();
+        CustomerRepository customerRepository = new CustomerRepositoryInMemory();
         hotelService = new HotelService(hotelRepositoryInMemory, customerRepository);
     }
 
