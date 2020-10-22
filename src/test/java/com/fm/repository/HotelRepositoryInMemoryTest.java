@@ -1,6 +1,6 @@
 package com.fm.repository;
 
-import com.fm.dto.StoragePoint;
+import com.fm.dto.StoragePointDetail;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,15 +11,15 @@ class HotelRepositoryInMemoryTest {
 
     @Test
     void getStoragePoint() {
-        StoragePoint storagePoint1 = new StoragePoint();
-        StoragePoint storagePoint2 = new StoragePoint();
-        storagePoint1.licensePlate = "B22ABC";
-        storagePoint2.licensePlate = "B33DEF";
+        StoragePointDetail storagePointDetail1 = new StoragePointDetail();
+        StoragePointDetail storagePointDetail2 = new StoragePointDetail();
+        storagePointDetail1.setLicensePlate("B22ABC");
+        storagePointDetail2.setLicensePlate("B33DEF");
         HotelRepositoryInMemory hotelRepository = new HotelRepositoryInMemory();
-        hotelRepository.setStoragePoints(Arrays.asList(storagePoint1, storagePoint2));
+        hotelRepository.setStoragePoints(Arrays.asList(storagePointDetail1, storagePointDetail2));
 
-        StoragePoint actual = hotelRepository.findStoragePoint("B22ABC");
+        StoragePointDetail actual = hotelRepository.findStoragePoint("B22ABC");
 
-        assertThat(actual.licensePlate).isEqualTo("B22ABC");
+        assertThat(actual.getLicensePlate()).isEqualTo("B22ABC");
     }
 }

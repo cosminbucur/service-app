@@ -1,14 +1,16 @@
 package com.fm.acceptance;
 
 import com.fm.dto.CustomerMapper;
-import com.fm.dto.StoragePoint;
-import com.fm.dto.Tyre;
+import com.fm.dto.StoragePointDetail;
+import com.fm.dto.TyreDetail;
 import com.fm.model.TyreType;
+import com.fm.model.WearLevel;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepository;
 import com.fm.repository.HotelRepositoryInMemory;
 import com.fm.service.HotelService;
+import com.fm.util.TestUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,21 +29,21 @@ class WhenWornTyresInStorageTest {
 
     @Test
     void shouldSeeWornTyres() {
-        Tyre wornTyre1 = new Tyre("michelin", TyreType.SUMMER, 3, 205, 55, "R16");
-        Tyre wornTyre2 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
-        Tyre newTyre1 = new Tyre("michelin", TyreType.SUMMER, 8, 205, 55, "R16");
-        Tyre wornTyre3 = new Tyre("michelin", TyreType.SUMMER, 2, 205, 55, "R16");
+        TyreDetail wornTyreDetail1 = TestUtils.createTyre(TyreType.SUMMER, WearLevel.DANGER);
+        TyreDetail wornTyreDetail2 = TestUtils.createTyre(TyreType.SUMMER, WearLevel.WARNING);
+        TyreDetail newTyreDetail1 = TestUtils.createTyre(TyreType.SUMMER, WearLevel.GOOD);
+        TyreDetail wornTyreDetail3 = TestUtils.createTyre(TyreType.SUMMER, WearLevel.DANGER);
 
-        StoragePoint storagePointWithWornTyres = new StoragePoint();
-        storagePointWithWornTyres.licensePlate = "B22ABC";
-        storagePointWithWornTyres.setTyres(Arrays.asList(wornTyre1, wornTyre2, newTyre1, wornTyre3));
+        StoragePointDetail storagePointDetailWithWornTyres = new StoragePointDetail();
+        storagePointDetailWithWornTyres.setLicensePlate("B22ABC");
+        storagePointDetailWithWornTyres.setTyreList(Arrays.asList(wornTyreDetail1, wornTyreDetail2, newTyreDetail1, wornTyreDetail3));
 
-        hotelRepository.setStoragePoints(Collections.singletonList(storagePointWithWornTyres));
+        hotelRepository.setStoragePoints(Collections.singletonList(storagePointDetailWithWornTyres));
 
-        Map<String, List<Tyre>> wornTyres = hotelService.getWornTyres();
+        Map<String, List<TyreDetail>> wornTyres = hotelService.getWornTyres();
 
-        int expectedResult = Map.of("B22ABC", Arrays.asList(wornTyre1, wornTyre2, wornTyre3)).size();
+        int expectedResult = Map.of("B22ABC", Arrays.asList(wornTyreDetail1, wornTyreDetail2, wornTyreDetail3)).size();
 
-        assertThat(wornTyres.size()).isEqualTo(expectedResult);
+        assertThat(wornTyres).hasSize(expectedResult);
     }
 }

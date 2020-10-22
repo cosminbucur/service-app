@@ -1,7 +1,7 @@
 package com.fm.repository;
 
-import com.fm.dto.StoragePoint;
-import com.fm.dto.Tyre;
+import com.fm.dto.StoragePointDetail;
+import com.fm.dto.TyreDetail;
 
 import java.util.List;
 import java.util.Map;
@@ -19,10 +19,10 @@ public interface HotelRepository {
      * @param licensePlate the license plate of the vehicle
      * @return the storage point associated to the license plate
      */
-    StoragePoint findStoragePoint(String licensePlate);
+    StoragePointDetail findStoragePoint(String licensePlate);
 
     // TODO remove this after switching to a real database
-    void setStoragePoints(List<StoragePoint> storagePoints);
+    void setStoragePoints(List<StoragePointDetail> storagePointDetails);
 
     /**
      * Returns a map of worn tyres where
@@ -32,9 +32,9 @@ public interface HotelRepository {
      *
      * @return the map with the entries if any
      */
-    Map<String, List<Tyre>> findWornTyres();
+    Map<String, List<TyreDetail>> findWornTyres();
 
-    void save(StoragePoint storagePoint);
+    void save(StoragePointDetail storagePointDetail);
 
-    List<StoragePoint> getStoragePointByLicensePlate(String licensePlates);
+    List<StoragePointDetail> getStoragePointByLicensePlate(String licensePlates);
 }

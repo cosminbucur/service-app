@@ -2,53 +2,53 @@ package com.fm.dto;
 
 import java.util.List;
 
+// TODO: remove dto (but save builder example)
 public class Vehicle {
 
     public String licensePlate;
-    public Tyre frontLeft;
-    public Tyre rearLeft;
-    public Tyre frontRight;
-    public Tyre rearRight;
+    public TyreDetail frontLeft;
+    public TyreDetail rearLeft;
+    public TyreDetail frontRight;
+    public TyreDetail rearRight;
 
     public Vehicle() {
     }
 
-    public void mountTyres(List<Tyre> newTyres) {
-
-        newTyres.add(frontLeft);
-        newTyres.add(frontRight);
-        newTyres.add(rearLeft);
-        newTyres.add(rearRight);
+    public void mountTyres(List<TyreDetail> newTyreDetails) {
+        newTyreDetails.add(frontLeft);
+        newTyreDetails.add(frontRight);
+        newTyreDetails.add(rearLeft);
+        newTyreDetails.add(rearRight);
     }
 
     public static class Builder {
         private String licensePlate;
-        private Tyre frontLeft;
-        private Tyre rearLeft;
-        private Tyre frontRight;
-        private Tyre rearRight;
+        private TyreDetail frontLeft;
+        private TyreDetail rearLeft;
+        private TyreDetail frontRight;
+        private TyreDetail rearRight;
 
         public Builder withLicensePlate(String licensePlate) {
             this.licensePlate = licensePlate;
             return this;
         }
 
-        public Builder withFrontLeft(Tyre frontLeft) {
+        public Builder withFrontLeft(TyreDetail frontLeft) {
             this.frontLeft = frontLeft;
             return this;
         }
 
-        public Builder withRearLeft(Tyre rearLeft) {
+        public Builder withRearLeft(TyreDetail rearLeft) {
             this.rearLeft = rearLeft;
             return this;
         }
 
-        public Builder withFrontRight(Tyre frontRight) {
+        public Builder withFrontRight(TyreDetail frontRight) {
             this.frontRight = frontRight;
             return this;
         }
 
-        public Builder withRearRight(Tyre rearRight) {
+        public Builder withRearRight(TyreDetail rearRight) {
             this.rearRight = rearRight;
             return this;
         }
@@ -62,35 +62,35 @@ public class Vehicle {
             return vehicle;
         }
 
-        public Tyre getFrontLeft() {
+        public TyreDetail getFrontLeft() {
             return frontLeft;
         }
 
-        public void setFrontLeft(Tyre frontLeft) {
+        public void setFrontLeft(TyreDetail frontLeft) {
             this.frontLeft = frontLeft;
         }
 
-        public Tyre getRearLeft() {
+        public TyreDetail getRearLeft() {
             return rearLeft;
         }
 
-        public void setRearLeft(Tyre rearLeft) {
+        public void setRearLeft(TyreDetail rearLeft) {
             this.rearLeft = rearLeft;
         }
 
-        public Tyre getFrontRight() {
+        public TyreDetail getFrontRight() {
             return frontRight;
         }
 
-        public void setFrontRight(Tyre frontRight) {
+        public void setFrontRight(TyreDetail frontRight) {
             this.frontRight = frontRight;
         }
 
-        public Tyre getRearRight() {
+        public TyreDetail getRearRight() {
             return rearRight;
         }
 
-        public void setRearRight(Tyre rearRight) {
+        public void setRearRight(TyreDetail rearRight) {
             this.rearRight = rearRight;
         }
     }

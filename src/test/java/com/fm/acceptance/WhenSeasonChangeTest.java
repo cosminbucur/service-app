@@ -1,17 +1,16 @@
 package com.fm.acceptance;
 
-import com.fm.dto.CustomerDetails;
 import com.fm.dto.CustomerMapper;
-import com.fm.dto.CustomerVisit;
-import com.fm.dto.StoragePoint;
-import com.fm.dto.Tyre;
+import com.fm.dto.CustomerVisitDetails;
+import com.fm.dto.StoragePointDetail;
+import com.fm.dto.TyreDetail;
 import com.fm.model.Customer;
-import com.fm.model.TyreType;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerRepositoryInMemory;
 import com.fm.repository.HotelRepository;
 import com.fm.repository.HotelRepositoryInMemory;
 import com.fm.service.HotelService;
+import com.fm.util.TestUtils;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -32,16 +31,16 @@ class WhenSeasonChangeTest {
     void shouldStoreTyres() {
         String licensePlate = "B22ABC";
         LocalDate visitDate = LocalDate.now();
-        CustomerVisit customerVisit = createCustomerVisit();
+        CustomerVisitDetails customerVisitDetails = TestUtils.createCustomerVisitDetails();
 
-        StoragePoint storagePoint = new StoragePoint();
-        List<Tyre> tyres = createTyres();
+        StoragePointDetail storagePointDetail = new StoragePointDetail();
+        List<TyreDetail> tyreDetails = TestUtils.createFourTyres();
 
-        hotelService.storeTyres(storagePoint, customerVisit, tyres);
+        hotelService.storeTyres(storagePointDetail, customerVisitDetails, tyreDetails);
 
-        Customer expectedCustomer = customerRepository.findByPhoneNumber(customerVisit.getCustomerDetails().getPhoneNumber());
+        Customer expectedCustomer = customerRepository.findByPhoneNumber(customerVisitDetails.getCustomerDetails().getPhoneNumber());
         String expectedPhoneNumber = expectedCustomer.getPhoneNumber();
-        assertThat(expectedPhoneNumber).isEqualTo(customerVisit.getCustomerDetails().getPhoneNumber());
+        assertThat(expectedPhoneNumber).isEqualTo(customerVisitDetails.getCustomerDetails().getPhoneNumber());
 //        assertThat(hotelRepository.findStoragePoint("B22ABC").getTyres().size()).isEqualTo(4);
 //        assertThat(customerRepository.findByPhoneNumber("0722333444").getFirstName()).isEqualTo("alex");
     }
@@ -49,74 +48,36 @@ class WhenSeasonChangeTest {
     // user story 7: unstore tyres during season change
     @Test
     void shouldUnstoreTyres() {
-        CustomerVisit customerVisit = new CustomerVisit(1, LocalDate.now(), "B22ABC");
-        StoragePoint storagePointsWithTyres = new StoragePoint();
-        storagePointsWithTyres.setTyres(createTyres());
+        CustomerVisitDetails customerVisitDetails = new CustomerVisitDetails(1, LocalDate.now(), "B22ABC");
+        StoragePointDetail storagePointsWithTyresDetails = new StoragePointDetail();
+        storagePointsWithTyresDetails.setTyreList(TestUtils.createFourTyres());
 
-        List<Tyre> selectedTyres = storagePointsWithTyres.getTyres();
+        List<TyreDetail> selectedTyreDetails = storagePointsWithTyresDetails.getTyreList();
 
-        hotelService.unstoreTyres(storagePointsWithTyres, customerVisit, selectedTyres);
+        hotelService.unstoreTyres(storagePointsWithTyresDetails, customerVisitDetails, selectedTyreDetails);
 
-        assertThat(storagePointsWithTyres.getTyres()).isEmpty();
+        assertThat(storagePointsWithTyresDetails.getTyreList()).isEmpty();
     }
 
     // TODO user story 8: notify customers after 6 months
     @Test
     void shouldNotifyCustomersEverySixMonths() {
-        StoragePoint storagePoint1 = new StoragePoint();
-        storagePoint1.setTyres(createTyres());
-        StoragePoint storagePoint2 = new StoragePoint();
-        storagePoint2.setTyres(createTyres());
+        StoragePointDetail storagePointDetail1 = new StoragePointDetail();
+        storagePointDetail1.setTyreList(TestUtils.createFourTyres());
+        StoragePointDetail storagePointDetail2 = new StoragePointDetail();
+        storagePointDetail2.setTyreList(TestUtils.createFourTyres());
 
         LocalDate sixMonthsAgo = LocalDate.of(2019, 6, 20);
         LocalDate recentDate = LocalDate.of(2020, 1, 10);
 
-        CustomerVisit customerVisit1 = new CustomerVisit(1, sixMonthsAgo, "B22ABC");
-        CustomerVisit customerVisit2 = new CustomerVisit(1, recentDate, "B22DEF");
+        CustomerVisitDetails customerVisitDetails1 = new CustomerVisitDetails(1, sixMonthsAgo, "B22ABC");
+        CustomerVisitDetails customerVisitDetails2 = new CustomerVisitDetails(1, recentDate, "B22DEF");
 
-        List<CustomerVisit> customerVisits = Arrays.asList(customerVisit1, customerVisit2);
+        List<CustomerVisitDetails> customerVisitDetails = Arrays.asList(customerVisitDetails1, customerVisitDetails2);
 
-        hotelService.notifyCustomersOnSeasonChange(customerVisits);
+        hotelService.notifyCustomersOnSeasonChange(customerVisitDetails);
 
-        assertThat(customerVisit2.isSeasonPassed()).isFalse();
+        assertThat(customerVisitDetails2.isSeasonPassed()).isFalse();
     }
 
-    private List<Tyre> createTyres() {
-        String tyreBrand = "michelin";
-        int treadDepth = 3;
-        return Arrays.asList(
-                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16"),
-                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16"),
-                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16"),
-                new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 205, 55, "R16")
-        );
-    }
-
-    private Customer createCustomer() {
-        Customer customer = new Customer();
-        customer.setId(2L);
-        customer.setFirstName("Alex");
-        customer.setLastName("Xela");
-        customer.setCompany("aerospace");
-        customer.setEmail("xela@aerospace.ro");
-        customer.setPhoneNumber("0722333444");
-        return customer;
-    }
-
-    private CustomerVisit createCustomerVisit() {
-        CustomerVisit dto = new CustomerVisit();
-        dto.setCustomerDetails(createCustomerDetails());
-        return dto;
-    }
-
-    private CustomerDetails createCustomerDetails() {
-        CustomerDetails dto = new CustomerDetails();
-        dto.setFirstName("Alex");
-        dto.setLastName("Xela");
-        dto.setCompany("aerospace");
-        dto.setEmail("xela@aerospace.ro");
-        dto.setPhoneNumber("0722333444");
-        dto.setLicensePlate("B222ABC");
-        return dto;
-    }
 }

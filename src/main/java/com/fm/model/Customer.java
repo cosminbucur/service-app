@@ -13,8 +13,17 @@ public class Customer {
     private String company;
     private String phoneNumber;
     private String email;
+    private boolean active;
 
     private List<String> licensePlates = new ArrayList<>();
+
+    public Customer() {
+        this.active = true;
+    }
+
+    public void addLicensePlate(String licensePlate) {
+        this.licensePlates.add(licensePlate);
+    }
 
     public Long getId() {
         return id;
@@ -68,8 +77,12 @@ public class Customer {
         return licensePlates;
     }
 
-    public void addLicensePlate(String licensePlate) {
-        this.licensePlates.add(licensePlate);
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.fm.acceptance;
 
-import com.fm.dto.CustomerVisit;
-import com.fm.dto.Tyre;
+import com.fm.dto.CustomerVisitDetails;
+import com.fm.dto.TyreDetail;
 import com.fm.dto.Vehicle;
 import com.fm.model.TyreType;
+import com.fm.model.WearLevel;
 import com.fm.service.MountingService;
+import com.fm.util.TestUtils;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -20,31 +22,29 @@ class WhenNewCustomerTest {
         LocalDate visitDate = LocalDate.now();
         long customerId = 2L;
         long mechanicId = 3L;
-        String tyreBrand = "michelin";
         String licensePlate = "B22ABC";
 
-        CustomerVisit customerVisit = new CustomerVisit(0, visitDate, licensePlates);
+        CustomerVisitDetails customerVisitDetails = new CustomerVisitDetails(0, visitDate, licensePlates);
 
         MountingService mountingService = new MountingService();
 
-        int treadDepth = 3;
         Vehicle vehicleWithOldTyres = new Vehicle.Builder()
-            .withFrontLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-            .withFrontRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-            .withRearLeft(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
-            .withRearRight(new Tyre(tyreBrand, TyreType.SUMMER, treadDepth, 185, 65, "R15"))
+            .withFrontLeft(TestUtils.createTyre(TyreType.SUMMER, WearLevel.GOOD))
+            .withFrontRight(TestUtils.createTyre(TyreType.SUMMER, WearLevel.GOOD))
+            .withRearLeft(TestUtils.createTyre(TyreType.SUMMER, WearLevel.GOOD))
+            .withRearRight(TestUtils.createTyre(TyreType.SUMMER, WearLevel.GOOD))
             .build();
 
-        Tyre newFrontLeft = new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15");
+        TyreDetail newFrontLeft = TestUtils.createTyre(TyreType.WINTER, WearLevel.GOOD);
 
         Vehicle vehicleWithNewTyres = new Vehicle.Builder()
             .withFrontLeft(newFrontLeft)
-            .withFrontRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
-            .withRearLeft(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
-            .withRearRight(new Tyre(tyreBrand, TyreType.WINTER, treadDepth, 195, 65, "R15"))
+            .withFrontRight(TestUtils.createTyre(TyreType.WINTER, WearLevel.GOOD))
+            .withRearLeft(TestUtils.createTyre(TyreType.WINTER, WearLevel.GOOD))
+            .withRearRight(TestUtils.createTyre(TyreType.WINTER, WearLevel.GOOD))
             .build();
 
-        mountingService.replaceTyres(customerVisit, mechanicId, licensePlate, vehicleWithOldTyres, vehicleWithNewTyres);
+        mountingService.replaceTyres(customerVisitDetails, mechanicId, licensePlate, vehicleWithOldTyres, vehicleWithNewTyres);
 
         assertThat(vehicleWithNewTyres.frontLeft).isEqualTo(newFrontLeft);
     }

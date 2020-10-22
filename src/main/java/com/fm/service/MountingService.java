@@ -1,7 +1,7 @@
 package com.fm.service;
 
-import com.fm.dto.CustomerVisit;
-import com.fm.dto.Tyre;
+import com.fm.dto.CustomerVisitDetails;
+import com.fm.dto.TyreDetail;
 import com.fm.dto.Vehicle;
 import com.fm.model.Mechanic;
 
@@ -11,17 +11,17 @@ import java.util.List;
 
 public class MountingService {
 
-    private List<Tyre> newTyres = new ArrayList<>();
+    private List<TyreDetail> newTyreDetails = new ArrayList<>();
 
-    public void replaceTyres(CustomerVisit customerVisit, long mechanicId, String licensePlate, Vehicle vehicleWithOldTyres, Vehicle vehicleWithNewTyres) {
+    public void replaceTyres(CustomerVisitDetails customerVisitDetails, long mechanicId, String licensePlate, Vehicle vehicleWithOldTyres, Vehicle vehicleWithNewTyres) {
 
         Mechanic.mechanic().setId(mechanicId);
 
-        customerVisit.setVisitDate(LocalDate.now());
-        customerVisit.getCustomerDetails().setLicensePlate(licensePlate);
+        customerVisitDetails.setVisitDate(LocalDate.now());
+        customerVisitDetails.getCustomerDetails().setLicensePlate(licensePlate);
 
-        vehicleWithOldTyres.licensePlate = customerVisit.getCustomerDetails().getLicensePlate();
+        vehicleWithOldTyres.licensePlate = customerVisitDetails.getCustomerDetails().getLicensePlate();
         vehicleWithNewTyres.licensePlate = vehicleWithOldTyres.licensePlate;
-        vehicleWithNewTyres.mountTyres(newTyres);
+        vehicleWithNewTyres.mountTyres(newTyreDetails);
     }
 }

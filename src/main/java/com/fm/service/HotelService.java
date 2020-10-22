@@ -1,10 +1,10 @@
 package com.fm.service;
 
-import com.fm.dto.CustomerDetails;
+import com.fm.dto.CustomerDetail;
 import com.fm.dto.CustomerMapper;
-import com.fm.dto.CustomerVisit;
-import com.fm.dto.StoragePoint;
-import com.fm.dto.Tyre;
+import com.fm.dto.CustomerVisitDetails;
+import com.fm.dto.StoragePointDetail;
+import com.fm.dto.TyreDetail;
 import com.fm.model.Customer;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.HotelRepository;
@@ -24,31 +24,31 @@ public class HotelService {
         this.customerMapper = customerMapper;
     }
 
-    public StoragePoint findStoragePoint(String licensePlate) {
+    public StoragePointDetail findStoragePoint(String licensePlate) {
         return hotelRepository.findStoragePoint(licensePlate);
     }
 
-    public void storeTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
-        CustomerDetails customerDetails = customerVisit.getCustomerDetails();
-        Customer customer = customerMapper.toEntity(customerDetails);
+    public void storeTyres(StoragePointDetail storagePointDetail, CustomerVisitDetails customerVisitDetails, List<TyreDetail> tyreDetails) {
+        CustomerDetail customerDetail = customerVisitDetails.getCustomerDetails();
+        Customer customer = customerMapper.toEntity(customerDetail);
 
-        if (!customerRepository.existsById(customerDetails.getId())) {
+        if (!customerRepository.existsById(customerDetail.getId())) {
             customerRepository.save(customer);
         }
 
-        storagePoint.setLicensePlate(customerDetails.getLicensePlate());
-        storagePoint.setTyres(tyres);
+        storagePointDetail.setLicensePlate(customerDetail.getLicensePlate());
+        storagePointDetail.setTyreList(tyreDetails);
 
-        hotelRepository.save(storagePoint);
+        hotelRepository.save(storagePointDetail);
     }
 
-    public void unstoreTyres(StoragePoint storagePoint, CustomerVisit customerVisit, List<Tyre> tyres) {
+    public void unstoreTyres(StoragePointDetail storagePointDetail, CustomerVisitDetails customerVisitDetails, List<TyreDetail> tyreDetails) {
         // get storage point from db (by license plate)
-        hotelRepository.getStoragePointByLicensePlate(customerVisit.getCustomerDetails().getLicensePlate());
+        hotelRepository.getStoragePointByLicensePlate(customerVisitDetails.getCustomerDetails().getLicensePlate());
         // remove tyres
-        storagePoint.removeTyres(tyres);
+        storagePointDetail.removeTyres(tyreDetails);
         // save
-        hotelRepository.save(storagePoint);
+        hotelRepository.save(storagePointDetail);
 
 //        if (!storagePoint.getTyres().isEmpty()) {
 //            storagePoint.removeTyres(tyres);
@@ -56,16 +56,16 @@ public class HotelService {
 //        } else throw new RuntimeException("no tyres stored for license plate" + storagePoint.licensePlate);
     }
 
-    public void swapStorage(StoragePoint oldStorage, StoragePoint newStorage) {
-        newStorage.setTyres(oldStorage.getTyres());
-        oldStorage.removeTyres(oldStorage.getTyres());
+    public void swapStorage(StoragePointDetail oldStorage, StoragePointDetail newStorage) {
+        newStorage.setTyreList(oldStorage.getTyreList());
+        oldStorage.removeTyres(oldStorage.getTyreList());
     }
 
-    public Map<String, List<Tyre>> getWornTyres() {
+    public Map<String, List<TyreDetail>> getWornTyres() {
         return hotelRepository.findWornTyres();
     }
 
-    public void notifyCustomersOnSeasonChange(List<CustomerVisit> customerVisits) {
+    public void notifyCustomersOnSeasonChange(List<CustomerVisitDetails> customerVisitDetails) {
 
     }
 }

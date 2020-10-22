@@ -4,7 +4,7 @@ package com.fm.model;
 // 5 4      ok
 // 3        warning
 // 2        danger
-public enum Wear {
+public enum WearLevel {
 
     GOOD, OK, WARNING, DANGER;
 }

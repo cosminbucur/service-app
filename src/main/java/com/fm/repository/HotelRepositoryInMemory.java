@@ -1,8 +1,8 @@
 package com.fm.repository;
 
-import com.fm.dto.StoragePoint;
-import com.fm.dto.Tyre;
-import com.fm.model.Wear;
+import com.fm.dto.StoragePointDetail;
+import com.fm.dto.TyreDetail;
+import com.fm.model.WearLevel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,24 +12,24 @@ import java.util.stream.Collectors;
 
 public class HotelRepositoryInMemory implements HotelRepository {
 
-    private List<StoragePoint> storagePoints = new ArrayList<>();
+    private List<StoragePointDetail> storagePointDetails = new ArrayList<>();
 
     @Override
-    public StoragePoint findStoragePoint(String licensePlate) {
-        return storagePoints.stream()
-            .filter(storagePoint -> storagePoint.licensePlate.equals(licensePlate))
+    public StoragePointDetail findStoragePoint(String licensePlate) {
+        return storagePointDetails.stream()
+            .filter(storagePoint -> storagePoint.getLicensePlate().equals(licensePlate))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("no tyres found for license plate " + licensePlate));
     }
 
     @Override
-    public Map<String, List<Tyre>> findWornTyres() {
-        Map<String, List<Tyre>> result = new HashMap<>();
+    public Map<String, List<TyreDetail>> findWornTyres() {
+        Map<String, List<TyreDetail>> result = new HashMap<>();
 
-        for (StoragePoint storagePoint : storagePoints) {
-            if (!storagePoint.getTyres().isEmpty()) {
-                List<Tyre> wornTyres = getWornTyresFromStoragePoint(storagePoint.getTyres());
-                result.put(storagePoint.licensePlate, wornTyres);
+        for (StoragePointDetail storagePoint : this.storagePointDetails) {
+            if (!storagePoint.getTyreList().isEmpty()) {
+                List<TyreDetail> wornTyreDetails = getWornTyresFromStoragePoint(storagePoint.getTyreList());
+                result.put(storagePoint.getLicensePlate(), wornTyreDetails);
             }
         }
 
@@ -37,24 +37,24 @@ public class HotelRepositoryInMemory implements HotelRepository {
     }
 
     @Override
-    public void save(StoragePoint storagePoint) {
-        storagePoints.add(storagePoint);
+    public void save(StoragePointDetail storagePointDetail) {
+        this.storagePointDetails.add(storagePointDetail);
     }
 
     @Override
-    public List<StoragePoint> getStoragePointByLicensePlate(String licensePlate) {
-        return storagePoints.stream().filter(storagePoint -> storagePoint.licensePlate.equals(licensePlate))
-                .collect(Collectors.toList());
+    public List<StoragePointDetail> getStoragePointByLicensePlate(String licensePlate) {
+        return storagePointDetails.stream().filter(storagePoint -> storagePoint.getLicensePlate().equals(licensePlate))
+            .collect(Collectors.toList());
     }
 
-    private List<Tyre> getWornTyresFromStoragePoint(List<Tyre> tyres) {
-        return tyres.stream()
-                .filter(tyre -> tyre.wear.equals(Wear.WARNING) || tyre.wear.equals(Wear.DANGER))
-                .collect(Collectors.toList());
+    private List<TyreDetail> getWornTyresFromStoragePoint(List<TyreDetail> tyreDetails) {
+        return tyreDetails.stream()
+            .filter(tyre -> tyre.getWearLevel().equals(WearLevel.WARNING) || tyre.getWearLevel().equals(WearLevel.DANGER))
+            .collect(Collectors.toList());
     }
 
     @Override
-    public void setStoragePoints(List<StoragePoint> storagePoints) {
-        this.storagePoints = storagePoints;
+    public void setStoragePoints(List<StoragePointDetail> storagePointDetails) {
+        this.storagePointDetails = storagePointDetails;
     }
 }
