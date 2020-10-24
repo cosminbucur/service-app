@@ -1,7 +1,5 @@
 package com.fm.model;
 
-import com.fm.dto.TyreDetail;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +7,13 @@ public class StoragePoint {
 
     private String licensePlate;
 
-    private List<TyreDetail> tyreDetails = new ArrayList<>();
+    private List<Tyre> tyres = new ArrayList<>();
 
     public StoragePoint() {
     }
 
-    public void removeTyres(List<TyreDetail> list) {
-        tyreDetails.removeAll(list);
+    public void removeTyres(List<Tyre> list) {
+        tyres.removeAll(list);
     }
 
     public String getLicensePlate() {
@@ -26,11 +24,11 @@ public class StoragePoint {
         this.licensePlate = licensePlate;
     }
 
-    public List<TyreDetail> getTyreDetails() {
-        return tyreDetails;
+    public List<Tyre> getTyreDetails() {
+        return tyres;
     }
 
-    public void setTyreDetails(List<TyreDetail> tyreDetails) {
-        this.tyreDetails = tyreDetails;
+    public void setTyreDetails(List<Tyre> tyres) {
+        this.tyres = tyres;
     }
 }

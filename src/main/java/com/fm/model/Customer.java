@@ -21,6 +21,7 @@ public class Customer {
         this.active = true;
     }
 
+    // helper method
     public void addLicensePlate(String licensePlate) {
         this.licensePlates.add(licensePlate);
     }

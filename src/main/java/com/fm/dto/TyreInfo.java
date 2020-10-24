@@ -4,7 +4,7 @@ import com.fm.model.RimType;
 import com.fm.model.TyreType;
 import com.fm.model.WearLevel;
 
-public class TyreDetail {
+public class TyreInfo {
 
     private Long id;
     private String tyreBrand;
@@ -14,10 +14,10 @@ public class TyreDetail {
     private int treadDepth;
     private WearLevel wearLevel;
 
-    public TyreDetail() {
+    public TyreInfo() {
     }
 
-    public TyreDetail(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, RimType rimType, int treadDepth) {
+    public TyreInfo(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, RimType rimType, int treadDepth) {
         this.id = id;
         this.tyreBrand = tyreBrand;
         this.tyreSize = tyreSize;

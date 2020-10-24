@@ -5,20 +5,20 @@ import com.fm.model.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerRepositoryInMemory implements CustomerRepository{
+public class CustomerH2Repository implements CustomerRepository {
 
-    private List<Customer> customers = new ArrayList<>();
+    private List<Customer> db = new ArrayList<>();
 
     @Override
     public void save(Customer customer) {
-        int nextId = customers.size() + 1;
+        int nextId = db.size() + 1;
         customer.setId((long) nextId);
-        customers.add(customer);
+        db.add(customer);
     }
 
     @Override
     public Customer findByPhoneNumber(String phoneNumber) {
-        return customers.stream()
+        return db.stream()
             .filter(customer -> customer.getPhoneNumber().equals(phoneNumber))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("no customer with phone number " + phoneNumber));
@@ -26,7 +26,7 @@ public class CustomerRepositoryInMemory implements CustomerRepository{
 
     @Override
     public boolean existsById(Long id) {
-        Customer foundCustomer = customers.stream()
+        Customer foundCustomer = db.stream()
             .filter(customer -> customer.getId().equals(id))
             .findFirst()
             .orElse(null);

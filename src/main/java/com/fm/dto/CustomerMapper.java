@@ -4,14 +4,14 @@ import com.fm.model.Customer;
 
 public class CustomerMapper {
 
-    public Customer toEntity(CustomerDetail customerDetail) {
+    public Customer toEntity(CustomerInfo customerInfo) {
         Customer customer = new Customer();
-        customer.setFirstName(customerDetail.getFirstName());
-        customer.setLastName(customerDetail.getLastName());
-        customer.setCompany(customerDetail.getCompany());
-        customer.setEmail(customerDetail.getEmail());
-        customer.setPhoneNumber(customerDetail.getPhoneNumber());
-        customer.addLicensePlate(customerDetail.getPhoneNumber());
+        customer.setFirstName(customerInfo.getFirstName());
+        customer.setLastName(customerInfo.getLastName());
+        customer.setCompany(customerInfo.getCompany());
+        customer.setEmail(customerInfo.getEmail());
+        customer.setPhoneNumber(customerInfo.getPhoneNumber());
+        customer.addLicensePlate(customerInfo.getPhoneNumber());
         return customer;
     }
 }

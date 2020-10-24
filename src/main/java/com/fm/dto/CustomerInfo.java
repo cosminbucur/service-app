@@ -1,6 +1,6 @@
 package com.fm.dto;
 
-public class CustomerDetail {
+public class CustomerInfo {
 
     private Long id;
     private String firstName;

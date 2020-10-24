@@ -1,22 +1,12 @@
 package com.fm.service;
 
-import com.fm.dto.CustomerVisitDetails;
-import com.fm.dto.TyreDetail;
-import com.fm.model.Mechanic;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import com.fm.dto.CustomerVisitInfo;
 
 public class MountingService {
 
-    private List<TyreDetail> newTyreDetails = new ArrayList<>();
+    public void replaceTyres(CustomerVisitInfo customerVisitInfo, long mechanicId, String licensePlate) {
 
-    public void replaceTyres(CustomerVisitDetails customerVisitDetails, long mechanicId, String licensePlate) {
 
-        Mechanic.mechanic().setId(mechanicId);
-
-        customerVisitDetails.setVisitDate(LocalDate.now());
-        customerVisitDetails.getCustomerDetails().setLicensePlate(licensePlate);
+        customerVisitInfo.getCustomerInfo().setLicensePlate(licensePlate);
     }
 }
