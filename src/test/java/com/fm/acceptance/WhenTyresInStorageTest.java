@@ -12,6 +12,8 @@ class WhenTyresInStorageTest {
 
     private final HotelService hotelService = createHotelService();
 
+    // user story: swap storage points
+
     @Test
     void shouldSwapStorage() {
         StoragePointInfo oldStorage = new StoragePointInfo();
