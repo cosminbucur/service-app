@@ -1,6 +1,10 @@
 package com.fm.service;
 
-import com.fm.dto.*;
+import com.fm.dto.CustomerInfo;
+import com.fm.dto.CustomerVisitInfo;
+import com.fm.dto.ObjectMapper;
+import com.fm.dto.ServiceInfo;
+import com.fm.dto.StoragePointInfo;
 import com.fm.model.Customer;
 import com.fm.model.CustomerVisit;
 import com.fm.model.StoragePoint;
@@ -8,17 +12,25 @@ import com.fm.model.Tyre;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerVisitRepository;
 import com.fm.repository.StoragePointRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class HotelService implements IHotelService {
 
-    private StoragePointRepository storagePointRepository;
-    private CustomerRepository customerRepository;
-    private ObjectMapper objectMapper;
-    private CustomerVisitRepository customerVisitRepository;
+    private static final Logger log = LoggerFactory.getLogger(HotelService.class);
 
+    private CustomerVisitRepository customerVisitRepository;
+    private CustomerRepository customerRepository;
+    private StoragePointRepository storagePointRepository;
+    private ObjectMapper objectMapper;
+
+    @Autowired
     public HotelService(CustomerVisitRepository customerVisitRepository, CustomerRepository customerRepository, StoragePointRepository storagePointRepository, ObjectMapper objectMapper) {
         this.storagePointRepository = storagePointRepository;
         this.customerRepository = customerRepository;
@@ -35,7 +47,7 @@ public class HotelService implements IHotelService {
     }
 
     @Override
-    public void storeTyres(CustomerVisitInfo customerVisitInfo) {
+    public CustomerVisitInfo saveCustomerVisit(CustomerVisitInfo customerVisitInfo) {
         CustomerInfo customerInfo = customerVisitInfo.getCustomerInfo();
         Customer customer = objectMapper.toEntity(customerInfo);
 
@@ -55,6 +67,9 @@ public class HotelService implements IHotelService {
         StoragePoint storagePoint = objectMapper.toEntity(storagePointInfo);
 
         storagePointRepository.save(storagePoint);
+
+        // TODO: use mapper
+        return new CustomerVisitInfo();
     }
 
     @Override
@@ -95,10 +110,4 @@ public class HotelService implements IHotelService {
 
     }
 
-    public CustomerVisit saveCustomerVisit(CustomerVisitInfo customerVisitInfo) {
-        CustomerVisit customerVisit = objectMapper.toEntity(customerVisitInfo);
-        CustomerVisit newCustomerVisit = customerVisitRepository.save(customerVisit);
-
-        return objectMapper.toDto(newCustomerVisit);
-    }
 }

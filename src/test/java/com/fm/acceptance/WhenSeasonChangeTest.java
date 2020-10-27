@@ -45,7 +45,7 @@ class WhenSeasonChangeTest {
         CustomerVisit expectedCustomerVisit = TestUtils.createCustomerVisit();
 
         // when
-        hotelService.storeTyres(customerVisitInfo);
+        hotelService.saveCustomerVisit(customerVisitInfo);
 
         // check customer
         Customer actualCustomer = customerRepository.findByPhoneNumber(expectedCustomer.getPhoneNumber());

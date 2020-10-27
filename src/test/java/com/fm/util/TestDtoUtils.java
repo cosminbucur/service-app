@@ -7,6 +7,7 @@ import com.fm.dto.StoragePointInfo;
 import com.fm.dto.TyreInfo;
 import com.fm.dto.TyreSizeInfo;
 import com.fm.model.RimType;
+import com.fm.model.Season;
 import com.fm.model.TyreType;
 
 import java.time.LocalDate;
@@ -72,39 +73,34 @@ public class TestDtoUtils {
 
     public static List<TyreInfo> createFourSummerTyresInfo() {
         return Arrays.asList(
-            createTyreInfo(TyreType.SUMMER, 8),
-            createTyreInfo(TyreType.SUMMER, 8),
-            createTyreInfo(TyreType.SUMMER, 8),
-            createTyreInfo(TyreType.SUMMER, 8)
+            createTyreInfo(Season.SUMMER, 8),
+            createTyreInfo(Season.SUMMER, 8),
+            createTyreInfo(Season.SUMMER, 8),
+            createTyreInfo(Season.SUMMER, 8)
         );
     }
 
     public static List<TyreInfo> createFourSummerWornTyresInfo() {
         return Arrays.asList(
-            createTyreInfo(TyreType.SUMMER, 2),
-            createTyreInfo(TyreType.SUMMER, 8),
-            createTyreInfo(TyreType.SUMMER, 5),
-            createTyreInfo(TyreType.SUMMER, 2)
+            createTyreInfo(Season.SUMMER, 2),
+            createTyreInfo(Season.SUMMER, 8),
+            createTyreInfo(Season.SUMMER, 5),
+            createTyreInfo(Season.SUMMER, 2)
         );
     }
 
     public static List<TyreInfo> createFourWinterTyresInfo() {
         return Arrays.asList(
-            createTyreInfo(TyreType.WINTER, 8),
-            createTyreInfo(TyreType.WINTER, 8),
-            createTyreInfo(TyreType.WINTER, 8),
-            createTyreInfo(TyreType.WINTER, 8)
+            createTyreInfo(Season.WINTER, 8),
+            createTyreInfo(Season.WINTER, 8),
+            createTyreInfo(Season.WINTER, 8),
+            createTyreInfo(Season.WINTER, 8)
         );
     }
 
-    public static TyreInfo createTyreInfo(TyreType tyreType, int treadDepth) {
+    public static TyreInfo createTyreInfo(Season season, int treadDepth) {
         String tyreBrand = "michelin";
         TyreSizeInfo tyreSizeInfo = new TyreSizeInfo(255, 55, 16);
-
-        if (tyreType.equals(TyreType.WINTER)) {
-            return new TyreInfo(1L, tyreBrand, tyreSizeInfo, TyreType.WINTER, RimType.ALLOY, treadDepth);
-        } else {
-            return new TyreInfo(1L, tyreBrand, tyreSizeInfo, TyreType.SUMMER, RimType.ALLOY, treadDepth);
-        }
+        return new TyreInfo(1L, tyreBrand, tyreSizeInfo, TyreType.REGULAR, season, RimType.ALLOY, treadDepth);
     }
 }

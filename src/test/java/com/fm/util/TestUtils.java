@@ -4,6 +4,7 @@ import com.fm.dto.ObjectMapper;
 import com.fm.model.Customer;
 import com.fm.model.CustomerVisit;
 import com.fm.model.RimType;
+import com.fm.model.Season;
 import com.fm.model.Tyre;
 import com.fm.model.TyreSize;
 import com.fm.model.TyreType;
@@ -43,23 +44,17 @@ public class TestUtils {
 
     public static List<Tyre> createFourSummerTyres() {
         return Arrays.asList(
-            createTyre(TyreType.SUMMER, 8),
-            createTyre(TyreType.SUMMER, 8),
-            createTyre(TyreType.SUMMER, 8),
-            createTyre(TyreType.SUMMER, 8)
+            createTyre(Season.SUMMER, 8),
+            createTyre(Season.SUMMER, 8),
+            createTyre(Season.SUMMER, 8),
+            createTyre(Season.SUMMER, 8)
         );
     }
 
-    // TODO: fix this
-    public static Tyre createTyre(TyreType tyreType, int threadDepth) {
+    public static Tyre createTyre(Season season, int threadDepth) {
         String tyreBrand = "michelin";
         TyreSize tyreSize = new TyreSize(255, 55, 16);
-
-        if (tyreType.equals(TyreType.WINTER)) {
-            return new Tyre(1L, tyreBrand, tyreSize, TyreType.WINTER, RimType.ALLOY, threadDepth);
-        } else {
-            return new Tyre(1L, tyreBrand, tyreSize, TyreType.SUMMER, RimType.ALLOY, threadDepth);
-        }
+        return new Tyre(1L, tyreBrand, tyreSize, TyreType.REGULAR, season, RimType.ALLOY, threadDepth);
     }
 
     public static Customer createCustomer() {

@@ -1,12 +1,17 @@
 package com.fm.dto;
 
-import com.fm.model.*;
+import com.fm.model.Customer;
+import com.fm.model.CustomerVisit;
+import com.fm.model.StoragePoint;
+import com.fm.model.Tyre;
+import com.fm.model.TyreSize;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ObjectMapper {
-
 
     // customer visit - entity
     public CustomerVisit toEntity(ServiceInfo serviceInfo) {
@@ -19,43 +24,13 @@ public class ObjectMapper {
         return customerVisit;
     }
 
-    public CustomerVisit toEntity(CustomerVisitInfo customerVisitInfo) {
-        Customer customer = getCustomerFromCustomerVisitInfo(customerVisitInfo);
+    public CustomerVisitInfo toDto(CustomerVisit entity) {
+        CustomerVisitInfo dto = new CustomerVisitInfo();
 
-        CustomerVisit customerVisit = new CustomerVisit();
-        customerVisit.setVisitDate(customerVisitInfo.getServiceInfo().getVisitDate());
-        customerVisit.setMechanicId(customerVisitInfo.getServiceInfo().getMechanicId());
-        customerVisit.setServicesPerformed(customerVisitInfo.getServiceInfo().getServicesPerformed());
-        customerVisit.setObservations(customerVisitInfo.getServiceInfo().getObservations());
-        customerVisit.setCustomer(customer);
+        // TODO: finish this
 
+        return dto;
 
-        return customerVisit;
-    }
-
-    public CustomerVisit toDto(CustomerVisit newCustomerVisit) {
-        CustomerVisit customerVisitToDto = new CustomerVisit();
-
-        customerVisitToDto.setId(newCustomerVisit.getId());
-        customerVisitToDto.setVisitDate(newCustomerVisit.getVisitDate());
-        customerVisitToDto.setMechanicId(newCustomerVisit.getMechanicId());
-        customerVisitToDto.setObservations(newCustomerVisit.getObservations());
-        customerVisitToDto.setObservations(newCustomerVisit.getObservations());
-        customerVisitToDto.setCustomer(newCustomerVisit.getCustomer());
-
-        return customerVisitToDto;
-
-    }
-
-    private Customer getCustomerFromCustomerVisitInfo(CustomerVisitInfo customerVisitInfo) {
-        Customer customer = new Customer();
-        customer.setId(customerVisitInfo.getCustomerInfo().getId());
-        customer.setFirstName(customerVisitInfo.getCustomerInfo().getFirstName());
-        customer.setLastName(customerVisitInfo.getCustomerInfo().getLastName());
-        customer.setCompany(customerVisitInfo.getCustomerInfo().getCompany());
-        customer.setEmail(customerVisitInfo.getCustomerInfo().getEmail());
-        customer.setPhoneNumber(customerVisitInfo.getCustomerInfo().getPhoneNumber());
-        return customer;
     }
 
     // storage point
@@ -105,8 +80,9 @@ public class ObjectMapper {
         Tyre entity = new Tyre(
             dto.getId(),
             dto.getTyreBrand(),
-            toEntity(dto.getTyreSize()),
+            toEntity(dto.getTyreSizeInfo()),
             dto.getTyreType(),
+            dto.getSeason(),
             dto.getRimType(),
             dto.getTreadDepth()
         );
@@ -133,7 +109,7 @@ public class ObjectMapper {
         dto.setTyreType(entity.getTyreType());
         dto.setTyreBrand(entity.getTyreBrand());
 
-        dto.setTyreSize(toDto(entity.getTyreSize()));
+        dto.setTyreSizeInfo(toDto(entity.getTyreSize()));
 
         dto.setWearLevel(entity.getWearLevel());
         dto.setRimType(entity.getRimType());

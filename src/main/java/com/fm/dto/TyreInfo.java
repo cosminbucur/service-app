@@ -1,6 +1,7 @@
 package com.fm.dto;
 
 import com.fm.model.RimType;
+import com.fm.model.Season;
 import com.fm.model.TyreType;
 import com.fm.model.WearLevel;
 
@@ -10,6 +11,7 @@ public class TyreInfo {
     private String tyreBrand;
     private TyreSizeInfo tyreSizeInfo;
     private TyreType tyreType;
+    private Season season;
     private RimType rimType;
     private int treadDepth;
     private WearLevel wearLevel;
@@ -17,11 +19,12 @@ public class TyreInfo {
     public TyreInfo() {
     }
 
-    public TyreInfo(Long id, String tyreBrand, TyreSizeInfo tyreSizeInfo, TyreType tyreType, RimType rimType, int treadDepth) {
+    public TyreInfo(Long id, String tyreBrand, TyreSizeInfo tyreSizeInfo, TyreType tyreType, Season season, RimType rimType, int treadDepth) {
         this.id = id;
         this.tyreBrand = tyreBrand;
         this.tyreSizeInfo = tyreSizeInfo;
         this.tyreType = tyreType;
+        this.season = season;
         this.rimType = rimType;
         this.treadDepth = treadDepth;
     }
@@ -42,11 +45,11 @@ public class TyreInfo {
         this.tyreBrand = tyreBrand;
     }
 
-    public TyreSizeInfo getTyreSize() {
+    public TyreSizeInfo getTyreSizeInfo() {
         return tyreSizeInfo;
     }
 
-    public void setTyreSize(TyreSizeInfo tyreSizeInfo) {
+    public void setTyreSizeInfo(TyreSizeInfo tyreSizeInfo) {
         this.tyreSizeInfo = tyreSizeInfo;
     }
 
@@ -56,6 +59,14 @@ public class TyreInfo {
 
     public void setTyreType(TyreType tyreType) {
         this.tyreType = tyreType;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
     public RimType getRimType() {

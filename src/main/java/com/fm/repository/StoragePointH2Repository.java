@@ -3,6 +3,7 @@ package com.fm.repository;
 import com.fm.model.StoragePoint;
 import com.fm.model.Tyre;
 import com.fm.model.WearLevel;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Repository
 public class StoragePointH2Repository implements StoragePointRepository {
 
     private static Map<Long, StoragePoint> db = new HashMap<>();

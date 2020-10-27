@@ -39,7 +39,7 @@ class WhenNewCustomerTest {
         CustomerVisit expectedCustomerVisit = TestUtils.createCustomerVisit();
 
         // when
-        hotelService.storeTyres(customerVisitInfo);
+        hotelService.saveCustomerVisit(customerVisitInfo);
 
         // then
 

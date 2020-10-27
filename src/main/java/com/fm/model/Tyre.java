@@ -6,6 +6,7 @@ public class Tyre {
     private String tyreBrand;
     private TyreSize tyreSize;
     private TyreType tyreType;
+    private Season season;
     private RimType rimType;
     private int treadDepth;
     private WearLevel wearLevel;
@@ -16,11 +17,12 @@ public class Tyre {
     public Tyre() {
     }
 
-    public Tyre(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, RimType rimType, int treadDepth) {
+    public Tyre(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, Season season, RimType rimType, int treadDepth) {
         this.id = id;
         this.tyreBrand = tyreBrand;
         this.tyreSize = tyreSize;
         this.tyreType = tyreType;
+        this.season = season;
         this.rimType = rimType;
         this.treadDepth = treadDepth;
         setTyreWearLevel(treadDepth);
@@ -79,6 +81,14 @@ public class Tyre {
 
     public void setTyreType(TyreType tyreType) {
         this.tyreType = tyreType;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
     public RimType getRimType() {

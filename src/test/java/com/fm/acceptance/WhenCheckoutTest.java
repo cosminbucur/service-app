@@ -30,7 +30,7 @@ class WhenCheckoutTest {
     void shouldCheckoutTyres() {
         // given
         CustomerVisitInfo customerVisitInfo = TestDtoUtils.createCustomerVisitInfo();
-        hotelService.storeTyres(customerVisitInfo);
+        hotelService.saveCustomerVisit(customerVisitInfo);
 
         // when
         hotelService.checkout(customerVisitInfo.getStoragePointInfo().getLicensePlate());

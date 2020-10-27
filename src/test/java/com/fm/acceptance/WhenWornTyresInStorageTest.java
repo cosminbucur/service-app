@@ -26,8 +26,8 @@ class WhenWornTyresInStorageTest {
         customerVisit2.getStoragePointInfo().setId(2L);
         customerVisit2.getStoragePointInfo().setCode("A2B2C2");
 
-        hotelService.storeTyres(customerVisit1);
-        hotelService.storeTyres(customerVisit2);
+        hotelService.saveCustomerVisit(customerVisit1);
+        hotelService.saveCustomerVisit(customerVisit2);
 
         // when
         Map<String, List<Tyre>> wornTyres = hotelService.findWornTyres();

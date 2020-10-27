@@ -1,9 +1,9 @@
 package com.fm.service;
 
 import com.fm.dto.ObjectMapper;
+import com.fm.model.Season;
 import com.fm.model.StoragePoint;
 import com.fm.model.Tyre;
-import com.fm.model.TyreType;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerVisitRepository;
 import com.fm.repository.StoragePointH2Repository;
@@ -40,10 +40,10 @@ class HotelServiceTest {
     @Test
     void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
         // given
-        Tyre wornTyre1 = TestUtils.createTyre(TyreType.SUMMER, 2);
-        Tyre wornTyre2 = TestUtils.createTyre(TyreType.SUMMER, 3);
-        Tyre newTyre1 = TestUtils.createTyre(TyreType.SUMMER, 8);
-        Tyre wornTyre3 = TestUtils.createTyre(TyreType.SUMMER, 2);
+        Tyre wornTyre1 = TestUtils.createTyre(Season.SUMMER, 2);
+        Tyre wornTyre2 = TestUtils.createTyre(Season.SUMMER, 3);
+        Tyre newTyre1 = TestUtils.createTyre(Season.SUMMER, 8);
+        Tyre wornTyre3 = TestUtils.createTyre(Season.SUMMER, 2);
 
         StoragePoint storagePoint1 = new StoragePoint();
         storagePoint1.setLicensePlate("B22ABC");

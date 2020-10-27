@@ -20,7 +20,7 @@ public interface IHotelService {
     /**
      * @param customerVisitInfo
      */
-    void storeTyres(CustomerVisitInfo customerVisitInfo);
+    CustomerVisitInfo saveCustomerVisit(CustomerVisitInfo customerVisitInfo);
 
     /**
      * During a visit, a customer can choose to checkout his tyres. The storage point must be cleared.

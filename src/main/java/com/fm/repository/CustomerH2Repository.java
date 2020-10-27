@@ -1,10 +1,12 @@
 package com.fm.repository;
 
 import com.fm.model.Customer;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class CustomerH2Repository implements CustomerRepository {
 
     private static Map<Long, Customer> db = new HashMap<>();
