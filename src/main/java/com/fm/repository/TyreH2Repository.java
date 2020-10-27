@@ -1,10 +1,12 @@
 package com.fm.repository;
 
 import com.fm.model.Tyre;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class TyreH2Repository implements TyreRepository {
 
     private static Map<Long, Tyre> db = new HashMap<>();

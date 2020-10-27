@@ -5,15 +5,24 @@ import com.fm.model.UserRole;
 import com.fm.repository.AppUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
 
-public class DbInit {
+@Configuration
+public class DbInit implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(DbInit.class);
 
     private AppUserRepository appUserRepository;
 
+    @Autowired
     public DbInit(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
+    }
+
+    @Override
+    public void run(String... args) {
         setupDb();
     }
 

@@ -1,6 +1,7 @@
 package com.fm.repository;
 
 import com.fm.model.AppUser;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class AppUserH2Repository implements AppUserRepository {
 
     private static Map<Long, AppUser> db = new HashMap<>();
