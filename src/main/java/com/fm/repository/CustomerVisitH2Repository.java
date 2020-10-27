@@ -11,10 +11,11 @@ public class CustomerVisitH2Repository implements CustomerVisitRepository {
     private static Map<Long, CustomerVisit> db = new HashMap<>();
 
     @Override
-    public void save(CustomerVisit customerVisit) {
+    public CustomerVisit save(CustomerVisit customerVisit) {
         long nextId = db.size() + 1L;
         customerVisit.setId(nextId);
         db.put(nextId, customerVisit);
+        return customerVisit;
     }
 
     @Override

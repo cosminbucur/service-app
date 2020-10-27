@@ -1,10 +1,6 @@
 package com.fm.service;
 
-import com.fm.dto.CustomerInfo;
-import com.fm.dto.CustomerVisitInfo;
-import com.fm.dto.ObjectMapper;
-import com.fm.dto.ServiceInfo;
-import com.fm.dto.StoragePointInfo;
+import com.fm.dto.*;
 import com.fm.model.Customer;
 import com.fm.model.CustomerVisit;
 import com.fm.model.StoragePoint;
@@ -99,4 +95,10 @@ public class HotelService implements IHotelService {
 
     }
 
+    public CustomerVisit saveCustomerVisit(CustomerVisitInfo customerVisitInfo) {
+        CustomerVisit customerVisit = objectMapper.toEntity(customerVisitInfo);
+        CustomerVisit newCustomerVisit = customerVisitRepository.save(customerVisit);
+
+        return objectMapper.toDto(newCustomerVisit);
+    }
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface CustomerVisitRepository {
 
-    void save(CustomerVisit customerVisit);
+    CustomerVisit save(CustomerVisit customerVisit);
 
     Optional<CustomerVisit> findByLicensePlate(String licensePlate);
 }

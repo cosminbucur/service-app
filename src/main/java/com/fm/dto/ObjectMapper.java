@@ -1,18 +1,14 @@
 package com.fm.dto;
 
-import com.fm.model.Customer;
-import com.fm.model.CustomerVisit;
-import com.fm.model.StoragePoint;
-import com.fm.model.Tyre;
-import com.fm.model.TyreSize;
+import com.fm.model.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ObjectMapper {
 
-    // customer visit
 
+    // customer visit - entity
     public CustomerVisit toEntity(ServiceInfo serviceInfo) {
         CustomerVisit customerVisit = new CustomerVisit();
         customerVisit.setVisitDate(serviceInfo.getVisitDate());
@@ -21,6 +17,45 @@ public class ObjectMapper {
         customerVisit.setObservations(serviceInfo.getObservations());
 
         return customerVisit;
+    }
+
+    public CustomerVisit toEntity(CustomerVisitInfo customerVisitInfo) {
+        Customer customer = getCustomerFromCustomerVisitInfo(customerVisitInfo);
+
+        CustomerVisit customerVisit = new CustomerVisit();
+        customerVisit.setVisitDate(customerVisitInfo.getServiceInfo().getVisitDate());
+        customerVisit.setMechanicId(customerVisitInfo.getServiceInfo().getMechanicId());
+        customerVisit.setServicesPerformed(customerVisitInfo.getServiceInfo().getServicesPerformed());
+        customerVisit.setObservations(customerVisitInfo.getServiceInfo().getObservations());
+        customerVisit.setCustomer(customer);
+
+
+        return customerVisit;
+    }
+
+    public CustomerVisit toDto(CustomerVisit newCustomerVisit) {
+        CustomerVisit customerVisitToDto = new CustomerVisit();
+
+        customerVisitToDto.setId(newCustomerVisit.getId());
+        customerVisitToDto.setVisitDate(newCustomerVisit.getVisitDate());
+        customerVisitToDto.setMechanicId(newCustomerVisit.getMechanicId());
+        customerVisitToDto.setObservations(newCustomerVisit.getObservations());
+        customerVisitToDto.setObservations(newCustomerVisit.getObservations());
+        customerVisitToDto.setCustomer(newCustomerVisit.getCustomer());
+
+        return customerVisitToDto;
+
+    }
+
+    private Customer getCustomerFromCustomerVisitInfo(CustomerVisitInfo customerVisitInfo) {
+        Customer customer = new Customer();
+        customer.setId(customerVisitInfo.getCustomerInfo().getId());
+        customer.setFirstName(customerVisitInfo.getCustomerInfo().getFirstName());
+        customer.setLastName(customerVisitInfo.getCustomerInfo().getLastName());
+        customer.setCompany(customerVisitInfo.getCustomerInfo().getCompany());
+        customer.setEmail(customerVisitInfo.getCustomerInfo().getEmail());
+        customer.setPhoneNumber(customerVisitInfo.getCustomerInfo().getPhoneNumber());
+        return customer;
     }
 
     // storage point
