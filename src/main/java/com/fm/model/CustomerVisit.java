@@ -9,6 +9,7 @@ public class CustomerVisit {
     private Long mechanicId;
     private String servicesPerformed;
     private String observations;
+    private Customer customer;
 
     public CustomerVisit() {
     }
@@ -51,5 +52,13 @@ public class CustomerVisit {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

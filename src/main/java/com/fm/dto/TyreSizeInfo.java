@@ -1,12 +1,12 @@
 package com.fm.dto;
 
-public class TyreSize {
+public class TyreSizeInfo {
 
     private int tyreWidth;
     private int tyreHeight;
     private int rimDiameter;
 
-    public TyreSize(int tyreWidth, int tyreHeight, int rimDiameter) {
+    public TyreSizeInfo(int tyreWidth, int tyreHeight, int rimDiameter) {
         this.tyreWidth = tyreWidth;
         this.tyreHeight = tyreHeight;
         this.rimDiameter = rimDiameter;

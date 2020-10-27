@@ -4,12 +4,9 @@ public class Tyre {
 
     private Long id;
     private String tyreBrand;
-    private int tyreWidth;
-    private int tyreHeight;
-    private int rimDiameter;
+    private TyreSize tyreSize;
     private TyreType tyreType;
     private RimType rimType;
-    private int numberOfRimCaps;
     private int treadDepth;
     private WearLevel wearLevel;
 
@@ -19,14 +16,12 @@ public class Tyre {
     public Tyre() {
     }
 
-    public Tyre(String tyreBrand, int tyreWidth, int tyreHeight, int rimDiameter, TyreType tyreType, RimType rimType, int numberOfRimCaps, int treadDepth) {
+    public Tyre(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, RimType rimType, int treadDepth) {
+        this.id = id;
         this.tyreBrand = tyreBrand;
-        this.tyreWidth = tyreWidth;
-        this.tyreHeight = tyreHeight;
-        this.rimDiameter = rimDiameter;
+        this.tyreSize = tyreSize;
         this.tyreType = tyreType;
         this.rimType = rimType;
-        this.numberOfRimCaps = numberOfRimCaps;
         this.treadDepth = treadDepth;
         setTyreWearLevel(treadDepth);
     }
@@ -70,28 +65,12 @@ public class Tyre {
         this.tyreBrand = tyreBrand;
     }
 
-    public int getTyreWidth() {
-        return tyreWidth;
+    public TyreSize getTyreSize() {
+        return tyreSize;
     }
 
-    public void setTyreWidth(int tyreWidth) {
-        this.tyreWidth = tyreWidth;
-    }
-
-    public int getTyreHeight() {
-        return tyreHeight;
-    }
-
-    public void setTyreHeight(int tyreHeight) {
-        this.tyreHeight = tyreHeight;
-    }
-
-    public int getRimDiameter() {
-        return rimDiameter;
-    }
-
-    public void setRimDiameter(int rimDiameter) {
-        this.rimDiameter = rimDiameter;
+    public void setTyreSize(TyreSize tyreSize) {
+        this.tyreSize = tyreSize;
     }
 
     public TyreType getTyreType() {
@@ -108,14 +87,6 @@ public class Tyre {
 
     public void setRimType(RimType rimType) {
         this.rimType = rimType;
-    }
-
-    public int getNumberOfRimCaps() {
-        return numberOfRimCaps;
-    }
-
-    public void setNumberOfRimCaps(int numberOfRimCaps) {
-        this.numberOfRimCaps = numberOfRimCaps;
     }
 
     public int getTreadDepth() {

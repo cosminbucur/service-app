@@ -8,7 +8,7 @@ public class TyreInfo {
 
     private Long id;
     private String tyreBrand;
-    private TyreSize tyreSize;
+    private TyreSizeInfo tyreSizeInfo;
     private TyreType tyreType;
     private RimType rimType;
     private int treadDepth;
@@ -17,10 +17,10 @@ public class TyreInfo {
     public TyreInfo() {
     }
 
-    public TyreInfo(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, RimType rimType, int treadDepth) {
+    public TyreInfo(Long id, String tyreBrand, TyreSizeInfo tyreSizeInfo, TyreType tyreType, RimType rimType, int treadDepth) {
         this.id = id;
         this.tyreBrand = tyreBrand;
-        this.tyreSize = tyreSize;
+        this.tyreSizeInfo = tyreSizeInfo;
         this.tyreType = tyreType;
         this.rimType = rimType;
         this.treadDepth = treadDepth;
@@ -42,12 +42,12 @@ public class TyreInfo {
         this.tyreBrand = tyreBrand;
     }
 
-    public TyreSize getTyreSize() {
-        return tyreSize;
+    public TyreSizeInfo getTyreSize() {
+        return tyreSizeInfo;
     }
 
-    public void setTyreSize(TyreSize tyreSize) {
-        this.tyreSize = tyreSize;
+    public void setTyreSize(TyreSizeInfo tyreSizeInfo) {
+        this.tyreSizeInfo = tyreSizeInfo;
     }
 
     public TyreType getTyreType() {

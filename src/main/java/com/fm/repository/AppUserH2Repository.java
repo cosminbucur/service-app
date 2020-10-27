@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class AppUserH2Repository implements AppUserRepository {
 
-    private Map<Long, AppUser> db = new HashMap<>();
+    private static Map<Long, AppUser> db = new HashMap<>();
 
     @Override
     public void save(AppUser appUser) {
@@ -31,11 +31,11 @@ public class AppUserH2Repository implements AppUserRepository {
 
     @Override
     public void update(Long id, AppUser appUser) {
-
+        db.put(id, appUser);
     }
 
     @Override
     public void delete(Long id) {
-
+        db.remove(id);
     }
 }

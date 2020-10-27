@@ -2,23 +2,24 @@ package com.fm.repository;
 
 import com.fm.model.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CustomerH2Repository implements CustomerRepository {
 
-    private List<Customer> db = new ArrayList<>();
+    private static Map<Long, Customer> db = new HashMap<>();
 
     @Override
-    public void save(Customer customer) {
-        int nextId = db.size() + 1;
-        customer.setId((long) nextId);
-        db.add(customer);
+    public Customer save(Customer customer) {
+        long nextId = db.size() + 1L;
+        customer.setId(nextId);
+        db.put(nextId, customer);
+        return db.get(nextId);
     }
 
     @Override
     public Customer findByPhoneNumber(String phoneNumber) {
-        return db.stream()
+        return db.values().stream()
             .filter(customer -> customer.getPhoneNumber().equals(phoneNumber))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("no customer with phone number " + phoneNumber));
@@ -26,10 +27,7 @@ public class CustomerH2Repository implements CustomerRepository {
 
     @Override
     public boolean existsById(Long id) {
-        Customer foundCustomer = db.stream()
-            .filter(customer -> customer.getId().equals(id))
-            .findFirst()
-            .orElse(null);
-        return foundCustomer != null;
+        Customer customer = db.get(id);
+        return customer != null;
     }
 }

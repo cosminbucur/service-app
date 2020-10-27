@@ -1,92 +1,102 @@
 package com.fm.service;
 
 import com.fm.dto.CustomerInfo;
-import com.fm.dto.CustomerMapper;
 import com.fm.dto.CustomerVisitInfo;
+import com.fm.dto.ObjectMapper;
 import com.fm.dto.ServiceInfo;
 import com.fm.dto.StoragePointInfo;
-import com.fm.dto.TyreInfo;
 import com.fm.model.Customer;
 import com.fm.model.CustomerVisit;
+import com.fm.model.StoragePoint;
+import com.fm.model.Tyre;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerVisitRepository;
-import com.fm.repository.HotelRepository;
+import com.fm.repository.StoragePointRepository;
 
 import java.util.List;
 import java.util.Map;
 
-public class HotelService {
+public class HotelService implements IHotelService {
 
-    private HotelRepository hotelRepository;
+    private StoragePointRepository storagePointRepository;
     private CustomerRepository customerRepository;
-    private CustomerMapper customerMapper;
+    private ObjectMapper objectMapper;
     private CustomerVisitRepository customerVisitRepository;
 
-    public HotelService(HotelRepository hotelRepository, CustomerRepository customerRepository, CustomerMapper customerMapper, CustomerVisitRepository customerVisitRepository) {
-        this.hotelRepository = hotelRepository;
+    public HotelService(CustomerVisitRepository customerVisitRepository, CustomerRepository customerRepository, StoragePointRepository storagePointRepository, ObjectMapper objectMapper) {
+        this.storagePointRepository = storagePointRepository;
         this.customerRepository = customerRepository;
-        this.customerMapper = customerMapper;
+        this.objectMapper = objectMapper;
         this.customerVisitRepository = customerVisitRepository;
     }
 
+    @Override
     public StoragePointInfo findStoragePoint(String licensePlate) {
-        return hotelRepository.findStoragePoint(licensePlate);
+        StoragePoint storagePoint = storagePointRepository.findStoragePoint(licensePlate)
+            .orElseThrow(() -> new RuntimeException("not found"));
+
+        return objectMapper.toDto(storagePoint);
     }
 
-    // TODO: should move this logic to mounting service
-
-    public void storeTyres(StoragePointInfo storagePointInfo, CustomerVisitInfo customerVisitInfo, List<TyreInfo> tyres) {
+    @Override
+    public void storeTyres(CustomerVisitInfo customerVisitInfo) {
         CustomerInfo customerInfo = customerVisitInfo.getCustomerInfo();
-        Customer customer = customerMapper.toEntity(customerInfo);
+        Customer customer = objectMapper.toEntity(customerInfo);
 
         if (!customerRepository.existsById(customerInfo.getId())) {
             customerRepository.save(customer);
         }
 
         ServiceInfo serviceInfo = customerVisitInfo.getServiceInfo();
-        CustomerVisit customerVisit = toCustomerVisit(serviceInfo);
+        CustomerVisit customerVisit = objectMapper.toEntity(serviceInfo);
+        customerVisit.setCustomer(customer);
 
         customerVisitRepository.save(customerVisit);
 
+        StoragePointInfo storagePointInfo = customerVisitInfo.getStoragePointInfo();
         storagePointInfo.setLicensePlate(customerInfo.getLicensePlate());
-        storagePointInfo.setMountedTyres(tyres);
 
-        hotelRepository.save(storagePointInfo);
+        StoragePoint storagePoint = objectMapper.toEntity(storagePointInfo);
+
+        storagePointRepository.save(storagePoint);
     }
 
-    public void unstoreTyres(StoragePointInfo storagePointInfo, CustomerVisitInfo customerVisitInfo, List<TyreInfo> tyreInfos) {
-        // get storage point from db (by license plate)
-        hotelRepository.findStoragePointByLicensePlate(customerVisitInfo.getCustomerInfo().getLicensePlate());
-        // remove tyres
-        storagePointInfo.removeTyres(tyreInfos);
-        // save
-        hotelRepository.save(storagePointInfo);
-
-//        if (!storagePoint.getTyres().isEmpty()) {
-//            storagePoint.removeTyres(tyres);
-//            hotelRepository.save(storagePoint);
-//        } else throw new RuntimeException("no tyres stored for license plate" + storagePoint.licensePlate);
+    @Override
+    public void checkout(String licensePlate) {
+        StoragePoint storagePoint = storagePointRepository.findStoragePoint(licensePlate)
+            .orElseThrow(() -> new RuntimeException("not found"));
+        storagePoint.clear();
+        storagePointRepository.save(storagePoint);
     }
 
-    public void swapStorage(StoragePointInfo oldStorage, StoragePointInfo newStorage) {
-        newStorage.setMountedTyres(oldStorage.getMountedTyres());
-        oldStorage.removeTyres(oldStorage.getMountedTyres());
+    // TODO: fix this
+    @Override
+    public void swapStorage(StoragePointInfo oldStorageInfo, StoragePointInfo newStorageInfo) {
+        StoragePoint oldStoragePoint = storagePointRepository.findStoragePoint(oldStorageInfo.getId())
+            .orElseThrow(() -> new RuntimeException("not found"));
+
+        oldStoragePoint.clear();
+
+        StoragePoint newStoragePoint = storagePointRepository.findStoragePoint(oldStorageInfo.getId())
+            .orElseThrow(() -> new RuntimeException("not found"));
+
+        newStoragePoint.setNumberOfRimCaps(newStorageInfo.getNumberOfRimCaps());
+        newStoragePoint.setLicensePlate(newStorageInfo.getLicensePlate());
+//        newStoragePoint.setMountedTyres(newStorageInfo.getMountedTyres());
+//        newStoragePoint.setStoredTyres(newStorageInfo.getStoredTyres());
+
+        storagePointRepository.save(oldStoragePoint);
+        storagePointRepository.save(newStoragePoint);
     }
 
-    public Map<String, List<TyreInfo>> getWornTyres() {
-        return hotelRepository.findWornTyres();
+    @Override
+    public Map<String, List<Tyre>> findWornTyres() {
+        return storagePointRepository.findWornTyres();
     }
 
+    @Override
     public void notifyCustomersOnSeasonChange(List<CustomerVisitInfo> customerVisits) {
 
     }
 
-    private CustomerVisit toCustomerVisit(ServiceInfo serviceInfo) {
-        CustomerVisit customerVisit = new CustomerVisit();
-        customerVisit.setVisitDate(serviceInfo.getVisitDate());
-        customerVisit.setMechanicId(serviceInfo.getMechanicId());
-        customerVisit.setServicesPerformed(serviceInfo.getServicesPerformed());
-        customerVisit.setObservations(serviceInfo.getObservations());
-        return customerVisit;
-    }
 }

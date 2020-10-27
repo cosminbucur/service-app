@@ -1,25 +1,28 @@
 package com.fm.repository;
 
-import com.fm.dto.StoragePointInfo;
+import com.fm.model.StoragePoint;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HotelH2RepositoryTest {
 
     @Test
-    void getStoragePoint() {
-        StoragePointInfo storagePointInfo1 = new StoragePointInfo();
-        StoragePointInfo storagePointInfo2 = new StoragePointInfo();
-        storagePointInfo1.setLicensePlate("B22ABC");
-        storagePointInfo2.setLicensePlate("B33DEF");
-        HotelH2Repository hotelRepository = new HotelH2Repository();
-        hotelRepository.setStoragePoints(Arrays.asList(storagePointInfo1, storagePointInfo2));
+    void shouldFindStoragePoint() {
+        // given
+        String licensePlate = "B22ABC";
+        StoragePoint storagePoint1 = new StoragePoint();
+        StoragePoint storagePoint2 = new StoragePoint();
+        storagePoint1.setLicensePlate(licensePlate);
+        storagePoint2.setLicensePlate("B33DEF");
+        StoragePointRepository storagePointRepository = new StoragePointH2Repository();
+        storagePointRepository.save(storagePoint1);
+        storagePointRepository.save(storagePoint2);
 
-        StoragePointInfo actual = hotelRepository.findStoragePoint("B22ABC");
+        // when
+        StoragePoint actual = storagePointRepository.findStoragePoint(licensePlate).get();
 
-        assertThat(actual.getLicensePlate()).isEqualTo("B22ABC");
+        // then
+        assertThat(actual.getLicensePlate()).isEqualTo(licensePlate);
     }
 }

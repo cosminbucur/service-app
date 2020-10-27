@@ -1,16 +1,24 @@
 package com.fm.repository;
 
-import com.fm.dto.StoragePointInfo;
-import com.fm.dto.TyreInfo;
+import com.fm.model.StoragePoint;
+import com.fm.model.Tyre;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 // deposit tyres in hotel by: shelf > row > floor
-public interface HotelRepository {
+public interface StoragePointRepository {
 
     // as a convention we use find() when a method might not have a result
     // and we use get() when a method returns something for sure
+
+    /**
+     * Saves or updates a storage point.
+     *
+     * @param storagePoint
+     */
+    void save(StoragePoint storagePoint);
 
     /**
      * Finds a storage point bt a license plate. Each tyre is labeled with the license plate number.
@@ -19,10 +27,9 @@ public interface HotelRepository {
      * @param licensePlate the license plate of the vehicle
      * @return the storage point associated to the license plate
      */
-    StoragePointInfo findStoragePoint(String licensePlate);
+    Optional<StoragePoint> findStoragePoint(String licensePlate);
 
-    // TODO remove this after switching to a real database
-    void setStoragePoints(List<StoragePointInfo> storagePointInfos);
+    Optional<StoragePoint> findStoragePoint(Long id);
 
     /**
      * Returns a map of worn tyres where
@@ -32,10 +39,5 @@ public interface HotelRepository {
      *
      * @return the map with the entries if any
      */
-    Map<String, List<TyreInfo>> findWornTyres();
-
-    void save(StoragePointInfo storagePointInfo);
-
-    // TODO: can tyres from the same car be in two separate storage points?
-    List<StoragePointInfo> findStoragePointByLicensePlate(String licensePlates);
+    Map<String, List<Tyre>> findWornTyres();
 }

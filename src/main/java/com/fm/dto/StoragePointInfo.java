@@ -5,17 +5,36 @@ import java.util.List;
 
 public class StoragePointInfo {
 
+    private Long id;
+    private String code;
     private String licensePlate;
     private int numberOfRimCaps;
 
+    // TODO: use enum (MOUNTED, STORED)  and reduce to a single list
     private List<TyreInfo> mountedTyres = new ArrayList<>();
-    private List<TyreInfo> storageTyres = new ArrayList<>();
+    private List<TyreInfo> storedTyres = new ArrayList<>();
 
     public StoragePointInfo() {
     }
 
     public void removeTyres(List<TyreInfo> list) {
-        mountedTyres.removeAll(list);
+        storedTyres.removeAll(list);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getLicensePlate() {
@@ -42,11 +61,11 @@ public class StoragePointInfo {
         this.mountedTyres = mountedTyres;
     }
 
-    public List<TyreInfo> getStorageTyres() {
-        return storageTyres;
+    public List<TyreInfo> getStoredTyres() {
+        return storedTyres;
     }
 
-    public void setStorageTyres(List<TyreInfo> storageTyres) {
-        this.storageTyres = storageTyres;
+    public void setStoredTyres(List<TyreInfo> storedTyres) {
+        this.storedTyres = storedTyres;
     }
 }

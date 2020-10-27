@@ -5,15 +5,37 @@ import java.util.List;
 
 public class StoragePoint {
 
+    private Long id;
+    private String code;
     private String licensePlate;
+    private int numberOfRimCaps;
 
-    private List<Tyre> tyres = new ArrayList<>();
+    private List<Tyre> mountedTyres = new ArrayList<>();
+    private List<Tyre> storedTyres = new ArrayList<>();
 
     public StoragePoint() {
     }
 
-    public void removeTyres(List<Tyre> list) {
-        tyres.removeAll(list);
+    public void clear() {
+        numberOfRimCaps = 0;
+        mountedTyres.clear();
+        storedTyres.clear();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getLicensePlate() {
@@ -24,11 +46,27 @@ public class StoragePoint {
         this.licensePlate = licensePlate;
     }
 
-    public List<Tyre> getTyreDetails() {
-        return tyres;
+    public int getNumberOfRimCaps() {
+        return numberOfRimCaps;
     }
 
-    public void setTyreDetails(List<Tyre> tyres) {
-        this.tyres = tyres;
+    public void setNumberOfRimCaps(int numberOfRimCaps) {
+        this.numberOfRimCaps = numberOfRimCaps;
+    }
+
+    public List<Tyre> getMountedTyres() {
+        return mountedTyres;
+    }
+
+    public void setMountedTyres(List<Tyre> mountedTyres) {
+        this.mountedTyres = mountedTyres;
+    }
+
+    public List<Tyre> getStoredTyres() {
+        return storedTyres;
+    }
+
+    public void setStoredTyres(List<Tyre> storedTyres) {
+        this.storedTyres = storedTyres;
     }
 }

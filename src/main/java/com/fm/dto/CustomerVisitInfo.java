@@ -4,6 +4,7 @@ public class CustomerVisitInfo {
 
     private CustomerInfo customerInfo;
     private ServiceInfo serviceInfo;
+    private StoragePointInfo storagePointInfo;
 
     public CustomerInfo getCustomerInfo() {
         return customerInfo;
@@ -19,6 +20,14 @@ public class CustomerVisitInfo {
 
     public void setServiceInfo(ServiceInfo serviceInfo) {
         this.serviceInfo = serviceInfo;
+    }
+
+    public StoragePointInfo getStoragePointInfo() {
+        return storagePointInfo;
+    }
+
+    public void setStoragePointInfo(StoragePointInfo storagePointInfo) {
+        this.storagePointInfo = storagePointInfo;
     }
 
     public boolean isSeasonPassed() {

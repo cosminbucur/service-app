@@ -4,7 +4,7 @@ import com.fm.model.Customer;
 
 public interface CustomerRepository {
 
-    void save(Customer customer);
+    Customer save(Customer customer);
 
     Customer findByPhoneNumber(String phoneNumber);
 
