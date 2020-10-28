@@ -22,7 +22,7 @@ public class CustomerVisitController {
 
     // TODO: save customer visit
     @PostMapping
-    public ResponseEntity<CustomerVisitInfo> saveCustomerVisit(@RequestBody CustomerVisitInfo customerVisitInfo) {
+    public ResponseEntity<CustomerVisitInfo> createCustomerVisit(@RequestBody CustomerVisitInfo customerVisitInfo) {
         // TODO: add validation later
         return ResponseEntity.ok(hotelService.saveCustomerVisit(customerVisitInfo));
     }
