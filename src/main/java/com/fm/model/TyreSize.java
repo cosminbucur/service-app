@@ -6,6 +6,9 @@ public class TyreSize {
     private int tyreHeight;
     private int rimDiameter;
 
+    public TyreSize() {
+    }
+
     public TyreSize(int tyreWidth, int tyreHeight, int rimDiameter) {
         this.tyreWidth = tyreWidth;
         this.tyreHeight = tyreHeight;

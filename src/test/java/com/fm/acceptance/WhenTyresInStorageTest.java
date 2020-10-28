@@ -1,7 +1,7 @@
 package com.fm.acceptance;
 
-import com.fm.dto.StoragePointInfo;
-import com.fm.service.IHotelService;
+import com.fm.dto.request.StoragePointWrite;
+import com.fm.service.ICustomerVisitService;
 import com.fm.util.TestDtoUtils;
 import org.junit.jupiter.api.Test;
 
@@ -10,20 +10,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WhenTyresInStorageTest {
 
-    private final IHotelService hotelService = createHotelService();
+    private final ICustomerVisitService hotelService = createHotelService();
 
     // user story: swap storage points
 
     @Test
     void shouldSwapStorage() {
         // given
-        StoragePointInfo oldStorage = TestDtoUtils.createStoragePointInfo();
-        StoragePointInfo newStorage = new StoragePointInfo();
+        StoragePointWrite oldStorage = TestDtoUtils.createStoragePointInfo();
+        StoragePointWrite newStorage = new StoragePointWrite();
 
         oldStorage.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
 
         // when
-        hotelService.swapStorage(oldStorage, newStorage);
+        hotelService.swapStorage(oldStorage.getCode(), newStorage.getCode());
 
         // then
 

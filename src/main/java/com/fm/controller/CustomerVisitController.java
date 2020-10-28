@@ -1,7 +1,8 @@
 package com.fm.controller;
 
-import com.fm.dto.CustomerVisitInfo;
-import com.fm.service.HotelService;
+import com.fm.dto.request.CustomerVisitWrite;
+import com.fm.dto.response.CustomerVisitRead;
+import com.fm.service.CustomerVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,22 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CustomerVisitController {
 
-    private HotelService hotelService;
+    private final CustomerVisitService customerVisitService;
 
     @Autowired
-    public CustomerVisitController(HotelService hotelService) {
-        this.hotelService = hotelService;
+    public CustomerVisitController(CustomerVisitService customerVisitService) {
+        this.customerVisitService = customerVisitService;
     }
 
-    // TODO: save customer visit
     @PostMapping
-    public ResponseEntity<CustomerVisitInfo> saveCustomerVisit(@RequestBody CustomerVisitInfo customerVisitInfo) {
+    public ResponseEntity<CustomerVisitRead> saveCustomerVisit(@RequestBody CustomerVisitWrite customerVisitWrite) {
         // TODO: add validation later
-        return ResponseEntity.ok(hotelService.saveCustomerVisit(customerVisitInfo));
+        return ResponseEntity.ok(customerVisitService.saveCustomerVisit(customerVisitWrite));
     }
 
-    // TODO: find storage point
     void findStoragePoint(String licensePlate) {
-
+        // TODO: find storage point
     }
 }

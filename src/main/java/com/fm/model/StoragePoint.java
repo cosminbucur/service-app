@@ -1,14 +1,19 @@
 package com.fm.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StoragePoint {
 
     private Long id;
+
+    // natural id
     private String code;
     private String licensePlate;
     private int numberOfRimCaps;
+    private boolean cleared;
+    private LocalDate clearedDate;
 
     private List<Tyre> mountedTyres = new ArrayList<>();
     private List<Tyre> storedTyres = new ArrayList<>();

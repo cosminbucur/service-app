@@ -1,23 +1,22 @@
-package com.fm.dto;
+package com.fm.dto.response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoragePointInfo {
+public class StoragePointRead {
 
     private Long id;
     private String code;
     private String licensePlate;
     private int numberOfRimCaps;
 
-    // TODO: use enum (MOUNTED, STORED)  and reduce to a single list
-    private List<TyreInfo> mountedTyres = new ArrayList<>();
-    private List<TyreInfo> storedTyres = new ArrayList<>();
+    private List<TyreRead> mountedTyres = new ArrayList<>();
+    private List<TyreRead> storedTyres = new ArrayList<>();
 
-    public StoragePointInfo() {
+    public StoragePointRead() {
     }
 
-    public void removeTyres(List<TyreInfo> list) {
+    public void removeTyres(List<TyreRead> list) {
         storedTyres.removeAll(list);
     }
 
@@ -53,19 +52,19 @@ public class StoragePointInfo {
         this.numberOfRimCaps = numberOfRimCaps;
     }
 
-    public List<TyreInfo> getMountedTyres() {
+    public List<TyreRead> getMountedTyres() {
         return mountedTyres;
     }
 
-    public void setMountedTyres(List<TyreInfo> mountedTyres) {
+    public void setMountedTyres(List<TyreRead> mountedTyres) {
         this.mountedTyres = mountedTyres;
     }
 
-    public List<TyreInfo> getStoredTyres() {
+    public List<TyreRead> getStoredTyres() {
         return storedTyres;
     }
 
-    public void setStoredTyres(List<TyreInfo> storedTyres) {
+    public void setStoredTyres(List<TyreRead> storedTyres) {
         this.storedTyres = storedTyres;
     }
 }

@@ -1,16 +1,17 @@
 package com.fm.acceptance;
 
-import com.fm.dto.CustomerVisitInfo;
-import com.fm.dto.ObjectMapper;
-import com.fm.dto.StoragePointInfo;
+import com.fm.dto.request.CustomerVisitWrite;
+import com.fm.dto.response.StoragePointRead;
 import com.fm.repository.CustomerH2Repository;
 import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerVisitH2Repository;
 import com.fm.repository.CustomerVisitRepository;
 import com.fm.repository.StoragePointH2Repository;
 import com.fm.repository.StoragePointRepository;
-import com.fm.service.HotelService;
-import com.fm.service.IHotelService;
+import com.fm.repository.TyreH2Repository;
+import com.fm.repository.TyreRepository;
+import com.fm.service.CustomerVisitService;
+import com.fm.service.ICustomerVisitService;
 import com.fm.util.TestDtoUtils;
 import org.junit.jupiter.api.Test;
 
@@ -21,22 +22,22 @@ class WhenCheckoutTest {
     StoragePointRepository storagePointRepository = new StoragePointH2Repository();
     CustomerRepository customerRepository = new CustomerH2Repository();
     CustomerVisitRepository customerVisitRepository = new CustomerVisitH2Repository();
-    ObjectMapper objectMapper = new ObjectMapper();
-    IHotelService hotelService = new HotelService(customerVisitRepository, customerRepository, storagePointRepository, objectMapper);
+    TyreRepository tyreRepository = new TyreH2Repository();
+    ICustomerVisitService hotelService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
 
     // user story: checkout storage
 
     @Test
     void shouldCheckoutTyres() {
         // given
-        CustomerVisitInfo customerVisitInfo = TestDtoUtils.createCustomerVisitInfo();
-        hotelService.saveCustomerVisit(customerVisitInfo);
+        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitInfo();
+        hotelService.saveCustomerVisit(customerVisitWrite);
 
         // when
-        hotelService.checkout(customerVisitInfo.getStoragePointInfo().getLicensePlate());
+        hotelService.checkout(customerVisitWrite.getStoragePointInfo().getLicensePlate());
 
         // then
-        StoragePointInfo storagePoint = hotelService.findStoragePoint(customerVisitInfo.getStoragePointInfo().getLicensePlate());
+        StoragePointRead storagePoint = hotelService.findStoragePoint(customerVisitWrite.getStoragePointInfo().getLicensePlate());
 
         // check storage point cleared
         assertThat(storagePoint.getNumberOfRimCaps()).isZero();

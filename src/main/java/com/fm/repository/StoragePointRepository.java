@@ -40,4 +40,6 @@ public interface StoragePointRepository {
      * @return the map with the entries if any
      */
     Map<String, List<Tyre>> findWornTyres();
+
+    boolean isEmpty();
 }

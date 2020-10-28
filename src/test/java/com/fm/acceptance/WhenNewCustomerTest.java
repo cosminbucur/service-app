@@ -1,7 +1,7 @@
 package com.fm.acceptance;
 
-import com.fm.dto.CustomerVisitInfo;
-import com.fm.dto.ObjectMapper;
+import com.fm.dto.request.CustomerVisitWrite;
+import com.fm.dto.response.CustomerVisitRead;
 import com.fm.model.Customer;
 import com.fm.model.CustomerVisit;
 import com.fm.model.StoragePoint;
@@ -11,8 +11,10 @@ import com.fm.repository.CustomerVisitH2Repository;
 import com.fm.repository.CustomerVisitRepository;
 import com.fm.repository.StoragePointH2Repository;
 import com.fm.repository.StoragePointRepository;
-import com.fm.service.HotelService;
-import com.fm.service.IHotelService;
+import com.fm.repository.TyreH2Repository;
+import com.fm.repository.TyreRepository;
+import com.fm.service.CustomerVisitService;
+import com.fm.service.ICustomerVisitService;
 import com.fm.util.TestDtoUtils;
 import com.fm.util.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -24,24 +26,27 @@ class WhenNewCustomerTest {
     StoragePointRepository storagePointRepository = new StoragePointH2Repository();
     CustomerRepository customerRepository = new CustomerH2Repository();
     CustomerVisitRepository customerVisitRepository = new CustomerVisitH2Repository();
-    ObjectMapper objectMapper = new ObjectMapper();
-    IHotelService hotelService = new HotelService(customerVisitRepository, customerRepository, storagePointRepository, objectMapper);
+    TyreRepository tyreRepository = new TyreH2Repository();
+    ICustomerVisitService hotelService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
 
     // user story: first time mount tyres
 
     @Test
-    void shouldStoreTyresForNewCustomer() {
+    void shouldSaveCustomerVisit() {
         // given
-        CustomerVisitInfo customerVisitInfo = TestDtoUtils.createCustomerVisitInfo();
-        String licensePlate = customerVisitInfo.getCustomerInfo().getLicensePlate();
+        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitInfo();
+        String licensePlate = customerVisitWrite.getStoragePointInfo().getLicensePlate();
 
         Customer expectedCustomer = TestUtils.createCustomer();
         CustomerVisit expectedCustomerVisit = TestUtils.createCustomerVisit();
 
         // when
-        hotelService.saveCustomerVisit(customerVisitInfo);
+        CustomerVisitRead customerVisitRead = hotelService.saveCustomerVisit(customerVisitWrite);
 
         // then
+
+        // TODO: check that ids are set, check all fields except id
+        assertThat(customerVisitRead.getCustomerRead().getEmail()).isEqualTo(customerVisitWrite.getCustomerInfo().getEmail());
 
         // check customer
         Customer actualCustomer = customerRepository.findByPhoneNumber(expectedCustomer.getPhoneNumber());

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class CustomerH2Repository implements CustomerRepository {
@@ -28,8 +29,7 @@ public class CustomerH2Repository implements CustomerRepository {
     }
 
     @Override
-    public boolean existsById(Long id) {
-        Customer customer = db.get(id);
-        return customer != null;
+    public Optional<Customer> findById(Long id) {
+        return Optional.of(db.get(id));
     }
 }

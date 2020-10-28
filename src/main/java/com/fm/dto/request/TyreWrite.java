@@ -1,8 +1,14 @@
-package com.fm.model;
+package com.fm.dto.request;
 
-public class Tyre {
+import com.fm.model.RimType;
+import com.fm.model.Season;
+import com.fm.model.TyreLocation;
+import com.fm.model.TyreSize;
+import com.fm.model.TyreType;
+import com.fm.model.WearLevel;
 
-    private Long id;
+public class TyreWrite {
+
     private String tyreBrand;
     private TyreSize tyreSize;
     private TyreType tyreType;
@@ -11,40 +17,18 @@ public class Tyre {
     private int treadDepth;
     private WearLevel wearLevel;
     private TyreLocation tyreLocation;
-    private Long storageId;
 
-    public Tyre() {
+    public TyreWrite() {
     }
 
-    public void setTyreWearLevel(int threadDepth) {
-        if (threadDepth <= 0 || threadDepth > 8) {
-            throw new IllegalArgumentException("must be between 1-8");
-        }
-
-        if (threadDepth == 2) {
-            this.wearLevel = WearLevel.DANGER;
-        }
-        if (threadDepth == 3) {
-            this.wearLevel = WearLevel.WARNING;
-        }
-        if (isInRangeIncluding(threadDepth, 4, 5)) {
-            this.wearLevel = WearLevel.OK;
-        }
-        if (isInRangeIncluding(threadDepth, 6, 8)) {
-            this.wearLevel = WearLevel.GOOD;
-        }
-    }
-
-    private boolean isInRangeIncluding(int number, int min, int max) {
-        return number >= min && number <= max;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public TyreWrite(String tyreBrand, TyreSize tyreSize, TyreType tyreType, Season season, RimType rimType, int treadDepth, TyreLocation tyreLocation) {
+        this.tyreBrand = tyreBrand;
+        this.tyreSize = tyreSize;
+        this.tyreType = tyreType;
+        this.season = season;
+        this.rimType = rimType;
+        this.treadDepth = treadDepth;
+        this.tyreLocation = tyreLocation;
     }
 
     public String getTyreBrand() {
@@ -110,13 +94,4 @@ public class Tyre {
     public void setTyreLocation(TyreLocation tyreLocation) {
         this.tyreLocation = tyreLocation;
     }
-
-    public Long getStorageId() {
-        return storageId;
-    }
-
-    public void setStorageId(Long storageId) {
-        this.storageId = storageId;
-    }
-
 }

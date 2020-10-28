@@ -1,8 +1,8 @@
 package com.fm.acceptance;
 
-import com.fm.dto.CustomerVisitInfo;
+import com.fm.dto.request.CustomerVisitWrite;
 import com.fm.model.Tyre;
-import com.fm.service.IHotelService;
+import com.fm.service.ICustomerVisitService;
 import com.fm.util.TestDtoUtils;
 import org.junit.jupiter.api.Test;
 
@@ -14,16 +14,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WhenWornTyresInStorageTest {
 
-    private final IHotelService hotelService = createHotelService();
+    private final ICustomerVisitService hotelService = createHotelService();
 
     @Test
     void shouldSeeWornTyres() {
         // given
-        CustomerVisitInfo customerVisit1 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
-        customerVisit1.getStoragePointInfo().setId(1L);
+        CustomerVisitWrite customerVisit1 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
         customerVisit1.getStoragePointInfo().setCode("A1B1C1");
-        CustomerVisitInfo customerVisit2 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
-        customerVisit2.getStoragePointInfo().setId(2L);
+        CustomerVisitWrite customerVisit2 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
         customerVisit2.getStoragePointInfo().setCode("A2B2C2");
 
         hotelService.saveCustomerVisit(customerVisit1);

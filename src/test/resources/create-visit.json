@@ -1,29 +1,27 @@
 {
   "customerInfo": {
-    "id": null,
     "firstName": "Alex",
     "lastName": "Vasile",
-    "company": "Ibm",
+    "company": "Google",
     "phoneNumber": "0722 333 444",
     "email": "alex@gmail.com",
-    "licensePlate": "B123BOS",
-    "isActive": true
+    "active": true
   },
   "serviceInfo": {
     "visitDate": "2020-10-20",
     "mechanicId": 1,
-    "servicesPerformed": "schimb complet",
-    "observations": "e bine ca nu e rau"
+    "servicesPerformed": "full replace",
+    "observations": "all went well"
   },
   "storagePointInfo": {
-    "code": "R1E1E1",
+    "code": "A1B1C1",
     "numberOfRimCaps": 12,
-    "licensePlate": "B123BOS",
+    "licensePlate": "B11CCC",
     "mountedTyres": [
       {
         "id": null,
         "tyreBrand": "Continental",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -32,12 +30,13 @@
         "season": "SUMMER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "MOUNTED"
       },
       {
         "id": null,
         "tyreBrand": "Continental",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -46,12 +45,13 @@
         "season": "SUMMER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "MOUNTED"
       },
       {
         "id": null,
         "tyreBrand": "Continental",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -60,12 +60,13 @@
         "season": "SUMMER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "MOUNTED"
       },
       {
         "id": null,
         "tyreBrand": "Continental",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -74,14 +75,15 @@
         "season": "SUMMER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "MOUNTED"
       }
     ],
     "storedTyres": [
       {
         "id": null,
         "tyreBrand": "Michelin",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -90,12 +92,13 @@
         "season": "WINTER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "STORED"
       },
       {
         "id": null,
         "tyreBrand": "Michelin",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -104,12 +107,13 @@
         "season": "WINTER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "STORED"
       },
       {
         "id": null,
         "tyreBrand": "Michelin",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -118,12 +122,13 @@
         "season": "WINTER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "STORED"
       },
       {
         "id": null,
         "tyreBrand": "Michelin",
-        "tyreSizeInfo": {
+        "tyreSize": {
           "tyreWidth": 215,
           "tyreHeight": 65,
           "rimDiameter": 15
@@ -132,7 +137,8 @@
         "season": "WINTER",
         "rimType": "ALLOY",
         "treadDepth": 8,
-        "wearLevel": "GOOD"
+        "wearLevel": "GOOD",
+        "tyreLocation": "STORED"
       }
     ]
   }

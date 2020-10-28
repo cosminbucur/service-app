@@ -17,13 +17,18 @@ public class CustomerVisitH2Repository implements CustomerVisitRepository {
         long nextId = db.size() + 1L;
         customerVisit.setId(nextId);
         db.put(nextId, customerVisit);
-        return customerVisit;
+        return db.get(nextId);
     }
 
     @Override
     public Optional<CustomerVisit> findByLicensePlate(String licensePlate) {
         return db.values().stream()
-            .filter(customerVisit -> customerVisit.getCustomer().getLicensePlates().contains(licensePlate))
+//            .filter(customerVisit -> customerVisit.getCustomer().getLicensePlates().contains(licensePlate))
             .findFirst();
+    }
+
+    @Override
+    public Optional<CustomerVisit> findById(Long id) {
+        return Optional.of(db.get(id));
     }
 }

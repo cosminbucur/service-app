@@ -1,13 +1,14 @@
 package com.fm.service;
 
-import com.fm.dto.CustomerVisitInfo;
-import com.fm.dto.StoragePointInfo;
+import com.fm.dto.request.CustomerVisitWrite;
+import com.fm.dto.response.CustomerVisitRead;
+import com.fm.dto.response.StoragePointRead;
 import com.fm.model.Tyre;
 
 import java.util.List;
 import java.util.Map;
 
-public interface IHotelService {
+public interface ICustomerVisitService {
 
     /**
      * Used to search
@@ -15,12 +16,12 @@ public interface IHotelService {
      * @param licensePlate
      * @return storage point
      */
-    StoragePointInfo findStoragePoint(String licensePlate);
+    StoragePointRead findStoragePoint(String licensePlate);
 
     /**
-     * @param customerVisitInfo
+     * @param customerVisitWrite
      */
-    CustomerVisitInfo saveCustomerVisit(CustomerVisitInfo customerVisitInfo);
+    CustomerVisitRead saveCustomerVisit(CustomerVisitWrite customerVisitWrite);
 
     /**
      * During a visit, a customer can choose to checkout his tyres. The storage point must be cleared.
@@ -32,10 +33,10 @@ public interface IHotelService {
     /**
      * Inside the storage, a set of tyres can be moved from one storage point to another.
      *
-     * @param oldStorageInfo
-     * @param newStorageInfo
+     * @param sourceStorageCode
+     * @param targetStorageCode
      */
-    void swapStorage(StoragePointInfo oldStorageInfo, StoragePointInfo newStorageInfo);
+    void swapStorage(String sourceStorageCode, String targetStorageCode);
 
     /**
      * Used to find the worn tyre.
@@ -45,5 +46,4 @@ public interface IHotelService {
      */
     Map<String, List<Tyre>> findWornTyres();
 
-    void notifyCustomersOnSeasonChange(List<CustomerVisitInfo> customerVisits);
 }

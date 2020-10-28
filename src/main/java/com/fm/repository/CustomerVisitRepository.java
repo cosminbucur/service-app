@@ -9,4 +9,6 @@ public interface CustomerVisitRepository {
     CustomerVisit save(CustomerVisit customerVisit);
 
     Optional<CustomerVisit> findByLicensePlate(String licensePlate);
+
+    Optional<CustomerVisit> findById(Long id);
 }

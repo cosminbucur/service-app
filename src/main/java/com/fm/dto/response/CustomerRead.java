@@ -1,6 +1,6 @@
-package com.fm.dto;
+package com.fm.dto.response;
 
-public class CustomerInfo {
+public class CustomerRead {
 
     private Long id;
     private String firstName;

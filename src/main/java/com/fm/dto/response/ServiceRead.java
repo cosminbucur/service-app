@@ -1,29 +1,13 @@
-package com.fm.model;
+package com.fm.dto.response;
 
 import java.time.LocalDate;
 
-public class CustomerVisit {
+public class ServiceRead {
 
-    private Long id;
     private LocalDate visitDate;
-
     private Long mechanicId;
     private String servicesPerformed;
     private String observations;
-
-    private Customer customer;
-
-    public CustomerVisit() {
-        this.visitDate = LocalDate.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public LocalDate getVisitDate() {
         return visitDate;
@@ -55,13 +39,5 @@ public class CustomerVisit {
 
     public void setObservations(String observations) {
         this.observations = observations;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 }

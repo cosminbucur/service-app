@@ -1,28 +1,12 @@
-package com.fm.model;
+package com.fm.dto.request;
 
-import java.util.Objects;
+public class CustomerWrite {
 
-public class Customer {
-
-    private Long id;
     private String firstName;
     private String lastName;
     private String company;
     private String phoneNumber;
     private String email;
-    private boolean active;
-
-    public Customer() {
-        this.active = true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -64,24 +48,4 @@ public class Customer {
         this.email = email;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, company, phoneNumber, email);
-    }
 }

@@ -1,21 +1,14 @@
-package com.fm.dto;
+package com.fm.dto.request;
 
-import java.time.LocalDate;
+// TODO: consider options
+// 1. move fields to customer visit
+// 2. leave it and modify mapper
+// 3. modify customer visit with embedded service object
+public class ServiceWrite {
 
-public class ServiceInfo {
-
-    private LocalDate visitDate;
     private Long mechanicId;
     private String servicesPerformed;
     private String observations;
-
-    public LocalDate getVisitDate() {
-        return visitDate;
-    }
-
-    public void setVisitDate(LocalDate visitDate) {
-        this.visitDate = visitDate;
-    }
 
     public Long getMechanicId() {
         return mechanicId;
@@ -40,4 +33,5 @@ public class ServiceInfo {
     public void setObservations(String observations) {
         this.observations = observations;
     }
+
 }

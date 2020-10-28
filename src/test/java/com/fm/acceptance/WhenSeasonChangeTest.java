@@ -1,9 +1,8 @@
 package com.fm.acceptance;
 
-import com.fm.dto.CustomerInfo;
-import com.fm.dto.CustomerVisitInfo;
-import com.fm.dto.ObjectMapper;
-import com.fm.dto.StoragePointInfo;
+import com.fm.dto.request.CustomerVisitWrite;
+import com.fm.dto.request.CustomerWrite;
+import com.fm.dto.request.StoragePointWrite;
 import com.fm.model.Customer;
 import com.fm.model.CustomerVisit;
 import com.fm.model.StoragePoint;
@@ -13,8 +12,11 @@ import com.fm.repository.CustomerVisitH2Repository;
 import com.fm.repository.CustomerVisitRepository;
 import com.fm.repository.StoragePointH2Repository;
 import com.fm.repository.StoragePointRepository;
-import com.fm.service.HotelService;
-import com.fm.service.IHotelService;
+import com.fm.repository.TyreH2Repository;
+import com.fm.repository.TyreRepository;
+import com.fm.service.CustomerVisitService;
+import com.fm.service.ICustomerVisitService;
+import com.fm.service.NotificationService;
 import com.fm.util.TestDtoUtils;
 import com.fm.util.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -30,22 +32,23 @@ class WhenSeasonChangeTest {
     StoragePointRepository storagePointRepository = new StoragePointH2Repository();
     CustomerRepository customerRepository = new CustomerH2Repository();
     CustomerVisitRepository customerVisitRepository = new CustomerVisitH2Repository();
-    ObjectMapper objectMapper = new ObjectMapper();
-    IHotelService hotelService = new HotelService(customerVisitRepository, customerRepository, storagePointRepository, objectMapper);
+    TyreRepository tyreRepository = new TyreH2Repository();
+    ICustomerVisitService hotelService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
+    NotificationService notificationService = new NotificationService();
 
     // user story: store tyres on season change
 
     @Test
     void shouldStoreTyresForExistingCustomer() {
         // given
-        CustomerVisitInfo customerVisitInfo = TestDtoUtils.createCustomerVisitInfo();
-        String licensePlate = customerVisitInfo.getCustomerInfo().getLicensePlate();
+        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitInfo();
+        String licensePlate = customerVisitWrite.getStoragePointInfo().getLicensePlate();
 
         Customer expectedCustomer = TestUtils.createCustomer();
         CustomerVisit expectedCustomerVisit = TestUtils.createCustomerVisit();
 
         // when
-        hotelService.saveCustomerVisit(customerVisitInfo);
+        hotelService.saveCustomerVisit(customerVisitWrite);
 
         // check customer
         Customer actualCustomer = customerRepository.findByPhoneNumber(expectedCustomer.getPhoneNumber());
@@ -66,28 +69,24 @@ class WhenSeasonChangeTest {
     @Test
     void shouldNotifyCustomersEverySixMonths() {
         // given
-        StoragePointInfo storagePointInfo1 = new StoragePointInfo();
-        storagePointInfo1.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
-        StoragePointInfo storagePointInfo2 = new StoragePointInfo();
-        storagePointInfo2.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
+        StoragePointWrite storagePointWrite1 = new StoragePointWrite();
+        storagePointWrite1.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
+        StoragePointWrite storagePointWrite2 = new StoragePointWrite();
+        storagePointWrite2.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
 
         LocalDate sixMonthsAgo = LocalDate.of(2019, 6, 20);
         LocalDate recentDate = LocalDate.of(2020, 1, 10);
 
-        CustomerVisitInfo customerVisit1 = TestDtoUtils.createCustomerVisitInfo();
-        CustomerInfo customer1 = customerVisit1.getCustomerInfo();
-        customer1.setId(1L);
-        customer1.setLicensePlate("B22ABC");
+        CustomerVisitWrite customerVisit1 = TestDtoUtils.createCustomerVisitInfo();
+        CustomerWrite customer1 = customerVisit1.getCustomerInfo();
 
-        CustomerVisitInfo customerVisit2 = TestDtoUtils.createCustomerVisitInfo();
-        CustomerInfo customer2 = customerVisit2.getCustomerInfo();
-        customer2.setId(2L);
-        customer2.setLicensePlate("B22DEF");
+        CustomerVisitWrite customerVisit2 = TestDtoUtils.createCustomerVisitInfo();
+        CustomerWrite customer2 = customerVisit2.getCustomerInfo();
 
-        List<CustomerVisitInfo> customerVisits = Arrays.asList(customerVisit1, customerVisit2);
+        List<CustomerVisitWrite> customerVisits = Arrays.asList(customerVisit1, customerVisit2);
 
         // when
-        hotelService.notifyCustomersOnSeasonChange(customerVisits);
+        notificationService.notifyCustomersOnSeasonChange(customerVisits);
 
         // then
         assertThat(customerVisit2.isSeasonPassed()).isFalse();

@@ -44,9 +44,9 @@ public class StoragePointH2Repository implements StoragePointRepository {
         }
     }
 
-    // TODO: fix this
     @Override
     public Map<String, List<Tyre>> findWornTyres() {
+        // TODO: fix findWornTyres
         Map<String, List<Tyre>> result = new HashMap<>();
 
         for (StoragePoint storagePoint : db.values()) {
@@ -65,4 +65,8 @@ public class StoragePointH2Repository implements StoragePointRepository {
             .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
 }

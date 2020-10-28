@@ -1,6 +1,6 @@
 package com.fm.service;
 
-import com.fm.dto.ObjectMapper;
+import com.fm.dto.mapper.CustomerVisitMapper;
 import com.fm.model.Season;
 import com.fm.model.StoragePoint;
 import com.fm.model.Tyre;
@@ -23,7 +23,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-class HotelServiceTest {
+class CustomerVisitServiceTest {
 
     @Mock
     StoragePointRepository storagePointRepository;
@@ -32,10 +32,10 @@ class HotelServiceTest {
     @Mock
     CustomerVisitRepository customerVisitRepository;
     @Mock
-    ObjectMapper objectMapper;
+    CustomerVisitMapper customerVisitMapper;
 
     @InjectMocks
-    IHotelService hotelService;
+    ICustomerVisitService hotelService;
 
     @Test
     void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
