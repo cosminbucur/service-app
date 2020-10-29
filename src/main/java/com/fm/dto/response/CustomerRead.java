@@ -1,8 +1,6 @@
-package com.fm.model;
+package com.fm.dto.response;
 
-import java.util.Objects;
-
-public class Customer {
+public class CustomerRead {
 
     private Long id;
     private String firstName;
@@ -10,11 +8,7 @@ public class Customer {
     private String company;
     private String phoneNumber;
     private String email;
-    private boolean active;
-
-    public Customer() {
-        this.active = true;
-    }
+    private String licensePlate;
 
     public Long getId() {
         return id;
@@ -64,24 +58,11 @@ public class Customer {
         this.email = email;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, company, phoneNumber, email);
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 }
