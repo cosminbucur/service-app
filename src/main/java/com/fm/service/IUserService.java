@@ -9,7 +9,7 @@ public interface IUserService {
 
     AppUser create(AppUser appUser);
 
-    List<AppUser> findAll(AppUser appUser);
+    List<AppUser> findAll();
 
     Optional<AppUser> findById(Long id);
 

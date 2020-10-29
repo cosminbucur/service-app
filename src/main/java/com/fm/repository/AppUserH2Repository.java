@@ -15,10 +15,11 @@ public class AppUserH2Repository implements AppUserRepository {
     private static Map<Long, AppUser> db = new HashMap<>();
 
     @Override
-    public void save(AppUser appUser) {
+    public AppUser save(AppUser appUser) {
         long nextId = db.size() + 1L;
         appUser.setId(nextId);
         db.put(nextId, appUser);
+        return db.get(nextId);
     }
 
     @Override
@@ -32,8 +33,9 @@ public class AppUserH2Repository implements AppUserRepository {
     }
 
     @Override
-    public void update(Long id, AppUser appUser) {
+    public AppUser update(Long id, AppUser appUser) {
         db.put(id, appUser);
+        return db.get(id);
     }
 
     @Override
