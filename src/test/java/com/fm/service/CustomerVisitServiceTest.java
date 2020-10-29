@@ -8,7 +8,7 @@ import com.fm.repository.CustomerRepository;
 import com.fm.repository.CustomerVisitRepository;
 import com.fm.repository.StoragePointH2Repository;
 import com.fm.repository.StoragePointRepository;
-import com.fm.util.TestUtils;
+import com.fm.util.TestEntityUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,10 +40,10 @@ class CustomerVisitServiceTest {
     @Test
     void given3wornTyresAnd1New_whenFindWornTyres_then3WornTyres() {
         // given
-        Tyre wornTyre1 = TestUtils.createTyre(Season.SUMMER, 2);
-        Tyre wornTyre2 = TestUtils.createTyre(Season.SUMMER, 3);
-        Tyre newTyre1 = TestUtils.createTyre(Season.SUMMER, 8);
-        Tyre wornTyre3 = TestUtils.createTyre(Season.SUMMER, 2);
+        Tyre wornTyre1 = TestEntityUtils.createTyre(Season.SUMMER, 2);
+        Tyre wornTyre2 = TestEntityUtils.createTyre(Season.SUMMER, 3);
+        Tyre newTyre1 = TestEntityUtils.createTyre(Season.SUMMER, 8);
+        Tyre wornTyre3 = TestEntityUtils.createTyre(Season.SUMMER, 2);
 
         StoragePoint storagePoint1 = new StoragePoint();
         storagePoint1.setLicensePlate("B22ABC");

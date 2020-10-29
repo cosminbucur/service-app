@@ -25,6 +25,8 @@ public class StoragePoint {
         numberOfRimCaps = 0;
         mountedTyres.clear();
         storedTyres.clear();
+        cleared = true;
+        clearedDate = LocalDate.now();
     }
 
     public Long getId() {
@@ -73,5 +75,21 @@ public class StoragePoint {
 
     public void setStoredTyres(List<Tyre> storedTyres) {
         this.storedTyres = storedTyres;
+    }
+
+    public boolean isCleared() {
+        return cleared;
+    }
+
+    public void setCleared(boolean cleared) {
+        this.cleared = cleared;
+    }
+
+    public LocalDate getClearedDate() {
+        return clearedDate;
+    }
+
+    public void setClearedDate(LocalDate clearedDate) {
+        this.clearedDate = clearedDate;
     }
 }

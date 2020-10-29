@@ -5,25 +5,25 @@ import com.fm.service.ICustomerVisitService;
 import com.fm.util.TestDtoUtils;
 import org.junit.jupiter.api.Test;
 
-import static com.fm.util.TestUtils.createHotelService;
+import static com.fm.util.TestEntityUtils.createCustomerVisitService;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WhenTyresInStorageTest {
 
-    private final ICustomerVisitService hotelService = createHotelService();
+    private final ICustomerVisitService customerVisitService = createCustomerVisitService();
 
     // user story: swap storage points
 
     @Test
     void shouldSwapStorage() {
         // given
-        StoragePointWrite oldStorage = TestDtoUtils.createStoragePointInfo();
+        StoragePointWrite oldStorage = TestDtoUtils.createStoragePointWrite();
         StoragePointWrite newStorage = new StoragePointWrite();
 
-        oldStorage.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
+        oldStorage.setMountedTyres(TestDtoUtils.createFourSummerTyresWrite());
 
         // when
-        hotelService.swapStorage(oldStorage.getCode(), newStorage.getCode());
+        customerVisitService.swapStorage(oldStorage.getCode(), newStorage.getCode());
 
         // then
 

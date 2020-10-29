@@ -3,7 +3,9 @@ package com.fm.repository;
 import com.fm.model.Customer;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,6 +20,11 @@ public class CustomerH2Repository implements CustomerRepository {
         customer.setId(nextId);
         db.put(nextId, customer);
         return db.get(nextId);
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return new ArrayList<>(db.values());
     }
 
     @Override

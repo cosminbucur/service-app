@@ -6,19 +6,25 @@ import com.fm.model.CustomerVisit;
 
 public class CustomerVisitMapper {
 
-    public static CustomerVisit toEntity(ServiceWrite serviceWrite) {
-        CustomerVisit customerVisit = new CustomerVisit();
-        customerVisit.setMechanicId(serviceWrite.getMechanicId());
-        customerVisit.setServicesPerformed(serviceWrite.getServicesPerformed());
-        customerVisit.setObservations(serviceWrite.getObservations());
+    private CustomerVisitMapper() {
+    }
 
-        return customerVisit;
+    public static CustomerVisit toEntity(ServiceWrite serviceWrite) {
+        CustomerVisit entity = new CustomerVisit();
+        entity.setMechanicId(serviceWrite.getMechanicId());
+        entity.setServicesPerformed(serviceWrite.getServicesPerformed());
+        entity.setObservations(serviceWrite.getObservations());
+
+        return entity;
     }
 
     public static CustomerVisitRead toDto(CustomerVisit entity) {
         CustomerVisitRead dto = new CustomerVisitRead();
 
-        // TODO: finish this
+        dto.setId(entity.getId());
+        dto.setCustomerRead(CustomerMapper.toDto(entity.getCustomer()));
+        dto.setServiceRead(null);
+        dto.setStoragePointRead(null);
 
         return dto;
     }

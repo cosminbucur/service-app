@@ -22,11 +22,18 @@ import com.fm.service.ICustomerVisitService;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestUtils {
+import static com.fm.util.TestConstants.COMPANY;
+import static com.fm.util.TestConstants.EMAIL;
+import static com.fm.util.TestConstants.FIRST_NAME;
+import static com.fm.util.TestConstants.LAST_NAME;
+import static com.fm.util.TestConstants.OBSERVATIONS;
+import static com.fm.util.TestConstants.PHONE_NUMBER;
+import static com.fm.util.TestConstants.SERVICES_PERFORMED;
+import static com.fm.util.TestConstants.TYRE_BRAND;
 
-    public static final String LICENSE_PLATE = "B222ABC";
+public class TestEntityUtils {
 
-    public static ICustomerVisitService createHotelService() {
+    public static ICustomerVisitService createCustomerVisitService() {
         StoragePointRepository storagePointRepository = new StoragePointH2Repository();
         CustomerRepository customerRepository = new CustomerH2Repository();
         CustomerVisitRepository customerVisitRepository = new CustomerVisitH2Repository();
@@ -35,13 +42,24 @@ public class TestUtils {
     }
 
     public static CustomerVisit createCustomerVisit() {
-        CustomerVisit customerVisit = new CustomerVisit();
-        customerVisit.setId(1L);
-        customerVisit.setMechanicId(1L);
-        customerVisit.setObservations(LICENSE_PLATE);
-        customerVisit.setServicesPerformed("aerospace");
-        customerVisit.setCustomer(createCustomer());
-        return customerVisit;
+        CustomerVisit entity = new CustomerVisit();
+        entity.setId(1L);
+        entity.setMechanicId(1L);
+        entity.setObservations(OBSERVATIONS);
+        entity.setServicesPerformed(SERVICES_PERFORMED);
+        entity.setCustomer(createCustomer());
+        return entity;
+    }
+
+    public static Customer createCustomer() {
+        Customer entity = new Customer();
+        entity.setId(1L);
+        entity.setFirstName(FIRST_NAME);
+        entity.setLastName(LAST_NAME);
+        entity.setCompany(COMPANY);
+        entity.setEmail(EMAIL);
+        entity.setPhoneNumber(PHONE_NUMBER);
+        return entity;
     }
 
     public static List<Tyre> createFourSummerTyres() {
@@ -56,7 +74,7 @@ public class TestUtils {
     public static Tyre createTyre(Season season, int threadDepth) {
         Tyre tyre = new Tyre();
         tyre.setId(1L);
-        tyre.setTyreBrand("michelin");
+        tyre.setTyreBrand(TYRE_BRAND);
         tyre.setTyreSize(new TyreSize(255, 55, 16));
         tyre.setTyreType(TyreType.REGULAR);
         tyre.setSeason(season);
@@ -65,16 +83,5 @@ public class TestUtils {
         tyre.setTreadDepth(threadDepth);
         tyre.setTyreLocation(TyreLocation.STORED);
         return tyre;
-    }
-
-    public static Customer createCustomer() {
-        Customer customer = new Customer();
-        customer.setId(1L);
-        customer.setFirstName("Alex");
-        customer.setLastName("Xela");
-        customer.setCompany("aerospace");
-        customer.setEmail("xela@aerospace.ro");
-        customer.setPhoneNumber("0722333444");
-        return customer;
     }
 }

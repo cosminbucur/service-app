@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static com.fm.util.TestUtils.createHotelService;
+import static com.fm.util.TestEntityUtils.createCustomerVisitService;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WhenWornTyresInStorageTest {
 
-    private final ICustomerVisitService hotelService = createHotelService();
+    private final ICustomerVisitService customerVisitService = createCustomerVisitService();
 
     @Test
     void shouldSeeWornTyres() {
@@ -24,11 +24,11 @@ class WhenWornTyresInStorageTest {
         CustomerVisitWrite customerVisit2 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
         customerVisit2.getStoragePointInfo().setCode("A2B2C2");
 
-        hotelService.saveCustomerVisit(customerVisit1);
-        hotelService.saveCustomerVisit(customerVisit2);
+        customerVisitService.saveCustomerVisit(customerVisit1);
+        customerVisitService.saveCustomerVisit(customerVisit2);
 
         // when
-        Map<String, List<Tyre>> wornTyres = hotelService.findWornTyres();
+        Map<String, List<Tyre>> wornTyres = customerVisitService.findWornTyres();
 
         assertThat(wornTyres).hasSize(6);
     }

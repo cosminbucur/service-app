@@ -14,7 +14,7 @@ public class DbInit implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(DbInit.class);
 
-    private AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
     public DbInit(AppUserRepository appUserRepository) {

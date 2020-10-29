@@ -23,25 +23,26 @@ class WhenCheckoutTest {
     CustomerRepository customerRepository = new CustomerH2Repository();
     CustomerVisitRepository customerVisitRepository = new CustomerVisitH2Repository();
     TyreRepository tyreRepository = new TyreH2Repository();
-    ICustomerVisitService hotelService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
+    ICustomerVisitService customerVisitService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
 
     // user story: checkout storage
 
     @Test
     void shouldCheckoutTyres() {
         // given
-        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitInfo();
-        hotelService.saveCustomerVisit(customerVisitWrite);
+        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitWrite();
+        customerVisitService.saveCustomerVisit(customerVisitWrite);
 
         // when
-        hotelService.checkout(customerVisitWrite.getStoragePointInfo().getLicensePlate());
+        customerVisitService.checkout(customerVisitWrite.getStoragePointInfo().getLicensePlate());
 
         // then
-        StoragePointRead storagePoint = hotelService.findStoragePoint(customerVisitWrite.getStoragePointInfo().getLicensePlate());
+        StoragePointRead storagePoint = customerVisitService.findStoragePoint(customerVisitWrite.getStoragePointInfo().getLicensePlate());
 
         // check storage point cleared
         assertThat(storagePoint.getNumberOfRimCaps()).isZero();
         assertThat(storagePoint.getMountedTyres()).isEmpty();
         assertThat(storagePoint.getStoredTyres()).isEmpty();
+        assertThat(storagePoint.isCleared()).isTrue();
     }
 }

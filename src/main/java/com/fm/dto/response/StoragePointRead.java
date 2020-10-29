@@ -1,5 +1,6 @@
 package com.fm.dto.response;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ public class StoragePointRead {
     private String code;
     private String licensePlate;
     private int numberOfRimCaps;
+    private boolean cleared;
+    private LocalDate clearedDate;
 
     private List<TyreRead> mountedTyres = new ArrayList<>();
     private List<TyreRead> storedTyres = new ArrayList<>();
@@ -66,5 +69,21 @@ public class StoragePointRead {
 
     public void setStoredTyres(List<TyreRead> storedTyres) {
         this.storedTyres = storedTyres;
+    }
+
+    public boolean isCleared() {
+        return cleared;
+    }
+
+    public void setCleared(boolean cleared) {
+        this.cleared = cleared;
+    }
+
+    public LocalDate getClearedDate() {
+        return clearedDate;
+    }
+
+    public void setClearedDate(LocalDate clearedDate) {
+        this.clearedDate = clearedDate;
     }
 }

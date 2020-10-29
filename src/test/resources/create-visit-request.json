@@ -1,25 +1,22 @@
 {
   "customerInfo": {
-    "firstName": "Alex",
-    "lastName": "Vasile",
+    "firstName": "Jon",
+    "lastName": "Snow",
     "company": "Google",
-    "phoneNumber": "0722 333 444",
-    "email": "alex@gmail.com",
-    "active": true
+    "phoneNumber": "0722333444",
+    "email": "jonsnow@gmail.com"
   },
   "serviceInfo": {
-    "visitDate": "2020-10-20",
     "mechanicId": 1,
-    "servicesPerformed": "full replace",
-    "observations": "all went well"
+    "servicesPerformed": "complete setup",
+    "observations": "need new summer tyres"
   },
   "storagePointInfo": {
     "code": "A1B1C1",
     "numberOfRimCaps": 12,
-    "licensePlate": "B11CCC",
+    "licensePlate": "B12ABC",
     "mountedTyres": [
       {
-        "id": null,
         "tyreBrand": "Continental",
         "tyreSize": {
           "tyreWidth": 215,
@@ -34,7 +31,6 @@
         "tyreLocation": "MOUNTED"
       },
       {
-        "id": null,
         "tyreBrand": "Continental",
         "tyreSize": {
           "tyreWidth": 215,
@@ -49,7 +45,6 @@
         "tyreLocation": "MOUNTED"
       },
       {
-        "id": null,
         "tyreBrand": "Continental",
         "tyreSize": {
           "tyreWidth": 215,
@@ -64,7 +59,6 @@
         "tyreLocation": "MOUNTED"
       },
       {
-        "id": null,
         "tyreBrand": "Continental",
         "tyreSize": {
           "tyreWidth": 215,
@@ -81,7 +75,6 @@
     ],
     "storedTyres": [
       {
-        "id": null,
         "tyreBrand": "Michelin",
         "tyreSize": {
           "tyreWidth": 215,
@@ -96,7 +89,6 @@
         "tyreLocation": "STORED"
       },
       {
-        "id": null,
         "tyreBrand": "Michelin",
         "tyreSize": {
           "tyreWidth": 215,
@@ -111,7 +103,6 @@
         "tyreLocation": "STORED"
       },
       {
-        "id": null,
         "tyreBrand": "Michelin",
         "tyreSize": {
           "tyreWidth": 215,
@@ -126,7 +117,6 @@
         "tyreLocation": "STORED"
       },
       {
-        "id": null,
         "tyreBrand": "Michelin",
         "tyreSize": {
           "tyreWidth": 215,

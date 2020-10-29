@@ -23,23 +23,20 @@ public class CustomerVisitRead {
         this.customerRead = customerRead;
     }
 
-    public ServiceRead getServiceInfo() {
+    public ServiceRead getServiceRead() {
         return serviceRead;
     }
 
-    public void setServiceInfo(ServiceRead serviceRead) {
+    public void setServiceRead(ServiceRead serviceRead) {
         this.serviceRead = serviceRead;
     }
 
-    public StoragePointRead getStoragePointInfo() {
+    public StoragePointRead getStoragePointRead() {
         return storagePointRead;
     }
 
-    public void setStoragePointInfo(StoragePointRead storagePointRead) {
+    public void setStoragePointRead(StoragePointRead storagePointRead) {
         this.storagePointRead = storagePointRead;
     }
 
-    public boolean isSeasonPassed() {
-        return false;
-    }
 }

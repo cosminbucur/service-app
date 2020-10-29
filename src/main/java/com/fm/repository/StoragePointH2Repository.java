@@ -5,6 +5,7 @@ import com.fm.model.Tyre;
 import com.fm.model.WearLevel;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,11 @@ public class StoragePointH2Repository implements StoragePointRepository {
         } else {
             db.put(storagePoint.getId(), storagePoint);
         }
+    }
+
+    @Override
+    public List<StoragePoint> findAll() {
+        return new ArrayList<>(db.values());
     }
 
     @Override

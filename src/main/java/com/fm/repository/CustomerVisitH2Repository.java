@@ -3,7 +3,9 @@ package com.fm.repository;
 import com.fm.model.CustomerVisit;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,6 +20,11 @@ public class CustomerVisitH2Repository implements CustomerVisitRepository {
         customerVisit.setId(nextId);
         db.put(nextId, customerVisit);
         return db.get(nextId);
+    }
+
+    @Override
+    public List<CustomerVisit> findAll() {
+        return new ArrayList<>(db.values());
     }
 
     @Override

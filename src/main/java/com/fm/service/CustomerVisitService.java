@@ -68,6 +68,8 @@ public class CustomerVisitService implements ICustomerVisitService {
     }
 
     public CustomerVisitRead findCustomerVisit(Long id) {
+        // TODO: create full dto
+
         return customerVisitRepository.findById(id)
             .map(CustomerVisitMapper::toDto)
             .orElseThrow(() -> new RuntimeException("not found"));

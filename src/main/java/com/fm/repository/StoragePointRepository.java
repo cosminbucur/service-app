@@ -20,6 +20,8 @@ public interface StoragePointRepository {
      */
     void save(StoragePoint storagePoint);
 
+    List<StoragePoint> findAll();
+
     /**
      * Finds a storage point bt a license plate. Each tyre is labeled with the license plate number.
      * All tyres belonging to a license plate are always kept in a single storage point.

@@ -16,7 +16,7 @@ import com.fm.repository.TyreRepository;
 import com.fm.service.CustomerVisitService;
 import com.fm.service.ICustomerVisitService;
 import com.fm.util.TestDtoUtils;
-import com.fm.util.TestUtils;
+import com.fm.util.TestEntityUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,11 +34,11 @@ class WhenNewCustomerTest {
     @Test
     void shouldSaveCustomerVisit() {
         // given
-        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitInfo();
+        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitWrite();
         String licensePlate = customerVisitWrite.getStoragePointInfo().getLicensePlate();
 
-        Customer expectedCustomer = TestUtils.createCustomer();
-        CustomerVisit expectedCustomerVisit = TestUtils.createCustomerVisit();
+        Customer expectedCustomer = TestEntityUtils.createCustomer();
+        CustomerVisit expectedCustomerVisit = TestEntityUtils.createCustomerVisit();
 
         // when
         CustomerVisitRead customerVisitRead = hotelService.saveCustomerVisit(customerVisitWrite);

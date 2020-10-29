@@ -18,7 +18,7 @@ import com.fm.service.CustomerVisitService;
 import com.fm.service.ICustomerVisitService;
 import com.fm.service.NotificationService;
 import com.fm.util.TestDtoUtils;
-import com.fm.util.TestUtils;
+import com.fm.util.TestEntityUtils;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -33,7 +33,7 @@ class WhenSeasonChangeTest {
     CustomerRepository customerRepository = new CustomerH2Repository();
     CustomerVisitRepository customerVisitRepository = new CustomerVisitH2Repository();
     TyreRepository tyreRepository = new TyreH2Repository();
-    ICustomerVisitService hotelService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
+    ICustomerVisitService customerVisitService = new CustomerVisitService(customerVisitRepository, customerRepository, storagePointRepository, tyreRepository);
     NotificationService notificationService = new NotificationService();
 
     // user story: store tyres on season change
@@ -41,22 +41,21 @@ class WhenSeasonChangeTest {
     @Test
     void shouldStoreTyresForExistingCustomer() {
         // given
-        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitInfo();
+        CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitWrite();
         String licensePlate = customerVisitWrite.getStoragePointInfo().getLicensePlate();
 
-        Customer expectedCustomer = TestUtils.createCustomer();
-        CustomerVisit expectedCustomerVisit = TestUtils.createCustomerVisit();
+        Customer expectedCustomer = TestEntityUtils.createCustomer();
+        CustomerVisit expectedCustomerVisit = TestEntityUtils.createCustomerVisit();
 
         // when
-        hotelService.saveCustomerVisit(customerVisitWrite);
+        customerVisitService.saveCustomerVisit(customerVisitWrite);
 
         // check customer
         Customer actualCustomer = customerRepository.findByPhoneNumber(expectedCustomer.getPhoneNumber());
         assertThat(actualCustomer).isEqualTo(expectedCustomer);
 
         // check customer visit
-        CustomerVisit actualCustomerVisit = customerVisitRepository.findByLicensePlate(licensePlate)
-            .orElseThrow(() -> new RuntimeException());
+        CustomerVisit actualCustomerVisit = customerVisitRepository.findByLicensePlate(licensePlate).get();
         assertThat(actualCustomerVisit).isEqualTo(expectedCustomerVisit);
 
         // check tyres in storage point
@@ -70,17 +69,17 @@ class WhenSeasonChangeTest {
     void shouldNotifyCustomersEverySixMonths() {
         // given
         StoragePointWrite storagePointWrite1 = new StoragePointWrite();
-        storagePointWrite1.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
+        storagePointWrite1.setMountedTyres(TestDtoUtils.createFourSummerTyresWrite());
         StoragePointWrite storagePointWrite2 = new StoragePointWrite();
-        storagePointWrite2.setMountedTyres(TestDtoUtils.createFourSummerTyresInfo());
+        storagePointWrite2.setMountedTyres(TestDtoUtils.createFourSummerTyresWrite());
 
         LocalDate sixMonthsAgo = LocalDate.of(2019, 6, 20);
         LocalDate recentDate = LocalDate.of(2020, 1, 10);
 
-        CustomerVisitWrite customerVisit1 = TestDtoUtils.createCustomerVisitInfo();
+        CustomerVisitWrite customerVisit1 = TestDtoUtils.createCustomerVisitWrite();
         CustomerWrite customer1 = customerVisit1.getCustomerInfo();
 
-        CustomerVisitWrite customerVisit2 = TestDtoUtils.createCustomerVisitInfo();
+        CustomerVisitWrite customerVisit2 = TestDtoUtils.createCustomerVisitWrite();
         CustomerWrite customer2 = customerVisit2.getCustomerInfo();
 
         List<CustomerVisitWrite> customerVisits = Arrays.asList(customerVisit1, customerVisit2);

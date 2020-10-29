@@ -21,6 +21,7 @@ public class CustomerMapper {
 
     public static CustomerRead toDto(Customer entity) {
         CustomerRead dto = new CustomerRead();
+        dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setCompany(entity.getCompany());

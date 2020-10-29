@@ -11,6 +11,7 @@ public class StoragePointMapper {
 
     public static StoragePoint toEntity(StoragePointWrite dto) {
         StoragePoint entity = new StoragePoint();
+        entity.setCode(dto.getCode());
         entity.setLicensePlate(dto.getLicensePlate());
         entity.setNumberOfRimCaps(dto.getNumberOfRimCaps());
         entity.setMountedTyres(TyreMapper.toEntity(dto.getStoredTyres()));
@@ -24,6 +25,8 @@ public class StoragePointMapper {
         dto.setCode(entity.getCode());
         dto.setNumberOfRimCaps(entity.getNumberOfRimCaps());
         dto.setLicensePlate(entity.getLicensePlate());
+        dto.setCleared(entity.isCleared());
+        dto.setClearedDate(entity.getClearedDate());
 
         dto.setMountedTyres(TyreMapper.toDto(entity.getMountedTyres()));
         dto.setStoredTyres(TyreMapper.toDto(entity.getStoredTyres()));
