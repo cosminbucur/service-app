@@ -35,7 +35,7 @@ class WhenNewCustomerTest {
     void shouldSaveCustomerVisit() {
         // given
         CustomerVisitWrite customerVisitWrite = TestDtoUtils.createCustomerVisitWrite();
-        String licensePlate = customerVisitWrite.getStoragePointInfo().getLicensePlate();
+        String licensePlate = customerVisitWrite.getStoragePointWrite().getLicensePlate();
 
         Customer expectedCustomer = TestEntityUtils.createCustomer();
         CustomerVisit expectedCustomerVisit = TestEntityUtils.createCustomerVisit();
@@ -46,7 +46,7 @@ class WhenNewCustomerTest {
         // then
 
         // TODO: check that ids are set, check all fields except id
-        assertThat(customerVisitRead.getCustomerRead().getEmail()).isEqualTo(customerVisitWrite.getCustomerInfo().getEmail());
+        assertThat(customerVisitRead.getCustomerRead().getEmail()).isEqualTo(customerVisitWrite.getCustomerWriteMaybe().getEmail());
 
         // check customer
         Customer actualCustomer = customerRepository.findByPhoneNumber(expectedCustomer.getPhoneNumber());

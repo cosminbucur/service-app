@@ -34,10 +34,10 @@ class WhenCheckoutTest {
         customerVisitService.saveCustomerVisit(customerVisitWrite);
 
         // when
-        customerVisitService.checkout(customerVisitWrite.getStoragePointInfo().getLicensePlate());
+        customerVisitService.checkout(customerVisitWrite.getStoragePointWrite().getLicensePlate());
 
         // then
-        StoragePointRead storagePoint = customerVisitService.findStoragePoint(customerVisitWrite.getStoragePointInfo().getLicensePlate());
+        StoragePointRead storagePoint = customerVisitService.findStoragePoint(customerVisitWrite.getStoragePointWrite().getLicensePlate());
 
         // check storage point cleared
         assertThat(storagePoint.getNumberOfRimCaps()).isZero();

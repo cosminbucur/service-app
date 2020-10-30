@@ -2,7 +2,6 @@ package com.fm.util;
 
 import com.fm.dto.request.CustomerVisitWrite;
 import com.fm.dto.request.CustomerWrite;
-import com.fm.dto.request.ServiceWrite;
 import com.fm.dto.request.StoragePointWrite;
 import com.fm.dto.request.TyreWrite;
 import com.fm.model.RimType;
@@ -30,17 +29,21 @@ public class TestDtoUtils {
 
     public static CustomerVisitWrite createCustomerVisitWrite() {
         CustomerVisitWrite dto = new CustomerVisitWrite();
-        dto.setCustomerInfo(createCustomerWrite());
-        dto.setServiceInfo(createServiceWrite());
-        dto.setStoragePointInfo(createStoragePointWrite());
+        dto.setCustomerWriteMaybe(createCustomerWrite());
+        dto.setMechanicId(1L);
+        dto.setServicesPerformed(SERVICES_PERFORMED);
+        dto.setObservations(OBSERVATIONS);
+        dto.setStoragePointWrite(createStoragePointWrite());
         return dto;
     }
 
     public static CustomerVisitWrite createCustomerVisitInfoWithWornTyres() {
         CustomerVisitWrite dto = new CustomerVisitWrite();
-        dto.setCustomerInfo(createCustomerWrite());
-        dto.setServiceInfo(createServiceWrite());
-        dto.setStoragePointInfo(createStoragePointInfoWithWornTyres());
+        dto.setCustomerWriteMaybe(createCustomerWrite());
+        dto.setMechanicId(1L);
+        dto.setServicesPerformed(SERVICES_PERFORMED);
+        dto.setObservations(OBSERVATIONS);
+        dto.setStoragePointWrite(createStoragePointInfoWithWornTyres());
         return dto;
     }
 
@@ -51,14 +54,6 @@ public class TestDtoUtils {
         dto.setCompany(COMPANY);
         dto.setEmail(EMAIL);
         dto.setPhoneNumber(PHONE_NUMBER);
-        return dto;
-    }
-
-    private static ServiceWrite createServiceWrite() {
-        ServiceWrite dto = new ServiceWrite();
-        dto.setMechanicId(1L);
-        dto.setServicesPerformed(SERVICES_PERFORMED);
-        dto.setObservations(OBSERVATIONS);
         return dto;
     }
 

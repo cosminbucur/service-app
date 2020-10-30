@@ -23,6 +23,8 @@ public interface ICustomerVisitService {
      */
     CustomerVisitRead saveCustomerVisit(CustomerVisitWrite customerVisitWrite);
 
+    List<CustomerVisitRead> findAll();
+
     /**
      * During a visit, a customer can choose to checkout his tyres. The storage point must be cleared.
      *

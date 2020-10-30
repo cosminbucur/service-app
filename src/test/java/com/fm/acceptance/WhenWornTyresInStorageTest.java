@@ -20,9 +20,9 @@ class WhenWornTyresInStorageTest {
     void shouldSeeWornTyres() {
         // given
         CustomerVisitWrite customerVisit1 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
-        customerVisit1.getStoragePointInfo().setCode("A1B1C1");
+        customerVisit1.getStoragePointWrite().setCode("A1B1C1");
         CustomerVisitWrite customerVisit2 = TestDtoUtils.createCustomerVisitInfoWithWornTyres();
-        customerVisit2.getStoragePointInfo().setCode("A2B2C2");
+        customerVisit2.getStoragePointWrite().setCode("A2B2C2");
 
         customerVisitService.saveCustomerVisit(customerVisit1);
         customerVisitService.saveCustomerVisit(customerVisit2);

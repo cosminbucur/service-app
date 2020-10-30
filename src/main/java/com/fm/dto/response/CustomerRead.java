@@ -8,7 +8,6 @@ public class CustomerRead {
     private String company;
     private String phoneNumber;
     private String email;
-    private String licensePlate;
 
     public Long getId() {
         return id;
@@ -58,11 +57,4 @@ public class CustomerRead {
         this.email = email;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
 }

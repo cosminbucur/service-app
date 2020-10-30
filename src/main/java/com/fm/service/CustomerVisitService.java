@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerVisitService implements ICustomerVisitService {
@@ -52,11 +53,11 @@ public class CustomerVisitService implements ICustomerVisitService {
     public CustomerVisitRead saveCustomerVisit(CustomerVisitWrite customerVisitWrite) {
         Customer customer = getOrCreateCustomer(customerVisitWrite);
 
-        CustomerVisit customerVisit = CustomerVisitMapper.toEntity(customerVisitWrite.getServiceInfo());
+        CustomerVisit customerVisit = CustomerVisitMapper.toEntity(customerVisitWrite);
         customerVisit.setCustomer(customer);
         customerVisitRepository.save(customerVisit);
 
-        StoragePoint storagePoint = StoragePointMapper.toEntity(customerVisitWrite.getStoragePointInfo());
+        StoragePoint storagePoint = StoragePointMapper.toEntity(customerVisitWrite.getStoragePointWrite());
         storagePointRepository.save(storagePoint);
 
         storagePoint.getMountedTyres().forEach(tyreRepository::save);
@@ -65,6 +66,13 @@ public class CustomerVisitService implements ICustomerVisitService {
         CustomerVisitRead result = findCustomerVisit(customerVisit.getId());
         log.info("Customer visit saved {}", result);
         return result;
+    }
+
+    @Override
+    public List<CustomerVisitRead> findAll() {
+        return customerVisitRepository.findAll().stream()
+            .map(CustomerVisitMapper::toDto)
+            .collect(Collectors.toList());
     }
 
     public CustomerVisitRead findCustomerVisit(Long id) {
@@ -77,7 +85,7 @@ public class CustomerVisitService implements ICustomerVisitService {
 
     private Customer getOrCreateCustomer(CustomerVisitWrite customerVisitWrite) {
         if (customerVisitWrite.getCustomerIdMaybe() == null) {
-            Customer newCustomer = CustomerMapper.toEntity(customerVisitWrite.getCustomerInfo());
+            Customer newCustomer = CustomerMapper.toEntity(customerVisitWrite.getCustomerWriteMaybe());
             customerRepository.save(newCustomer);
             return newCustomer;
         } else {

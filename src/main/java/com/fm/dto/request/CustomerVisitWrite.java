@@ -7,7 +7,10 @@ public class CustomerVisitWrite {
     private Long customerIdMaybe;
     private CustomerWrite customerWriteMaybe;
 
-    private ServiceWrite serviceWrite;
+    private Long mechanicId;
+    private String servicesPerformed;
+    private String observations;
+
     private StoragePointWrite storagePointWrite;
 
     public Long getCustomerIdMaybe() {
@@ -18,31 +21,44 @@ public class CustomerVisitWrite {
         this.customerIdMaybe = customerIdMaybe;
     }
 
-    public CustomerWrite getCustomerInfo() {
+    public CustomerWrite getCustomerWriteMaybe() {
         return customerWriteMaybe;
     }
 
-    public void setCustomerInfo(CustomerWrite customerWrite) {
-        this.customerWriteMaybe = customerWrite;
+    public void setCustomerWriteMaybe(CustomerWrite customerWriteMaybe) {
+        this.customerWriteMaybe = customerWriteMaybe;
     }
 
-    public ServiceWrite getServiceInfo() {
-        return serviceWrite;
+    public Long getMechanicId() {
+        return mechanicId;
     }
 
-    public void setServiceInfo(ServiceWrite serviceWrite) {
-        this.serviceWrite = serviceWrite;
+    public void setMechanicId(Long mechanicId) {
+        this.mechanicId = mechanicId;
     }
 
-    public StoragePointWrite getStoragePointInfo() {
+    public String getServicesPerformed() {
+        return servicesPerformed;
+    }
+
+    public void setServicesPerformed(String servicesPerformed) {
+        this.servicesPerformed = servicesPerformed;
+    }
+
+    public String getObservations() {
+        return observations;
+    }
+
+    public void setObservations(String observations) {
+        this.observations = observations;
+    }
+
+    public StoragePointWrite getStoragePointWrite() {
         return storagePointWrite;
     }
 
-    public void setStoragePointInfo(StoragePointWrite storagePointWrite) {
+    public void setStoragePointWrite(StoragePointWrite storagePointWrite) {
         this.storagePointWrite = storagePointWrite;
     }
 
-    public boolean isSeasonPassed() {
-        return false;
-    }
 }
