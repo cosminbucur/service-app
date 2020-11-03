@@ -57,4 +57,15 @@ public class CustomerRead {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "CustomerRead{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", company='" + company + '\'' +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            ", email='" + email + '\'' +
+            '}';
+    }
 }

@@ -42,14 +42,6 @@ public class CustomerVisitService implements ICustomerVisitService {
     }
 
     @Override
-    public StoragePointRead findStoragePoint(String licensePlate) {
-        StoragePoint storagePoint = storagePointRepository.findStoragePoint(licensePlate)
-            .orElseThrow(() -> new RuntimeException("not found"));
-
-        return StoragePointMapper.toDto(storagePoint);
-    }
-
-    @Override
     public CustomerVisitRead saveCustomerVisit(CustomerVisitWrite customerVisitWrite) {
         Customer customer = getOrCreateCustomer(customerVisitWrite);
 
@@ -60,10 +52,19 @@ public class CustomerVisitService implements ICustomerVisitService {
         StoragePoint storagePoint = StoragePointMapper.toEntity(customerVisitWrite.getStoragePointWrite());
         storagePointRepository.save(storagePoint);
 
-        storagePoint.getMountedTyres().forEach(tyreRepository::save);
-        storagePoint.getStoredTyres().forEach(tyreRepository::save);
+        storagePoint.getMountedTyres().forEach(tyre -> {
+            tyre.setStorageId(storagePoint.getId());
+            tyreRepository.save(tyre);
+        });
+        storagePoint.getStoredTyres().forEach(tyre -> {
+            tyre.setStorageId(storagePoint.getId());
+            tyreRepository.save(tyre);
+        });
 
         CustomerVisitRead result = findCustomerVisit(customerVisit.getId());
+        StoragePointRead storagePointRead = findStoragePoint(storagePoint.getLicensePlate());
+        result.setStoragePointRead(storagePointRead);
+
         log.info("Customer visit saved {}", result);
         return result;
     }
@@ -76,30 +77,21 @@ public class CustomerVisitService implements ICustomerVisitService {
     }
 
     public CustomerVisitRead findCustomerVisit(Long id) {
-        // TODO: create full dto
-
         return customerVisitRepository.findById(id)
             .map(CustomerVisitMapper::toDto)
             .orElseThrow(() -> new RuntimeException("not found"));
     }
 
-    private Customer getOrCreateCustomer(CustomerVisitWrite customerVisitWrite) {
-        if (customerVisitWrite.getCustomerIdMaybe() == null) {
-            Customer newCustomer = CustomerMapper.toEntity(customerVisitWrite.getCustomerWriteMaybe());
-            customerRepository.save(newCustomer);
-            return newCustomer;
-        } else {
-            return customerRepository.findById(customerVisitWrite.getCustomerIdMaybe())
-                .orElseThrow(() -> new RuntimeException("not found"));
-        }
+    @Override
+    public StoragePointRead findStoragePoint(String licensePlate) {
+        return storagePointRepository.findStoragePoint(licensePlate)
+            .map(StoragePointMapper::toDto)
+            .orElseThrow(() -> new RuntimeException("not found"));
     }
 
     @Override
-    public void checkout(String licensePlate) {
-        StoragePoint storagePoint = storagePointRepository.findStoragePoint(licensePlate)
-            .orElseThrow(() -> new RuntimeException("not found"));
-        storagePoint.clear();
-        storagePointRepository.save(storagePoint);
+    public Map<String, List<Tyre>> findWornTyres() {
+        return storagePointRepository.findWornTyres();
     }
 
     @Override
@@ -121,8 +113,22 @@ public class CustomerVisitService implements ICustomerVisitService {
     }
 
     @Override
-    public Map<String, List<Tyre>> findWornTyres() {
-        return storagePointRepository.findWornTyres();
+    public void checkout(String licensePlate) {
+        StoragePoint storagePoint = storagePointRepository.findStoragePoint(licensePlate)
+            .orElseThrow(() -> new RuntimeException("not found"));
+        storagePoint.clear();
+        storagePointRepository.save(storagePoint);
+    }
+
+    private Customer getOrCreateCustomer(CustomerVisitWrite customerVisitWrite) {
+        if (customerVisitWrite.getCustomerIdMaybe() == null) {
+            Customer newCustomer = CustomerMapper.toEntity(customerVisitWrite.getCustomerWriteMaybe());
+            customerRepository.save(newCustomer);
+            return newCustomer;
+        } else {
+            return customerRepository.findById(customerVisitWrite.getCustomerIdMaybe())
+                .orElseThrow(() -> new RuntimeException("not found"));
+        }
     }
 
 }

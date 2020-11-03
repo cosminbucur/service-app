@@ -1,17 +1,15 @@
 {
-  "customerInfo": {
+  "mechanicId": 1,
+  "servicesPerformed": "complete setup",
+  "observations": "need new summer tyres",
+  "customerWriteMaybe": {
     "firstName": "Jon",
     "lastName": "Snow",
     "company": "Google",
     "phoneNumber": "0722333444",
     "email": "jonsnow@gmail.com"
   },
-  "serviceInfo": {
-    "mechanicId": 1,
-    "servicesPerformed": "complete setup",
-    "observations": "need new summer tyres"
-  },
-  "storagePointInfo": {
+  "storagePointWrite": {
     "code": "A1B1C1",
     "numberOfRimCaps": 12,
     "licensePlate": "B12ABC",

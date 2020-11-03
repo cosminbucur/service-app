@@ -26,6 +26,8 @@ public class TyreMapper {
         entity.setRimType(dto.getRimType());
         entity.setTreadDepth(dto.getTreadDepth());
         entity.setTyreLocation(dto.getTyreLocation());
+        entity.setTyreWearLevel(dto.getTreadDepth());
+
         return entity;
     }
 
@@ -37,13 +39,16 @@ public class TyreMapper {
     public static TyreRead toDto(Tyre entity) {
         TyreRead dto = new TyreRead();
         dto.setId(entity.getId());
-        dto.setTyreType(entity.getTyreType());
         dto.setTyreBrand(entity.getTyreBrand());
-
         dto.setTyreSize(entity.getTyreSize());
-
-        dto.setWearLevel(entity.getWearLevel());
+        dto.setTyreType(entity.getTyreType());
+        dto.setSeason(entity.getSeason());
         dto.setRimType(entity.getRimType());
+        dto.setTreadDepth(entity.getTreadDepth());
+        dto.setWearLevel(entity.getWearLevel());
+        dto.setTyreLocation(entity.getTyreLocation());
+        dto.setStorageId(entity.getStorageId());
+
         return dto;
     }
 }

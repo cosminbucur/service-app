@@ -86,4 +86,18 @@ public class StoragePointRead {
     public void setClearedDate(LocalDate clearedDate) {
         this.clearedDate = clearedDate;
     }
+
+    @Override
+    public String toString() {
+        return "StoragePointRead{" +
+            "id=" + id +
+            ", code='" + code + '\'' +
+            ", licensePlate='" + licensePlate + '\'' +
+            ", numberOfRimCaps=" + numberOfRimCaps +
+            ", cleared=" + cleared +
+            ", clearedDate=" + clearedDate +
+            ", mountedTyres=" + mountedTyres +
+            ", storedTyres=" + storedTyres +
+            '}';
+    }
 }

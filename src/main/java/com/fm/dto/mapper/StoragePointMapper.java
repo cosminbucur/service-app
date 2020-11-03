@@ -14,7 +14,7 @@ public class StoragePointMapper {
         entity.setCode(dto.getCode());
         entity.setLicensePlate(dto.getLicensePlate());
         entity.setNumberOfRimCaps(dto.getNumberOfRimCaps());
-        entity.setMountedTyres(TyreMapper.toEntity(dto.getStoredTyres()));
+        entity.setMountedTyres(TyreMapper.toEntity(dto.getMountedTyres()));
         entity.setStoredTyres(TyreMapper.toEntity(dto.getStoredTyres()));
         return entity;
     }

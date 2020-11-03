@@ -1,5 +1,7 @@
 package com.fm.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class CustomerVisitRead {
@@ -9,7 +11,9 @@ public class CustomerVisitRead {
     private Long mechanicId;
     private String servicesPerformed;
     private String observations;
+    @JsonProperty("customer")
     private CustomerRead customerRead;
+    @JsonProperty("storagePoint")
     private StoragePointRead storagePointRead;
 
     public Long getId() {
@@ -68,4 +72,16 @@ public class CustomerVisitRead {
         this.storagePointRead = storagePointRead;
     }
 
+    @Override
+    public String toString() {
+        return "CustomerVisitRead{" +
+            "id=" + id +
+            ", visitDate=" + visitDate +
+            ", mechanicId=" + mechanicId +
+            ", servicesPerformed='" + servicesPerformed + '\'' +
+            ", observations='" + observations + '\'' +
+            ", customerRead=" + customerRead +
+            ", storagePointRead=" + storagePointRead +
+            '}';
+    }
 }

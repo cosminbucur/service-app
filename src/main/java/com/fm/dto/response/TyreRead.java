@@ -18,18 +18,9 @@ public class TyreRead {
     private int treadDepth;
     private WearLevel wearLevel;
     private TyreLocation tyreLocation;
+    private Long storageId;
 
     public TyreRead() {
-    }
-
-    public TyreRead(Long id, String tyreBrand, TyreSize tyreSize, TyreType tyreType, Season season, RimType rimType, int treadDepth) {
-        this.id = id;
-        this.tyreBrand = tyreBrand;
-        this.tyreSize = tyreSize;
-        this.tyreType = tyreType;
-        this.season = season;
-        this.rimType = rimType;
-        this.treadDepth = treadDepth;
     }
 
     public Long getId() {
@@ -102,5 +93,29 @@ public class TyreRead {
 
     public void setTyreLocation(TyreLocation tyreLocation) {
         this.tyreLocation = tyreLocation;
+    }
+
+    public Long getStorageId() {
+        return storageId;
+    }
+
+    public void setStorageId(Long storageId) {
+        this.storageId = storageId;
+    }
+
+    @Override
+    public String toString() {
+        return "TyreRead{" +
+            "id=" + id +
+            ", tyreBrand='" + tyreBrand + '\'' +
+            ", tyreSize=" + tyreSize +
+            ", tyreType=" + tyreType +
+            ", season=" + season +
+            ", rimType=" + rimType +
+            ", treadDepth=" + treadDepth +
+            ", wearLevel=" + wearLevel +
+            ", tyreLocation=" + tyreLocation +
+            ", storageId=" + storageId +
+            '}';
     }
 }

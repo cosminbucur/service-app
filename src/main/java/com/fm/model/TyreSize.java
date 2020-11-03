@@ -38,4 +38,13 @@ public class TyreSize {
     public void setRimDiameter(int rimDiameter) {
         this.rimDiameter = rimDiameter;
     }
+
+    @Override
+    public String toString() {
+        return "TyreSize{" +
+            "tyreWidth=" + tyreWidth +
+            ", tyreHeight=" + tyreHeight +
+            ", rimDiameter=" + rimDiameter +
+            '}';
+    }
 }
