@@ -1,19 +1,37 @@
 package com.fm.service;
 
-import com.fm.model.AppUser;
+import com.fm.dto.response.JwtTokenResponse;
+import com.fm.dto.response.UserRead;
+import com.fm.dto.response.UserWrite;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 public interface IUserService {
 
-    AppUser create(AppUser appUser);
+    JwtTokenResponse signup(UserWrite request);
 
-    List<AppUser> findAll();
+    UserRead search(String username);
 
-    Optional<AppUser> findById(Long id);
+    UserRead whoami(HttpServletRequest request);
 
-    AppUser update(Long id, AppUser appUser);
+    List<UserRead> findAll();
+
+    /**
+     * Finds a user by id. Can not fail.
+     *
+     * @param id
+     * @return
+     */
+    UserRead findById(Long id);
+
+    UserRead update(Long id, UserWrite request);
 
     void deactivate(Long id);
+
+    // security
+
+    JwtTokenResponse login(String username, String password);
+
+    JwtTokenResponse refresh(String username);
 }
