@@ -3,10 +3,10 @@ pipeline {
 
     stages {
         stage ('Build') {
-            sh "gradlew clean build -x test"
+            sh "./gradlew assemble"
         }
         stage ('Test') {
-            sh 'gradlew test'
+            sh './gradlew test'
         }
         stage ('Deploy') {
 
