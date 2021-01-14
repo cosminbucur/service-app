@@ -3,10 +3,14 @@ pipeline {
 
     stages {
         stage ('Build') {
-            sh "./gradlew assemble"
+            steps {
+                sh "./gradlew assemble"
+            }
         }
         stage ('Test') {
-            sh './gradlew test'
+            steps {
+                sh './gradlew test'
+            }
         }
         stage ('Deploy') {
 
