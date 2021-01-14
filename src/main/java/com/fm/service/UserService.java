@@ -1,9 +1,9 @@
 package com.fm.service;
 
 import com.fm.dto.mapper.UserMapper;
+import com.fm.dto.request.UserWrite;
 import com.fm.dto.response.JwtTokenResponse;
 import com.fm.dto.response.UserRead;
-import com.fm.dto.response.UserWrite;
 import com.fm.exception.CustomException;
 import com.fm.model.User;
 import com.fm.repository.UserRepository;

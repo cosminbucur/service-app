@@ -1,7 +1,7 @@
 package com.fm.dto.mapper;
 
+import com.fm.dto.request.UserWrite;
 import com.fm.dto.response.UserRead;
-import com.fm.dto.response.UserWrite;
 import com.fm.model.User;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class UserMapper {
         entity.setUsername(dto.getUsername());
         entity.setPassword(dto.getPassword());
         entity.setEmail(dto.getEmail());
-        entity.setRoles(dto.getRoles());
+//        entity.setRoles(dto.getRoles());
 
         return entity;
     }

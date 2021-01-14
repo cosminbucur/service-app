@@ -1,8 +1,9 @@
 package com.fm.controller;
 
+import com.fm.dto.request.LoginWrite;
+import com.fm.dto.request.UserWrite;
 import com.fm.dto.response.JwtTokenResponse;
 import com.fm.dto.response.UserRead;
-import com.fm.dto.response.UserWrite;
 import com.fm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,9 +34,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public JwtTokenResponse login(@RequestParam String username,
-                                  @RequestParam String password) {
-        return userService.login(username, password);
+    public JwtTokenResponse login(@RequestBody LoginWrite request) {
+        return userService.login(request.getUsername(), request.getPassword());
     }
 
     @GetMapping

@@ -1,8 +1,4 @@
-package com.fm.dto.response;
-
-import com.fm.model.Role;
-
-import java.util.List;
+package com.fm.dto.request;
 
 public class UserWrite {
 
@@ -12,8 +8,9 @@ public class UserWrite {
 
     private String username;
     private String email;
+    private String phone;
     private String password;
-    private List<Role> roles;
+//    private List<Role> roles;
 
     public String getFirstName() {
         return firstName;
@@ -47,6 +44,14 @@ public class UserWrite {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -55,12 +60,12 @@ public class UserWrite {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
+//    public List<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<Role> roles) {
+//        this.roles = roles;
+//    }
 
 }

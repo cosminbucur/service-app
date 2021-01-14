@@ -35,7 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated();
 
         // if a user try to access a resource without having enough permissions
-        http.exceptionHandling().accessDeniedPage("/login");
+        // TODO: consider creating a 401 page
+//        http.exceptionHandling().accessDeniedPage("/login");
 
         // apply JWT
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
@@ -58,7 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .ignoring()
             .antMatchers("/h2-console/**/**");
-        ;
     }
 
     @Bean
