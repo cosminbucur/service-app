@@ -9,12 +9,14 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh './gradlew test'
+                echo 'Testing....'
+//                sh './gradlew test'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'java -jar /var/lib/jenkins/workspace/service-app_master/build/libs/service-app-1.0-SNAPSHOT.jar'
             }
         }
     }

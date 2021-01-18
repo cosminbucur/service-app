@@ -10,9 +10,10 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.3.3.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'pl.allegro.tech.build.axion-release' version '1.12.1'
 }
 
 java {
@@ -23,6 +24,7 @@ java {
 }
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
@@ -30,6 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation "io.jsonwebtoken:jjwt-api:$jjwtVersion"
     implementation "io.jsonwebtoken:jjwt-impl:$jjwtVersion"
@@ -39,11 +42,9 @@ dependencies {
 
     runtimeOnly 'com.h2database:h2'
 
-    testImplementation 'org.assertj:assertj-core:3.17.2'
-    testImplementation 'org.mockito:mockito-core:3.5.13'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:4.3.3'
+
 }
 
 test {
