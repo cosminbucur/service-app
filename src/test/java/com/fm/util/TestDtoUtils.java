@@ -61,7 +61,7 @@ public class TestDtoUtils {
         StoragePointWrite dto = new StoragePointWrite();
         dto.setCode(CODE);
         dto.setLicensePlate(LICENSE_PLATE);
-        dto.setNumberOfRimCaps(NUMBER_OF_RIM_CAPS);
+        dto.setRimCapsCount(NUMBER_OF_RIM_CAPS);
         dto.setMountedTyres(createFourSummerTyresWrite());
         dto.setStoredTyres(createFourWinterTyresWrite());
         return dto;
@@ -70,7 +70,7 @@ public class TestDtoUtils {
     public static StoragePointWrite createStoragePointInfoWithWornTyres() {
         StoragePointWrite dto = new StoragePointWrite();
         dto.setLicensePlate(LICENSE_PLATE);
-        dto.setNumberOfRimCaps(NUMBER_OF_RIM_CAPS);
+        dto.setRimCapsCount(NUMBER_OF_RIM_CAPS);
         dto.setStoredTyres(createFourSummerWornTyresWrite());
         return dto;
     }

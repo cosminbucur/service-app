@@ -6,7 +6,7 @@ import java.util.List;
 public class StoragePointWrite {
 
     private String code;
-    private int numberOfRimCaps;
+    private int rimCapsCount;
     private String licensePlate;
 
     private List<TyreWrite> mountedTyres = new ArrayList<>();
@@ -27,12 +27,12 @@ public class StoragePointWrite {
         this.code = code;
     }
 
-    public int getNumberOfRimCaps() {
-        return numberOfRimCaps;
+    public int getRimCapsCount() {
+        return rimCapsCount;
     }
 
-    public void setNumberOfRimCaps(int numberOfRimCaps) {
-        this.numberOfRimCaps = numberOfRimCaps;
+    public void setRimCapsCount(int rimCapsCount) {
+        this.rimCapsCount = rimCapsCount;
     }
 
     public String getLicensePlate() {

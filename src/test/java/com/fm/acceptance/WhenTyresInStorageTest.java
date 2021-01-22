@@ -31,13 +31,13 @@ class WhenTyresInStorageTest {
         assertThat(oldStorage.getLicensePlate()).isNull();
         assertThat(oldStorage.getMountedTyres()).isEmpty();
         assertThat(oldStorage.getStoredTyres()).isEmpty();
-        assertThat(oldStorage.getNumberOfRimCaps()).isZero();
+        assertThat(oldStorage.getRimCapsCount()).isZero();
 
         // check new storage is full
         assertThat(newStorage.getLicensePlate()).isNotEmpty();
         assertThat(newStorage.getMountedTyres().size()).isEqualTo(4);
         assertThat(newStorage.getStoredTyres().size()).isEqualTo(4);
-        assertThat(newStorage.getNumberOfRimCaps()).isEqualTo(12);
+        assertThat(newStorage.getRimCapsCount()).isEqualTo(12);
     }
 
 }
